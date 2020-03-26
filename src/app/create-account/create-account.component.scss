@@ -1,0 +1,81 @@
+.create-page {
+  max-width: 1000px;
+  height: 820px;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  background-color: #F8F8FF;
+}
+
+.create-content {
+  width: 50%;
+  height: 50%;
+  margin-top: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+.anon-img {
+  margin-top: 10%;
+  margin-bottom: 5%;
+}
+
+.error-message {
+  width: 90%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+
+  span {
+    color: red;
+    text-align: center;
+  }
+}
+
+.create-email,
+.create-pass {
+  width: 250px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+
+  input {
+    height: 25px;
+    padding-left: 5px;
+    outline: none;
+    cursor: pointer;
+  }
+
+  input.ng-touched.ng-invalid,
+  input.ng-touched.ng-valid.error {
+    border: 2px solid red;
+  }
+
+  input.ng-touched.ng-valid {
+    border: 2px solid green;
+  }
+}
+
+.create-button {
+  margin-top: 15px;
+
+  button {
+    width: 75px;
+    height: 25px;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .create {
+    margin-right: 10px;
+    background-color: #228B22;
+  }
+
+  .cancel {
+    background-color: #FF0000;
+  }
+}

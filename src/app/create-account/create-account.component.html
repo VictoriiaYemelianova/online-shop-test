@@ -1,0 +1,30 @@
+<div class="create-page">
+  <div class="create-content">
+    <div class="anon-img">
+      <img src="assets/img/no_avatar.gif" alt="">
+    </div>
+
+    <div class="error-message">
+      <span>{{ errorMessage }}</span>
+    </div>
+
+    <div class="create-email">
+      <label for="email">Enter email:</label>
+      <input type="text" id="email" [class.error]="errorMessage" [(ngModel)]="userEmail" name="email" #email="ngModel"
+        required>
+    </div>
+
+    <div class="create-pass">
+      <label for="pass">Enter password:</label>
+      <input type="text" id="pass" [class.error]="errorMessage" [(ngModel)]="userPass" name="pass" #pass="ngModel"
+        required>
+    </div>
+
+    <div class="create-button">
+      <button class="create" [disabled]="email.invalid || email.untouched || pass.invalid || pass.untouched"
+        (click)="createUser()">create</button>
+      <button class="cancel" (click)="moveToHomePage()">cancel</button>
+    </div>
+
+  </div>
+</div>

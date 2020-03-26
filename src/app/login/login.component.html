@@ -1,0 +1,43 @@
+<div class="login-page">
+  <div class="login-content">
+    <div class="login-img">
+      <img src="assets/img/login.png" alt="">
+    </div>
+
+    <div class="error-message">
+      <span> {{ errorMessage }}</span>
+    </div>
+
+    <div class="login-email">
+      <label for="email">Enter email:</label>
+      <input
+        type="text"
+        id="email"
+        [class.error]="errorMessage"
+        [(ngModel)]="userEmail"
+        name="email"
+        #email="ngModel"
+        required
+      >
+    </div>
+
+    <div class="login-pass">
+      <label for="pass">Enter password:</label>
+      <input
+        type="text"
+        id="pass"
+        [class.error]="errorMessage"
+        [(ngModel)]="userPass"
+        name="pass"
+        #pass="ngModel"
+        required
+      >
+    </div>
+
+    <div class="login-button">
+      <button class="login" [disabled]="email.invalid || email.untouched || pass.invalid || pass.untouched" (click)="logginIn()">login</button>
+      <button class="cancel" (click)="moveToHomePage()">cancel</button>
+    </div>
+    
+  </div>
+</div>
