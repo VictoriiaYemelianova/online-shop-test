@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../user-service.service';
-import { ICreateLogUser, IUserServerModel } from '../users-interface';
-import {Router} from '@angular/router';
+import { IUser, IUserServerModel } from '../users-interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   logginIn() {
-    const user: ICreateLogUser = {
+    const user: IUser = {
       login: this.userEmail,
       pass: this.userPass
     };
@@ -26,9 +26,12 @@ export class LoginComponent implements OnInit {
       .subscribe((res: IUserServerModel) => {
         if (res.success) {
           this.userService.addUserInfo(res.user);
-          this.router.navigate(['categories']);
+          if (res.user.login === 'Admin') {
+            this.router.navigate(['admin']);
+          } else {
+            this.router.navigate(['categories']);
+          }
         } else {
-          console.log(res)
           this.errorMessage = res.message;
         }
       });

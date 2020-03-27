@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IUserServerModel, IUser, ICreateLogUser } from './users-interface';
+import { IUser } from './users-interface';
 import { HttpClient} from '@angular/common/http';
 import { apiUrl } from './constants';
 
@@ -11,7 +11,7 @@ export class UserServiceService {
 
   constructor( private http: HttpClient ) { }
 
-  loginUser(user: ICreateLogUser) {
+  loginUser(user: IUser) {
     return this.http.post(`${apiUrl}/login`, user);
   }
 
@@ -19,9 +19,7 @@ export class UserServiceService {
     this.logUser = user;
   }
 
-  addFailMessage() {}
-
-  createUser(user: ICreateLogUser) {
+  createUser(user: IUser) {
     return this.http.post(`${apiUrl}/register`, user);
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../user-service.service';
-import { ICreateLogUser, IUserServerModel } from '../users-interface';
+import { IUser, IUserServerModel } from '../users-interface';
 import {Router} from '@angular/router';
 
 @Component({
@@ -19,10 +19,10 @@ export class CreateAccountComponent implements OnInit {
   }
 
   createUser() {
-    const newUser: ICreateLogUser = {
+    const newUser: IUser = {
       login: this.userEmail,
       pass: this.userPass
-    }
+    };
     this.userService.createUser(newUser)
       .subscribe((res: IUserServerModel) => {
         if (res.success) {
