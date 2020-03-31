@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IUser } from './users-interface';
+import { IUser } from './data-interface';
 import { HttpClient} from '@angular/common/http';
 import { apiUrl } from './constants';
 

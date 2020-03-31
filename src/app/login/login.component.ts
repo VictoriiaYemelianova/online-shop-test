@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../user-service.service';
-import { IUser, IUserServerModel } from '../users-interface';
+import { IUser, IUserServerModel } from '../data-interface';
 import { Router } from '@angular/router';
 
 @Component({
@@ -27,9 +27,9 @@ export class LoginComponent implements OnInit {
         if (res.success) {
           this.userService.addUserInfo(res.user);
           if (res.user.login === 'Admin') {
-            this.router.navigate(['admin']);
+            this.router.navigate(['admin/create-category']);
           } else {
-            this.router.navigate(['categories']);
+            this.router.navigate(['user/categories']);
           }
         } else {
           this.errorMessage = res.message;

@@ -1,0 +1,24 @@
+<div class="category-form-block">
+  <h3>Create new category</h3>
+
+  <form [formGroup]="categoryForm" (ngSubmit)="onSubmitNewCategpry()" class="form-content">
+    <div class="message input-block">
+      <span>{{ infoMessage }}</span>
+    </div>
+
+    <div class="input-block">
+      <label for="name">Name category:</label>
+      <input type="text" id="name" formControlName="name">
+    </div>
+
+    <div class="input-block">
+      <label for="imgUrl">Img Url:</label>
+      <input type="text" id="imgUrl" formControlName="imgUrl">
+    </div>
+
+    <div class="button-block">
+      <button type="submit" class="create" [disabled]="!categoryForm.valid">Create</button>
+      <button class="cancel" (click)="onCancel()">Cancel</button>
+    </div>
+  </form>
+</div>

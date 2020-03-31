@@ -12,7 +12,8 @@ export interface IUser {
 
 export interface IProductsServerModel {
   success: boolean;
-  items: Array<IProduct>;
+  items?: Array<IProduct>;
+  item?: IProduct;
 }
 
 export interface IProduct {
@@ -27,7 +28,8 @@ export interface IProduct {
 
 export interface ICategoriesServerModel {
   success: boolean;
-  items: Array<ICategory>;
+  items?: Array<ICategory>;
+  item?: ICategory;
 }
 
 export interface ICategory {
