@@ -1,0 +1,50 @@
+<div class="categories-page">
+  <div *ngFor="let category of categoriesList" class="categories-content">
+    <div class="category">
+      <span> {{ category.name }} </span>
+      <a [routerLink]="category.name.toLowerCase()"><img [src]="category.imgUrl" alt=""></a>
+    </div>
+
+    <div *ngIf="isAdmin" class="button-content">
+      <button class="delete">delete</button>
+      <button class="update" (click)="updateCategory(category)">update</button>
+    </div>
+
+  </div>
+
+</div>
+
+<ng-template #template let-message="message">
+  <div class="form-content">
+    <h3>Update {{ categoryName }}</h3>
+
+    <div class="message input-block">
+      <span>{{ infoMessage }}</span>
+    </div>
+
+    <form [formGroup]="toUpdateForm">
+      <div class="input-block">
+        <label for="name">Category name:</label>
+        <input type="text" id="name" formControlName="name">
+      </div>
+
+      <div class="input-block">
+        <label for="img-url">Img-url:</label>
+        <input type="text" id="img-url" formControlName="imgUrl">
+      </div>
+
+      <div class="input-block">
+        <label for="id">Id:</label>
+        <input type="text" id="id" formControlName="_id">
+      </div>
+
+      <div class="button-block">
+        <button class="update" (click)="toUpdate()">update</button>
+        <button class="cancel" (click)="toCancel()">cancel</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<app-modal *ngIf="IsModalShow" [template]="template">
+</app-modal>
