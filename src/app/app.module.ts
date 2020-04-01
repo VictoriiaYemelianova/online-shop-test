@@ -2,24 +2,40 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import {Routes, RouterModule} from '@angular/router';
+import { Routes, RouterModule} from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { CategotiesComponent } from './categoties/categoties.component';
+import { CategotiesComponent } from './categories/categories.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { FirstPageComponent } from './first-page/first-page.component';
-import { ClothingComponent } from './clothing/clothing.component';
-import { AdminPageComponent } from './admin-page/admin-page.component';
+import { AdminPageComponent } from './admin-panel/admin-page/admin-page.component';
+import { CategoryFormComponent } from './admin-panel/category-form/category-form.component';
+import { ProductFormComponent } from './admin-panel/product-form/product-form.component';
+import { UserPageComponent } from './user-panel/user-page/user-page.component';
+import { ModalComponent } from 'src/app/modal/modal.component';
+import { ProductsComponent } from './products/products.component';
+
+import { UserServiceService } from './user-service.service';
+import { DataService } from './data.service';
 
 const appRoutes: Routes = [
   { path: '', component: FirstPageComponent },
-  { path: 'admin', component: AdminPageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'create', component: CreateAccountComponent },
-  { path: 'categories', component:  CategotiesComponent },
-  { path: 'clothing', component: ClothingComponent },
+  { path: 'admin', component: AdminPageComponent, children: [
+    { path: 'create-category', component:  CategoryFormComponent, data: {isAdmin: true} },
+    { path: 'categories', component: CategotiesComponent, data: {isAdmin: true} },
+    { path: 'categories/:name', component: ProductsComponent, data: {isAdmin: true} },
+    { path: 'categories/:name/create-product', component:  ProductFormComponent, data: {isAdmin: true} },
+    { path: 'categories/:name/:id', component: ProductsComponent, data: {isAdmin: true} }
+  ] },
+  { path: 'user', component: UserPageComponent, children: [
+    { path: 'categories', component: CategotiesComponent },
+    { path: 'categories/:name', component: ProductsComponent },
+    { path: 'categories/:name/:id', component: ProductsComponent }
+  ] }
 ];
 
 @NgModule({
@@ -29,8 +45,12 @@ const appRoutes: Routes = [
     CategotiesComponent,
     CreateAccountComponent,
     FirstPageComponent,
-    ClothingComponent,
-    AdminPageComponent
+    AdminPageComponent,
+    CategoryFormComponent,
+    ProductFormComponent,
+    UserPageComponent,
+    ModalComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +60,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [UserServiceService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

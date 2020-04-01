@@ -4,3 +4,22 @@ html {
   height: 100%;
   margin: 0;
 }
+
+.btn-green,
+.btn-red {
+  width: 70px;
+  height: 25px;
+  border-radius: 5px;
+  color: #000000;
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+}
+
+.btn-red {
+  background-color: red;
+}
+
+.btn-green {
+  background-color: green;
+}

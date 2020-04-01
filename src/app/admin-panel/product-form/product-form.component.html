@@ -1,0 +1,26 @@
+<div class="product-form-block">
+  <h3>Create new product</h3>
+
+  <form [formGroup]="productForm" (ngSubmit)="onSubmitNewProduct()" class="form-content">
+    <div class="input-block"><span>{{ infoMessage }}</span></div>
+    <div class="input-block">
+      <label for="name">Product name:</label>
+      <input type="text" id="name" formControlName="name">
+    </div>
+
+    <div class="input-block">
+      <label for="img-url">Product img url</label>
+      <input type="text" id="img-url" formControlName="imgUrl">
+    </div>
+
+    <div class="input-block">
+      <label for="price">Product price</label>
+      <input type="text" id="price" formControlName="price">
+    </div>
+
+    <div class="button-block">
+      <button class="btn-green" [disabled]="!productForm.valid">Create</button>
+      <button class="btn-red" (click)="onCancel()">Cancel</button>
+    </div>
+  </form>
+</div>

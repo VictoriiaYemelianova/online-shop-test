@@ -1,0 +1,61 @@
+<div class="link">
+  <a routerLink="create-product">Create</a>
+</div>
+<div class="products-page">
+  <div class="product-content" *ngFor="let product of productList">
+    <div class="product" >
+      <span> {{ product.name }} </span>
+      <a [routerLink]="product._id"><img [src]="product.imgUrl" alt=""></a>
+      <span>Price: {{ product.price }}$</span>
+    </div>
+
+    <div *ngIf="!isAdmin" class="button-content">
+      <button class="btn-green">buy</button>
+    </div>
+
+    <div *ngIf="isAdmin" class="button-content">
+      <button class="btn-red" (click)="deleteCategory(product._id)">delete</button>
+      <button class="btn-green" (click)="updateProduct(product)">update</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #template>
+  <div class="form-content">
+    <h3>Update {{ productName }}</h3>
+
+    <div class="message input-block">
+      <span>{{ infoMessage }}</span>
+    </div>
+
+    <form [formGroup]="updateForm" (ngSubmit)="onUpdateForm()">
+      <div class="input-block">
+        <label for="name">Category name:</label>
+        <input type="text" id="name" formControlName="name">
+      </div>
+
+      <div class="input-block">
+        <label for="img-url">Img-url:</label>
+        <input type="text" id="img-url" formControlName="imgUrl">
+      </div>
+
+      <div class="input-block">
+        <label for="price">Price:</label>
+        <input type="text" id="price" formControlName="price">
+      </div>
+
+      <div class="input-block">
+        <label for="id">Id:</label>
+        <input type="text" id="id" formControlName="_id">
+      </div>
+
+      <div class="button-block">
+        <button type="submit" class="btn-green">update</button>
+        <button class="btn-red" (click)="onCancel()">cancel</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<app-modal *ngIf="IsModalShow" [template]="template">
+</app-modal>

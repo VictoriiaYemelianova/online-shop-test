@@ -21,9 +21,11 @@
     </div>
 
     <div class="create-button">
-      <button class="create" [disabled]="email.invalid || email.untouched || pass.invalid || pass.untouched"
+      <button
+        class="btn-green"
+        [disabled]="email.invalid || email.untouched || pass.invalid || pass.untouched"
         (click)="createUser()">create</button>
-      <button class="cancel" (click)="moveToHomePage()">cancel</button>
+      <button class="btn-red" (click)="moveToHomePage()">cancel</button>
     </div>
 
   </div>

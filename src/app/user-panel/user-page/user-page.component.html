@@ -1,0 +1,11 @@
+<div class="user-page">
+  <nav class="links-block">
+    <ul class="links">
+      <li *ngIf="isAdmin"><a routerLink="/admin/categories">Back to admin page</a></li>
+      <li><a routerLink="/">Home page</a></li>
+      <li><a routerLink="categories" routerLinkActive="active-link">Categories</a></li>
+    </ul>
+  </nav>
+
+  <router-outlet></router-outlet>
+</div>

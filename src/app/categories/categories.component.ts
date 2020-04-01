@@ -17,11 +17,11 @@ export class CategotiesComponent implements OnInit, OnDestroy {
   public categoriesList: ICategory[];
   public isAdmin = false;
   public IsModalShow = false;
-  public categoryName: string;
+  public onUpdateForm: FormGroup;
+  public infoMessage: string;
+  public currentObj: ICategory;
 
   constructor(private router: ActivatedRoute, private categoriesService: DataService) { }
-  public toUpdateForm: FormGroup;
-  public infoMessage: string;
 
   ngOnInit(): void {
     this.categoriesService.get('categories').subscribe((res: ICategoriesServerModel) => {
@@ -35,14 +35,12 @@ export class CategotiesComponent implements OnInit, OnDestroy {
         if (data.isAdmin) {
           this.isAdmin = true;
         }
-        console.log(this.isAdmin);
       });
     });
 
-    this.toUpdateForm = new FormGroup({
+    this.onUpdateForm = new FormGroup({
       name: new FormControl('', Validators.required),
-      imgUrl: new FormControl('', Validators.required),
-      _id: new FormControl({value: '', disabled: true})
+      imgUrl: new FormControl('', Validators.required)
     });
   }
 
@@ -53,16 +51,44 @@ export class CategotiesComponent implements OnInit, OnDestroy {
 
   updateCategory(obj: ICategory) {
     this.IsModalShow = true;
-    this.categoryName = obj.name;
-    this.toUpdateForm.controls.name.setValue(obj.name);
-    this.toUpdateForm.controls.imgUrl.setValue(obj.imgUrl);
-    this.toUpdateForm.controls._id.setValue(obj._id);
+    this.currentObj = obj;
+    this.onUpdateForm.controls.name.setValue(obj.name);
+    this.onUpdateForm.controls.imgUrl.setValue(obj.imgUrl);
   }
 
-  toUpdate() {}
+  onUpdate() {
+    const formValue = this.onUpdateForm.value;
+    formValue._id = this.currentObj._id;
+    this.categoriesService.update(formValue, 'categories').subscribe((res: ICategoriesServerModel) => {
+      if (res.success) {
+        const newCategoriesList: ICategory[] = this.categoriesList.map((el: ICategory) => {
+          if (el._id === res.item._id) {
+            el = res.item;
+          }
+          return el;
+        });
+        this.categoriesList = newCategoriesList;
+        this.infoMessage = 'Updated successfully!';
+        this.onUpdateForm.reset();
+      } else {
+        this.infoMessage = 'Error!';
+      }
+    });
+  }
 
-  toCancel() {}
+  onCancel() {
+    this.onUpdateForm.reset();
+    this.IsModalShow = false;
+  }
 
-  deleteCategory() {}
+  deleteCategory(id: string) {
+    alert('Delete?');
+    this.categoriesService.delete(id, 'categories').subscribe((res: ICategoriesServerModel) => {
+      if (res.success) {
+        const newCategoriesList: ICategory[] = this.categoriesList.filter(el => el._id !== id);
+        this.categoriesList = newCategoriesList;
+      }
+    });
+  }
 
 }

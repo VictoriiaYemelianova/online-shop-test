@@ -61,21 +61,7 @@
 .create-button {
   margin-top: 15px;
 
-  button {
-    width: 75px;
-    height: 25px;
-    border-radius: 5px;
-    font-size: 14px;
-    outline: none;
-    cursor: pointer;
-  }
-
-  .create {
+  .btn-green {
     margin-right: 10px;
-    background-color: #228B22;
-  }
-
-  .cancel {
-    background-color: #FF0000;
   }
 }
