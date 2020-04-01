@@ -26,6 +26,14 @@
     list-style-type: none;
     border-bottom: 1px solid transparent;
     cursor: pointer;
+
+    a {
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: red;
+    }
   }
 
   li:hover {
