@@ -1,5 +1,9 @@
+<div class="back">
+  <a (click)="onCancel()">Back to product</a>
+</div>
+
 <div class="product-form-block">
-  <h3>Create new product</h3>
+  <h3>Create new product {{ productName }}</h3>
 
   <form [formGroup]="productForm" (ngSubmit)="onSubmitNewProduct()" class="form-content">
     <div class="input-block"><span>{{ infoMessage }}</span></div>

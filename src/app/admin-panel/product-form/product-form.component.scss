@@ -1,3 +1,17 @@
+.back {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  a {
+    cursor: pointer;
+  }
+
+  a:hover {
+    border-bottom: 1px solid #000000;
+  }
+}
+
 .product-form-block {
   min-width: 1000px;
   min-height: 820px;

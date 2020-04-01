@@ -4,7 +4,8 @@ import { DataService } from 'src/app/data.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { IProductsServerModel, IProduct } from 'src/app/data-interface';
+import { IProductsServerModel } from 'src/app/data-interface';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-product-form',
@@ -18,7 +19,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   public productName: string;
   public infoMessage: string;
 
-  constructor( private router: ActivatedRoute, private productService: DataService) { }
+  constructor( private router: ActivatedRoute, private productService: DataService, private location: Location) { }
 
   ngOnInit(): void {
     this.router.params
@@ -37,7 +38,9 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     this.destroy.complete();
   }
 
-  onCancel() {}
+  onCancel() {
+    this.location.back();
+  }
 
   onSubmitNewProduct() {
     const formValue = this.productForm.value;
