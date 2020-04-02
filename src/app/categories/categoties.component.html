@@ -1,13 +1,25 @@
 <div class="categories-page">
-  <div *ngFor="let category of categoriesList" class="categories-content">
-    <div class="category">
-      <span> {{ category.name }} </span>
-      <a [routerLink]="category.name.toLowerCase()"><img [src]="category.imgUrl" alt=""></a>
-    </div>
+  <div *ngFor="let category of categoriesList" class="category-block">
+    <div class="content">
+      <div class="category-content">
+        <div class="category-name">
+          <span> {{ category.name }} </span>
+        </div>
+  
+        <div class="category-img">
+          <a [routerLink]="category.name.toLowerCase()"><img [src]="category.imgUrl" alt=""></a>
+        </div>
+      </div>
+  
+      <div *ngIf="isAdmin" class="button-content">
+        <button class="btn-trash" (click)="deleteCategory(category._id)">
+          <fa-icon [icon]="faTrashAlt"></fa-icon>
+        </button>
 
-    <div *ngIf="isAdmin" class="button-content">
-      <button class="btn-red" (click)="deleteCategory(category._id)">delete</button>
-      <button class="btn-green" (click)="updateCategory(category)">update</button>
+        <button class="btn-update" (click)="updateCategory(category)">
+          <fa-icon [icon]="faPencilAlt"></fa-icon>
+        </button>
+      </div>
     </div>
 
   </div>

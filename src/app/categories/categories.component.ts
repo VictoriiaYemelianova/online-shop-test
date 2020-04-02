@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-categoties',
@@ -20,6 +22,8 @@ export class CategotiesComponent implements OnInit, OnDestroy {
   public onUpdateForm: FormGroup;
   public infoMessage: string;
   public currentObj: ICategory;
+  public faTrashAlt = faTrashAlt;
+  public faPencilAlt = faPencilAlt;
 
   constructor(private router: ActivatedRoute, private categoriesService: DataService) { }
 

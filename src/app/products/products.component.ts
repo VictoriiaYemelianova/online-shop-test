@@ -5,6 +5,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-products',
@@ -21,6 +23,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
   public infoMessage: string;
   public IsModalShow = false;
   public currentObj: IProduct;
+  public faTrashAlt = faTrashAlt;
+  public faPencilAlt = faPencilAlt;
 
   constructor( private router: ActivatedRoute, private productService: DataService ) { }
 

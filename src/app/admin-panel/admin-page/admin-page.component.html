@@ -1,12 +1,14 @@
 <div class="admin-page">
-  <nav class="links-block">
-    <ul class="links">
-      <li><a routerLink="create-category" routerLinkActive="active-link">Add new category</a></li> 
-      <li><a routerLink="categories" routerLinkActive="active-link">Categories</a></li>
-      <li><a routerLink="/user/categories" routerLinkActive="active-link">User</a></li>
-      <li><a routerLink="/">Home page</a></li>
-    </ul>
-  </nav>
+  <div class="menu-content">
+    <nav class="links-block">
+      <ul class="links">
+        <li><a routerLink="create-category" routerLinkActive="active-link">Add new category</a></li> 
+        <li><a routerLink="categories" routerLinkActive="active-link">Categories</a></li>
+        <li><a routerLink="/user/categories" routerLinkActive="active-link">User</a></li>
+        <li><a routerLink="/">Home page</a></li>
+      </ul>
+    </nav>
+  </div>
 
   <router-outlet></router-outlet>
 </div>
