@@ -23,7 +23,7 @@ import { DataService } from './data.service';
 const appRoutes: Routes = [
   { path: '', component: FirstPageComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'create', component: CreateAccountComponent },
+  { path: 'create-user', component: CreateAccountComponent },
   { path: 'admin', component: AdminPageComponent, children: [
     { path: 'create-category', component:  CategoryFormComponent, data: {isAdmin: true} },
     { path: 'categories', component: CategotiesComponent, data: {isAdmin: true} },
