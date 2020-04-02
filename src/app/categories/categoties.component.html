@@ -46,8 +46,8 @@
       </div>
 
       <div class="button-block">
-        <button type="submit" class="btn-green">update</button>
-        <button class="btn-red" (click)="onCancel()">cancel</button>
+        <button type="submit" [disabled]="!onUpdateForm.valid"  class="btn-green">update</button>
+        <button type="button" class="btn-red" (click)="closeModal()">cancel</button>
       </div>
     </form>
   </div>

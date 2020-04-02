@@ -98,7 +98,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     });
   }
 
-  onCancel() {
+  closeModal() {
     this.updateForm.reset();
     this.IsModalShow = false;
   }

@@ -80,11 +80,6 @@ export class CategotiesComponent implements OnInit, OnDestroy {
     });
   }
 
-  onCancel() {
-    this.onUpdateForm.reset();
-    this.IsModalShow = false;
-  }
-
   deleteCategory(id: string) {
     alert('Delete?');
     this.categoriesService.delete(id, 'categories').subscribe((res: ICategoriesServerModel) => {
@@ -96,6 +91,7 @@ export class CategotiesComponent implements OnInit, OnDestroy {
   }
 
   closeModal() {
+    this.onUpdateForm.reset();
     this.IsModalShow = false;
   }
 }

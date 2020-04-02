@@ -1,16 +1,17 @@
 .user-page {
   max-width: 1000px;
-  height: 820px;
-  padding: 5% 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   margin: 0 auto;
   background-color: #F8F8FF;
 }
 
+.menu-content {
+  width: 1000px;
+  position: fixed;
+  background-color: #F8F8FF;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
 .links-block {
-  width: 50%;
 
   .links {
     display: flex;
@@ -26,6 +27,14 @@
     list-style-type: none;
     border-bottom: 1px solid transparent;
     cursor: pointer;
+
+    a {
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: red;
+    }
   }
 
   li:hover {
