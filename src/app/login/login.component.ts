@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../user-service.service';
 import { IUser, IUserServerModel } from '../data-interface';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -12,17 +13,20 @@ export class LoginComponent implements OnInit {
   public userEmail: string;
   public userPass: string;
   public errorMessage: string;
+  public loginForm: FormGroup;
 
   constructor(private userService: UserServiceService, private router: Router) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loginForm = new FormGroup({
+      login: new FormControl('', Validators.required),
+      pass: new FormControl('', Validators.required)
+    });
+  }
 
-  logginIn() {
-    const user: IUser = {
-      login: this.userEmail,
-      pass: this.userPass
-    };
-    this.userService.loginUser(user)
+  onSubmit() {
+    const formValue = this.loginForm.value;
+    this.userService.loginUser(formValue)
       .subscribe((res: IUserServerModel) => {
         if (res.success) {
           this.userService.addUserInfo(res.user);
@@ -37,7 +41,7 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  moveToHomePage() {
+  onCancel() {
     this.router.navigate(['']);
   }
 }

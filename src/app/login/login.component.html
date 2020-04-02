@@ -8,36 +8,35 @@
       <span> {{ errorMessage }}</span>
     </div>
 
-    <div class="login-email">
-      <label for="email">Enter email:</label>
-      <input
-        type="text"
-        id="email"
-        [class.error]="errorMessage"
-        [(ngModel)]="userEmail"
-        name="email"
-        #email="ngModel"
-        required
-      >
-    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-content">
+      <div class="form-group">
+        <div class="input-block">
+          <label for="login">Email:</label>
+          <input type="text" id="login" formControlName="login">
+        </div>
 
-    <div class="login-pass">
-      <label for="pass">Enter password:</label>
-      <input
-        type="text"
-        id="pass"
-        [class.error]="errorMessage"
-        [(ngModel)]="userPass"
-        name="pass"
-        #pass="ngModel"
-        required
-      >
-    </div>
+        <div *ngIf="loginForm.controls['login'].invalid && 
+          (loginForm.controls['login'].dirty || loginForm.controls['login'].touched)" class="error">
+          <span *ngIf="loginForm.controls['login'].errors.required">Email is required</span>
+        </div>
+      </div>
 
-    <div class="login-button">
-      <button class="btn-green" [disabled]="email.invalid || email.untouched || pass.invalid || pass.untouched" (click)="logginIn()">login</button>
-      <button class="btn-red" (click)="moveToHomePage()">cancel</button>
-    </div>
-    
+      <div class="form-group">
+        <div class="input-block">
+          <label for="pass">Password</label>
+          <input type="text" id="pass" formControlName="pass">
+        </div>
+
+        <div *ngIf="loginForm.controls['pass'].invalid && 
+          (loginForm.controls['pass'].dirty || loginForm.controls['pass'].touched)" class="error">
+          <span *ngIf="loginForm.controls['pass'].errors.required">Password is required</span>
+        </div>
+      </div>
+
+      <div class="button-block">
+        <button type="submit" class="btn-green" [disabled]="!loginForm.valid">Create</button>
+        <button type="button" class="btn-red" (click)="onCancel()">Cancel</button>
+      </div>
+    </form>
   </div>
 </div>

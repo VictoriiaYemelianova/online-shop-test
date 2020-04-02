@@ -8,25 +8,35 @@
       <span>{{ errorMessage }}</span>
     </div>
 
-    <div class="create-email">
-      <label for="email">Enter email:</label>
-      <input type="text" id="email" [class.error]="errorMessage" [(ngModel)]="userEmail" name="email" #email="ngModel"
-        required>
-    </div>
+    <form [formGroup]="createForm" (ngSubmit)="onCreate()" class="form-content">
+      <div class="form-group">
+        <div class="input-block">
+          <label for="login">Login</label>
+          <input type="text" id="login" formControlName="login">
+        </div>
 
-    <div class="create-pass">
-      <label for="pass">Enter password:</label>
-      <input type="text" id="pass" [class.error]="errorMessage" [(ngModel)]="userPass" name="pass" #pass="ngModel"
-        required>
-    </div>
+        <div *ngIf="createForm.controls['login'].invalid && 
+          (createForm.controls['login'].dirty || createForm.controls['login'].touched)" class="error">
+          <span *ngIf="createForm.controls['login'].errors.required">Login is required</span>
+        </div>
+      </div>
 
-    <div class="create-button">
-      <button
-        class="btn-green"
-        [disabled]="email.invalid || email.untouched || pass.invalid || pass.untouched"
-        (click)="createUser()">create</button>
-      <button class="btn-red" (click)="moveToHomePage()">cancel</button>
-    </div>
+      <div class="form-group">
+        <div class="input-block">
+          <label for="pass">Password</label>
+          <input type="text" id="pass" formControlName="pass">
+        </div>
 
+        <div *ngIf="createForm.controls['pass'].invalid && 
+          (createForm.controls['pass'].dirty || createForm.controls['pass'].touched)" class="error">
+          <span *ngIf="createForm.controls['pass'].errors.required">Password is required</span>
+        </div>
+      </div>
+
+      <div class="button-block">
+        <button type="submit" class="btn-green" [disabled]="!createForm.valid">Create</button>
+        <button type="button" class="btn-red" (click)="onCancel()">Cancel</button>
+      </div>
+    </form>
   </div>
 </div>
