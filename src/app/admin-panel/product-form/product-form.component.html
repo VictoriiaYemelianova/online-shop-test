@@ -6,25 +6,49 @@
   <h3>Create new product {{ productName }}</h3>
 
   <form [formGroup]="productForm" (ngSubmit)="onSubmitNewProduct()" class="form-content">
-    <div class="input-block"><span>{{ infoMessage }}</span></div>
-    <div class="input-block">
-      <label for="name">Product name:</label>
-      <input type="text" id="name" formControlName="name">
+    <div class="info-message">
+      <span>{{ infoMessage }}</span>
     </div>
 
-    <div class="input-block">
-      <label for="img-url">Product img url</label>
-      <input type="text" id="img-url" formControlName="imgUrl">
+    <div class="form-group">
+      <div class="input-block">
+        <label for="name">Product name:</label>
+        <input type="text" id="name" formControlName="name">
+      </div>
+
+      <div *ngIf="productForm.controls['name'].invalid && 
+        (productForm.controls['name'].dirty || productForm.controls['name'].touched)" class="error">
+        <span *ngIf="productForm.controls['name'].errors.required" class="error-message">Name is required</span>
+      </div>
     </div>
 
-    <div class="input-block">
-      <label for="price">Product price</label>
-      <input type="text" id="price" formControlName="price">
+    <div class="form-group">
+      <div class="input-block">
+        <label for="img-url">Product img url</label>
+        <input type="text" id="img-url" formControlName="imgUrl">
+      </div>
+
+      <div *ngIf="productForm.controls['imgUrl'].invalid && 
+        (productForm.controls['imgUrl'].dirty || productForm.controls['imgUrl'].touched)" class="error">
+        <span *ngIf="productForm.controls['imgUrl'].errors.required" class="error-message">Img Url is required</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-block">
+        <label for="price">Product price</label>
+        <input type="text" id="price" formControlName="price">
+      </div>
+
+      <div *ngIf="productForm.controls['price'].invalid && 
+        (productForm.controls['price'].dirty || productForm.controls['price'].touched)" class="error">
+        <span *ngIf="productForm.controls['price'].errors.required" class="error-message">Price is required</span>
+      </div>
     </div>
 
     <div class="button-block">
-      <button class="btn-green" [disabled]="!productForm.valid">Create</button>
-      <button class="btn-red" (click)="onCancel()">Cancel</button>
+      <button type="submit" class="btn-green" [disabled]="!productForm.valid">Create</button>
+      <button type="button" class="btn-red" (click)="onCancel()">Cancel</button>
     </div>
   </form>
 </div>

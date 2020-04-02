@@ -2,23 +2,36 @@
   <h3>Create new category</h3>
 
   <form [formGroup]="categoryForm" (ngSubmit)="onSubmitNewCategpry()" class="form-content">
-    <div class="message input-block">
+    <div class="info-message">
       <span>{{ infoMessage }}</span>
     </div>
 
-    <div class="input-block">
-      <label for="name">Name category:</label>
-      <input type="text" id="name" formControlName="name">
+    <div class="form-group">
+      <div class="input-block">
+        <label for="name">Name category:</label>
+        <input type="text" id="name" formControlName="name">
+      </div>
+
+      <div *ngIf="categoryForm.controls['name'].invalid && 
+        (categoryForm.controls['name'].dirty || categoryForm.controls['name'].touched)" class="error">
+        <span *ngIf="categoryForm.controls['name'].errors.required" class="error-message">Name is required</span>
+      </div>
     </div>
 
-    <div class="input-block">
-      <label for="imgUrl">Img Url:</label>
-      <input type="text" id="imgUrl" formControlName="imgUrl">
+    <div class="form-group">
+      <div class="input-block">
+        <label for="imgUrl">Img Url:</label>
+        <input type="text" id="imgUrl" formControlName="imgUrl">
+      </div>
+
+      <div *ngIf="categoryForm.controls['imgUrl'].invalid && 
+        (categoryForm.controls['imgUrl'].dirty || categoryForm.controls['imgUrl'].touched)" class="error">
+        <span *ngIf="categoryForm.controls['imgUrl'].errors.required" class="error-message">Img Url is required</span>
+      </div>
     </div>
 
     <div class="button-block">
       <button type="submit" class="btn-green" [disabled]="!categoryForm.valid">Create</button>
-      <button class="btn-red" (click)="onCancel()">Cancel</button>
     </div>
   </form>
 </div>

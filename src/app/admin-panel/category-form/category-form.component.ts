@@ -33,6 +33,4 @@ export class CategoryFormComponent implements OnInit {
         }
       });
   }
-
-  onCancel() {}
 }

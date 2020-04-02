@@ -18,11 +18,21 @@
   background-color: #ffffff;
 }
 
-.input-block,
-.button-block {
+.info-message {
+  height: 30px;
+  color: blue;
+}
+
+.form-group {
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.input-block {
   display: flex;
   align-items: center;
-  margin-bottom: 5%;
 
   label {
     width: 120px;
@@ -45,8 +55,11 @@
   input.ng-touched.ng-dirty.ng-valid {
     border: 1px solid green;
   }
+}
 
-  .btn-green {
-    margin-right: 10px;
-  }
+.error {
+  width: 160px;
+  padding: 4px;
+  color: red;
+  background-color: rgb(100%, 0%, 0%, 0.2);
 }
