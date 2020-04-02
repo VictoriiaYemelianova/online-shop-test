@@ -91,4 +91,7 @@ export class CategotiesComponent implements OnInit, OnDestroy {
     });
   }
 
+  closeModal() {
+    this.IsModalShow = false;
+  }
 }

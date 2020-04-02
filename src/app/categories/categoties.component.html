@@ -41,5 +41,5 @@
   </div>
 </ng-template>
 
-<app-modal *ngIf="IsModalShow" [template]="template">
+<app-modal *ngIf="IsModalShow" [template]="template" (closeModal)="closeModal()">
 </app-modal>

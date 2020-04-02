@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, TemplateRef } from '@angular/core';
+import { Component, OnInit, Input, TemplateRef, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-modal',
@@ -7,11 +7,14 @@ import { Component, OnInit, Input, TemplateRef } from '@angular/core';
 })
 export class ModalComponent implements OnInit {
   @Input() template: TemplateRef<any>;
+  @Output() closeModal: EventEmitter<boolean> = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  closeModal() {}
+  onModalClose() {
+    this.closeModal.emit(true);
+  }
 }
