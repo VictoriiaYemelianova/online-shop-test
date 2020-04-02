@@ -19,6 +19,7 @@ import { ProductsComponent } from './products/products.component';
 
 import { UserServiceService } from './user-service.service';
 import { DataService } from './data.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const appRoutes: Routes = [
   { path: '', component: FirstPageComponent },
@@ -58,7 +59,8 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    FontAwesomeModule
   ],
   providers: [UserServiceService, DataService],
   bootstrap: [AppComponent]
