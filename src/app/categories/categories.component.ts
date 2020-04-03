@@ -53,7 +53,9 @@ export class CategotiesComponent implements OnInit, OnDestroy {
     this.destroy.complete();
   }
 
-  updateCategory(obj: ICategory) {
+  updateCategory(obj: ICategory, event: Event) {
+    event.preventDefault();
+    event. stopPropagation();
     this.IsModalShow = true;
     this.currentObj = obj;
     this.onUpdateForm.controls.name.setValue(obj.name);
@@ -80,7 +82,9 @@ export class CategotiesComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteCategory(id: string) {
+  deleteCategory(id: string, event: Event) {
+    event.preventDefault();
+    event. stopPropagation();
     alert('Delete?');
     this.categoriesService.delete(id, 'categories').subscribe((res: ICategoriesServerModel) => {
       if (res.success) {

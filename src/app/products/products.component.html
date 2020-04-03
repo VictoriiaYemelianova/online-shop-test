@@ -3,14 +3,14 @@
 </div>
 <div class="products-page">
   <div class="product-block" *ngFor="let product of productList">
-    <div class="content">
+    <div [routerLink]="product._id" class="content">
       <div class="product-content">
         <div class="product-name">
           <span> {{ product.name }} </span>
         </div>
 
         <div class="product-img">
-          <a [routerLink]="product._id"><img [src]="product.imgUrl" alt=""></a>
+          <img [src]="product.imgUrl" alt="">
         </div>
 
         <div class="product-price">
@@ -24,11 +24,11 @@
         </div>
 
         <div *ngIf="isAdmin" class="button-admin">
-          <button class="btn-trash" (click)="deleteCategory(product._id)">
+          <button class="btn-trash" (click)="deleteCategory(product._id, $event)">
             <fa-icon [icon]="faTrashAlt"></fa-icon>
           </button>
 
-          <button class="btn-update" (click)="updateProduct(product)">
+          <button class="btn-update" (click)="updateProduct(product, $event)">
             <fa-icon [icon]="faPencilAlt"></fa-icon>
           </button>
         </div>

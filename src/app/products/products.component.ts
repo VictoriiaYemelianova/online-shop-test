@@ -60,7 +60,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.destroy.complete();
   }
 
-  updateProduct(el: IProduct) {
+  updateProduct(el: IProduct, event: Event) {
+    event.preventDefault();
+    event. stopPropagation();
     this.IsModalShow = true;
     this.currentObj = el;
     this.updateForm.controls.name.setValue(el.name);
@@ -88,7 +90,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteCategory(id: string) {
+  deleteCategory(id: string, event: Event) {
+    event.preventDefault();
+    event. stopPropagation();
     alert('Dalete?');
     this.productService.delete(id, this.productName).subscribe((res: IProductsServerModel) => {
       if (res.success) {
