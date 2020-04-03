@@ -1,26 +1,27 @@
-.back {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-
-  a {
-    cursor: pointer;
-  }
-
-  a:hover {
-    border-bottom: 1px solid #000000;
-  }
-}
-
 .product-form-block {
   min-width: 1000px;
   min-height: 820px;
-  padding: 5% 0;
+  padding: 10% 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
   background-color: #F8F8FF;
+}
+
+.back {
+  display: flex;
+  justify-content: center;
+
+  a {
+    border-bottom: 1px solid transparent;
+  }
+
+  a:hover {
+    color: red;
+    border-bottom: 1px solid red;
+    cursor: pointer;
+  }
 }
 
 .form-content {

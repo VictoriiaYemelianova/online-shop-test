@@ -1,41 +1,44 @@
-<div class="link">
-  <a routerLink="create-product">Create</a>
-</div>
 <div class="products-page">
-  <div class="product-block" *ngFor="let product of productList">
-    <div [routerLink]="product._id" class="content">
-      <div class="product-content">
-        <div class="product-name">
-          <span> {{ product.name }} </span>
-        </div>
-
-        <div class="product-img">
-          <img [src]="product.imgUrl" alt="">
-        </div>
-
-        <div class="product-price">
-          <span>Price: {{ product.price }}$ </span>
-      </div>
-    </div>
-
-      <div class="button-content">
-        <div *ngIf="!isAdmin" class="button-user">
-          <button class="btn-buy">buy</button>
-        </div>
-
-        <div *ngIf="isAdmin" class="button-admin">
-          <button class="btn-trash" (click)="deleteCategory(product, $event)">
-            <fa-icon [icon]="faTrashAlt"></fa-icon>
-          </button>
-
-          <button class="btn-update" (click)="updateProduct(product, $event)">
-            <fa-icon [icon]="faPencilAlt"></fa-icon>
-          </button>
-        </div>
-      </div>
-
+  <div class="link">
+    <a routerLink="create-product">Create</a>
   </div>
-</div>
+
+  <div class="products-content ">
+    <div class="product-block" *ngFor="let product of productList">
+      <div [routerLink]="product._id" class="content">
+        <div class="product-content">
+          <div class="product-name">
+            <span> {{ product.name }} </span>
+          </div>
+  
+          <div class="product-img">
+            <img [src]="product.imgUrl" alt="">
+          </div>
+  
+          <div class="product-price">
+            <span>Price: {{ product.price }}$ </span>
+        </div>
+      </div>
+  
+        <div class="button-content">
+          <div *ngIf="!isAdmin" class="button-user">
+            <button class="btn-buy">buy</button>
+          </div>
+  
+          <div *ngIf="isAdmin" class="button-admin">
+            <button class="btn-trash" (click)="deleteCategory(product, $event)">
+              <fa-icon [icon]="faTrashAlt"></fa-icon>
+            </button>
+  
+            <button class="btn-update" (click)="updateProduct(product, $event)">
+              <fa-icon [icon]="faPencilAlt"></fa-icon>
+            </button>
+          </div>
+        </div>
+  
+    </div>
+  </div>
+  </div>
 
 <ng-template #updateTemplate>
   <div class="form-content">
