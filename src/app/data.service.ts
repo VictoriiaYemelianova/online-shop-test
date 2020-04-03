@@ -24,4 +24,8 @@ export class DataService {
   delete( id: string, entity: string ) {
     return this.http.get(`${apiUrl}/${entity}/delete/${id}`);
   }
+
+  deleteAll( entity: string ) {
+    return this.http.get(`${apiUrl}/${entity}/delete`);
+  }
 }

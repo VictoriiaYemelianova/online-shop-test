@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
 import { DataService } from '../data.service';
-import { ICategory, ICategoriesServerModel } from '../data-interface';
+import { ICategory, ICategoriesServerModel, IProductsServerModel } from '../data-interface';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -94,16 +94,27 @@ export class CategotiesComponent implements OnInit, OnDestroy {
     this.currentTemplate = this.deleteNotificationTemplate;
     this.currentObj = obj;
     this.IsModalShow = true;
+    console.log(this.currentObj.name);
   }
 
   onDelete() {
     this.categoriesService.delete(this.currentObj._id , 'categories').subscribe((res: ICategoriesServerModel) => {
       if (res.success) {
         const newCategoriesList: ICategory[] = this.categoriesList.filter(el => el._id !== this.currentObj._id );
+        this.deleteProducts();
         this.categoriesList = newCategoriesList;
       }
     });
     this.closeModal();
+  }
+
+  deleteProducts() {
+    const currentProductName = this.currentObj.name.toLocaleLowerCase();
+    this.categoriesService.deleteAll(currentProductName).subscribe((response: IProductsServerModel) => {
+      if (response.success) {
+        console.log('succesfully');
+      }
+    });
   }
 
   closeModal() {
