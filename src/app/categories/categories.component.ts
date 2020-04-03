@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
 import { DataService } from '../data.service';
 import { ICategory, ICategoriesServerModel } from '../data-interface';
 import { ActivatedRoute } from '@angular/router';
@@ -14,6 +14,10 @@ import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./categoties.component.scss']
 })
 export class CategotiesComponent implements OnInit, OnDestroy {
+  @ViewChild('updateTemplate') updateTemplate: TemplateRef<any>;
+  @ViewChild('deleteNotificationTemplate') deleteNotificationTemplate: TemplateRef<any>;
+
+
   private destroy: Subject<void> = new Subject<void>();
 
   public categoriesList: ICategory[];
@@ -24,6 +28,7 @@ export class CategotiesComponent implements OnInit, OnDestroy {
   public currentObj: ICategory;
   public faTrashAlt = faTrashAlt;
   public faPencilAlt = faPencilAlt;
+  public currentTemplate: TemplateRef<any>;
 
   constructor(private router: ActivatedRoute, private categoriesService: DataService) { }
 
@@ -55,7 +60,8 @@ export class CategotiesComponent implements OnInit, OnDestroy {
 
   updateCategory(obj: ICategory, event: Event) {
     event.preventDefault();
-    event. stopPropagation();
+    event.stopPropagation();
+    this.currentTemplate = this.updateTemplate;
     this.IsModalShow = true;
     this.currentObj = obj;
     this.onUpdateForm.controls.name.setValue(obj.name);
@@ -82,20 +88,25 @@ export class CategotiesComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteCategory(id: string, event: Event) {
+  deleteCategory(obj: ICategory, event: Event) {
     event.preventDefault();
     event. stopPropagation();
-    alert('Delete?');
-    this.categoriesService.delete(id, 'categories').subscribe((res: ICategoriesServerModel) => {
+    this.currentTemplate = this.deleteNotificationTemplate;
+    this.currentObj = obj;
+    this.IsModalShow = true;
+  }
+
+  onDelete() {
+    this.categoriesService.delete(this.currentObj._id , 'categories').subscribe((res: ICategoriesServerModel) => {
       if (res.success) {
-        const newCategoriesList: ICategory[] = this.categoriesList.filter(el => el._id !== id);
+        const newCategoriesList: ICategory[] = this.categoriesList.filter(el => el._id !== this.currentObj._id );
         this.categoriesList = newCategoriesList;
       }
     });
+    this.closeModal();
   }
 
   closeModal() {
-    this.onUpdateForm.reset();
     this.IsModalShow = false;
   }
 }

@@ -12,7 +12,7 @@
       </div>
   
       <div *ngIf="isAdmin" class="button-content">
-        <button class="btn-trash" (click)="deleteCategory(category._id, $event)">
+        <button class="btn-trash" (click)="deleteCategory(category, $event)">
           <fa-icon [icon]="faTrashAlt"></fa-icon>
         </button>
 
@@ -26,7 +26,7 @@
 
 </div>
 
-<ng-template #template>
+<ng-template #updateTemplate>
   <div class="form-content">
     <h3>Update {{ currentObj.name }}</h3>
 
@@ -53,5 +53,18 @@
   </div>
 </ng-template>
 
-<app-modal *ngIf="IsModalShow" [template]="template" (closeModal)="closeModal()">
+<ng-template #deleteNotificationTemplate>
+  <div class="delete-massage">
+    <div class="info-message">
+      <span>Are you sure you want to remove {{ currentObj.name }}?</span>
+    </div>
+
+    <div class="info-button">
+      <button (click)="onDelete()"  class="btn-green">delete</button>
+      <button (click)="closeModal()" class="btn-red">cancel</button>
+    </div>
+  </div>
+</ng-template>
+
+<app-modal *ngIf="IsModalShow" [template]="currentTemplate" (closeModal)="closeModal()">
 </app-modal>
