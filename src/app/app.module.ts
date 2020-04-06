@@ -16,6 +16,7 @@ import { ProductFormComponent } from './admin-panel/product-form/product-form.co
 import { UserPageComponent } from './user-panel/user-page/user-page.component';
 import { ModalComponent } from 'src/app/modal/modal.component';
 import { ProductsComponent } from './products/products.component';
+import { ShopBasketComponent } from './user-panel/shop-basket/shop-basket.component';
 
 import { UserServiceService } from './service/user-service.service';
 import { DataService } from './service/data.service';
@@ -36,12 +37,15 @@ const appRoutes: Routes = [
     { path: 'categories/:name/create-product', component:  ProductFormComponent, data: {isAdmin: true} },
     { path: 'categories/:name/:id', component: ProductsComponent, data: {isAdmin: true} }
   ] },
-  { path: 'user', component: UserPageComponent, canActivate: [UserGuard], children: [
+  { path: 'user', component: UserPageComponent, children: [
     { path: 'categories', component: CategotiesComponent },
     { path: 'categories/:name', component: ProductsComponent },
-    { path: 'categories/:name/:id', component: ProductsComponent }
+    { path: 'categories/:name/:id', component: ProductsComponent },
+    { path: 'basket', component: ShopBasketComponent }
   ] }
 ];
+
+// canActivate: [UserGuard],
 
 @NgModule({
   declarations: [
@@ -55,7 +59,8 @@ const appRoutes: Routes = [
     ProductFormComponent,
     UserPageComponent,
     ModalComponent,
-    ProductsComponent
+    ProductsComponent,
+    ShopBasketComponent
   ],
   imports: [
     BrowserModule,

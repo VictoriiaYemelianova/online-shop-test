@@ -1,0 +1,35 @@
+<div class="basket-page">
+  <div class="basket-content">
+    <h3>Your basket:</h3>
+    <div *ngIf="!productList.length" class="empty-basket">
+      <span>Your basket is empty</span>
+    </div>
+
+    <div *ngIf="productList.length">
+      <div *ngFor="let product of productList" class="basket">
+          <div class="img-block">
+            <img [src]="product.imgUrl" alt="">
+          </div>
+  
+          <div class="info-block">
+            <div>Product name: {{product.name}}</div>
+            <div>Product price: {{product.price}}$</div>
+          </div>
+
+          <div class="count-block">
+            <div>
+              <fa-icon [icon]="faMinusSquare" class="icon"></fa-icon>
+            </div>
+            <span>{{product.count}}</span>
+            <div>
+              <fa-icon [icon]="faPlusSquare" class="icon"></fa-icon>
+            </div>
+          </div>
+  
+        <div class="icon-block">
+          <fa-icon class="trash-alt" [icon]="faTrashAlt"></fa-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
