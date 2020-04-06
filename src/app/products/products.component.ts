@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
-import { DataService } from '../data.service';
+import { DataService } from '../service/data.service';
 import { IProduct, IProductsServerModel } from '../data-interface';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';

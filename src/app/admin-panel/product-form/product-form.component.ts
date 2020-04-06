@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { DataService } from 'src/app/data.service';
+import { DataService } from 'src/app/service/data.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';

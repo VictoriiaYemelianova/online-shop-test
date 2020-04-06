@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
-import { DataService } from '../data.service';
+import { DataService } from '../service/data.service';
 import { ICategory, ICategoriesServerModel, IProductsServerModel } from '../data-interface';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';

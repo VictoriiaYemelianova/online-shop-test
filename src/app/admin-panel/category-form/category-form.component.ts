@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { DataService } from 'src/app/data.service';
+import { DataService } from 'src/app/service/data.service';
 import { ICategoriesServerModel } from 'src/app/data-interface';
 
 @Component({

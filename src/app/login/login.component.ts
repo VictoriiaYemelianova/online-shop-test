@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserServiceService } from '../user-service.service';
+import { UserServiceService } from '../service/user-service.service';
 import { IUser, IUserServerModel } from '../data-interface';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
     this.userService.loginUser(formValue)
       .subscribe((res: IUserServerModel) => {
         if (res.success) {
-          this.userService.addUserInfo(res.user);
           if (res.user.login === 'Admin') {
             this.router.navigate(['admin/create-category']);
           } else {
