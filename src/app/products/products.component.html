@@ -1,5 +1,5 @@
 <div class="products-page">
-  <div class="link">
+  <div *ngIf="isAdmin" class="link">
     <a routerLink="create-product">Create</a>
   </div>
 
@@ -22,7 +22,7 @@
   
         <div class="button-content">
           <div *ngIf="!isAdmin" class="button-user">
-            <button class="btn-buy">buy</button>
+            <button class="btn-buy" (click)="onBasket(product, $event)">buy</button>
           </div>
   
           <div *ngIf="isAdmin" class="button-admin">

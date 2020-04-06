@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { UserServiceService } from 'src/app/service/user-service.service';
+import { IProduct } from 'src/app/data-interface';
 
 @Component({
   selector: 'app-user-page',
@@ -15,6 +16,7 @@ export class UserPageComponent implements OnInit, OnDestroy {
 
   public isAdmin = false;
   public faShoppingBasket = faShoppingCart;
+  public userProductSize: number;
 
   constructor( private router: ActivatedRoute, private userService: UserServiceService ) { }
 
@@ -25,6 +27,10 @@ export class UserPageComponent implements OnInit, OnDestroy {
       if (data.isAdmin) {
         this.isAdmin = true;
       }
+    });
+
+    this.userService.productToBuyList.subscribe((res: Array<IProduct>) => {
+      this.userProductSize = res.length;
     });
   }
 

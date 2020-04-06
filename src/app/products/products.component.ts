@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { UserServiceService } from '../service/user-service.service';
 
 @Component({
   selector: 'app-products',
@@ -30,7 +31,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   public faPencilAlt = faPencilAlt;
   public currentTemplate: TemplateRef<any>;
 
-  constructor( private router: ActivatedRoute, private productService: DataService ) { }
+  constructor( private router: ActivatedRoute, private productService: DataService, private userService: UserServiceService ) { }
 
   ngOnInit(): void {
     this.router.params
@@ -115,5 +116,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   closeModal() {
     this.IsModalShow = false;
+  }
+
+  onBasket(product: IProduct, event) {
+    event.preventDefault();
+    event. stopPropagation();
+    this.userService.addElToBuyList(product);
   }
 }

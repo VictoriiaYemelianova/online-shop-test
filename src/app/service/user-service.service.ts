@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { IUser, IUserServerModel } from '../data-interface';
+import { IUser, IUserServerModel, IProduct } from '../data-interface';
 import { HttpClient} from '@angular/common/http';
 import { apiUrl } from '../constants';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class UserServiceService {
   public logUser: IUser;
+  public productToBuyList: BehaviorSubject<Array<IProduct>> = new BehaviorSubject([]);
 
   constructor( private http: HttpClient, private router: Router, ) { }
 
@@ -39,5 +40,11 @@ export class UserServiceService {
   logOut() {
     this.logUser = null;
     this.router.navigate(['']);
+  }
+
+  addElToBuyList(el: IProduct) {
+    const currentList = this.productToBuyList.value;
+    currentList.push(el);
+    this.productToBuyList.next(currentList);
   }
 }
