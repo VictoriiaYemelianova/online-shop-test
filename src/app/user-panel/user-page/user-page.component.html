@@ -2,9 +2,9 @@
   <div class="menu-content">
     <nav class="links-block">
       <ul class="links">
-        <li><a routerLink="/">Home page</a></li>
         <li><a routerLink="categories" routerLinkActive="active-link">Categories</a></li>
-        <li><a href=""><fa-icon [icon]="faShoppingBasket"></fa-icon> </a></li>
+        <li><a routerLink="basket"><fa-icon [icon]="faShoppingBasket"></fa-icon> </a></li>
+        <li><a (click)="onLogOut()">Log out</a></li>
       </ul>
     </nav>
   </div>

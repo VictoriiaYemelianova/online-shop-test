@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { UserServiceService } from 'src/app/service/user-service.service';
 
 @Component({
   selector: 'app-user-page',
@@ -15,7 +16,7 @@ export class UserPageComponent implements OnInit, OnDestroy {
   public isAdmin = false;
   public faShoppingBasket = faShoppingCart;
 
-  constructor(private router: ActivatedRoute) { }
+  constructor( private router: ActivatedRoute, private userService: UserServiceService ) { }
 
   ngOnInit(): void {
     this.router.data
@@ -30,6 +31,10 @@ export class UserPageComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroy.next();
     this.destroy.complete();
+  }
+
+  onLogOut() {
+    this.userService.logOut();
   }
 
 }
