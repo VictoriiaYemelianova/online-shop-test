@@ -21,7 +21,8 @@ import { UserServiceService } from './service/user-service.service';
 import { DataService } from './service/data.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import { IsAdminGuard } from './Guard/is-admin.guard';
+import { IsAdminGuard } from './Guard/is-admin/is-admin.guard';
+import { UserGuard } from './Guard/is-user/user.guard';
 
 const appRoutes: Routes = [
   { path: 'enter-page', component: FirstPageComponent },
@@ -35,7 +36,7 @@ const appRoutes: Routes = [
     { path: 'categories/:name/create-product', component:  ProductFormComponent, data: {isAdmin: true} },
     { path: 'categories/:name/:id', component: ProductsComponent, data: {isAdmin: true} }
   ] },
-  { path: 'user', component: UserPageComponent, children: [
+  { path: 'user', component: UserPageComponent, canActivate: [UserGuard], children: [
     { path: 'categories', component: CategotiesComponent },
     { path: 'categories/:name', component: ProductsComponent },
     { path: 'categories/:name/:id', component: ProductsComponent }
@@ -65,7 +66,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FontAwesomeModule
   ],
-  providers: [UserServiceService, DataService, IsAdminGuard],
+  providers: [UserServiceService, DataService, IsAdminGuard, UserGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
