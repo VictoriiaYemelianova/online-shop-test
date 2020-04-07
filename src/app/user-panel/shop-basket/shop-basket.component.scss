@@ -52,8 +52,14 @@
     margin-right: 35px;
     justify-content: space-evenly;
 
-    .icon {
+    .faMinusSquare {
+      color: red;
+      cursor: pointer;
+    }
+
+    .faPlusSquare {
       color: green;
+      cursor: pointer;
     }
   }
 

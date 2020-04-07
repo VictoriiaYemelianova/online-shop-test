@@ -18,16 +18,16 @@
 
           <div class="count-block">
             <div>
-              <fa-icon [icon]="faMinusSquare" class="icon"></fa-icon>
+              <fa-icon [icon]="faMinusSquare" class="faMinusSquare"></fa-icon>
             </div>
             <span>{{product.count}}</span>
             <div>
-              <fa-icon [icon]="faPlusSquare" class="icon"></fa-icon>
+              <fa-icon [icon]="faPlusSquare" class="faPlusSquare"></fa-icon>
             </div>
           </div>
   
         <div class="icon-block">
-          <fa-icon class="trash-alt" [icon]="faTrashAlt"></fa-icon>
+          <fa-icon class="trash-alt" [icon]="faTrashAlt" (click)="onDelete(product)"></fa-icon>
         </div>
       </div>
     </div>

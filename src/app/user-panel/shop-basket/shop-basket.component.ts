@@ -23,16 +23,25 @@ export class ShopBasketComponent implements OnInit {
   }
 
   createProductList(arr: Array<IProduct>) {
-    arr.forEach((el: IProduct) => {
-      const index = this.productList.indexOf(el);
-      let newEl;
-      if (index !== -1) {
-        this.productList[index].count += 1;
-      } else {
-        newEl = el;
-        newEl.count = 1;
-        this.productList.push(newEl);
-      }
-    });
+    if (!arr.length) {
+      this.productList = [];
+    } else {
+      arr.forEach((el: IProduct) => {
+        const index = this.productList.indexOf(el);
+        let newEl;
+        if (index !== -1) {
+          this.productList[index].count += 1;
+        } else {
+          newEl = el;
+          newEl.count = 1;
+          this.productList.push(newEl);
+        }
+      });
+    }
+  }
+
+  onDelete(product) {
+    delete product.count;
+    this.userService.deleteProduct(product);
   }
 }

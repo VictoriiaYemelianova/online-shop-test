@@ -47,4 +47,10 @@ export class UserServiceService {
     currentList.push(el);
     this.productToBuyList.next(currentList);
   }
+
+  deleteProduct(el: IProduct) {
+    const currentList = this.productToBuyList.value;
+    const newList = currentList.filter(element => element !== el);
+    this.productToBuyList.next(newList);
+  }
 }
