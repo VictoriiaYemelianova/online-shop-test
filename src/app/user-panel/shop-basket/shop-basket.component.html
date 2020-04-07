@@ -18,11 +18,11 @@
 
           <div class="count-block">
             <div>
-              <fa-icon [icon]="faMinusSquare" class="faMinusSquare"></fa-icon>
+              <fa-icon [icon]="faMinusSquare" class="faMinusSquare" (click)="onMinus(product)"></fa-icon>
             </div>
             <span>{{product.count}}</span>
             <div>
-              <fa-icon [icon]="faPlusSquare" class="faPlusSquare"></fa-icon>
+              <fa-icon [icon]="faPlusSquare" class="faPlusSquare" (click)="onPlus(product)"></fa-icon>
             </div>
           </div>
   

@@ -14,7 +14,7 @@ export class ShopBasketComponent implements OnInit {
   public faPlusSquare = faPlusSquare;
   public faMinusSquare = faMinusSquare;
 
-  constructor( private userService: UserServiceService ) { }
+  constructor(private userService: UserServiceService) { }
 
   ngOnInit(): void {
     this.userService.productToBuyList.subscribe((res: Array<IProduct>) => {
@@ -23,21 +23,29 @@ export class ShopBasketComponent implements OnInit {
   }
 
   createProductList(arr: Array<IProduct>) {
-    if (!arr.length) {
-      this.productList = [];
-    } else {
-      arr.forEach((el: IProduct) => {
-        const index = this.productList.indexOf(el);
-        let newEl;
-        if (index !== -1) {
-          this.productList[index].count += 1;
-        } else {
-          newEl = el;
-          newEl.count = 1;
-          this.productList.push(newEl);
-        }
-      });
-    }
+    this.productList = [];
+    arr.forEach((el: IProduct) => {
+      const index = this.productList.indexOf(el);
+      let newEl;
+      if (index !== -1) {
+        this.productList[index].count += 1;
+      } else {
+        newEl = el;
+        newEl.count = 1;
+        this.productList.push(newEl);
+      }
+    });
+
+  }
+
+  onMinus(product) {
+    delete product.count;
+    this.userService.deleteOneProduct(product);
+  }
+
+  onPlus(product) {
+    delete product.count;
+    this.userService.addOneProduct(product);
   }
 
   onDelete(product) {

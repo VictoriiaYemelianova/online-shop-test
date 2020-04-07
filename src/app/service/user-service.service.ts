@@ -48,6 +48,19 @@ export class UserServiceService {
     this.productToBuyList.next(currentList);
   }
 
+  deleteOneProduct(el: IProduct) {
+    const currentList = this.productToBuyList.value;
+    const index = currentList.indexOf(el);
+    currentList.splice(index, 1);
+    this.productToBuyList.next(currentList);
+  }
+
+  addOneProduct(el: IProduct) {
+    const currentList = this.productToBuyList.value;
+    currentList.push(el);
+    this.productToBuyList.next(currentList);
+  }
+
   deleteProduct(el: IProduct) {
     const currentList = this.productToBuyList.value;
     const newList = currentList.filter(element => element !== el);
