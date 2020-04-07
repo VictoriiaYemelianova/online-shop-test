@@ -14,7 +14,7 @@ export class ShopBasketComponent implements OnInit {
   public faPlusSquare = faPlusSquare;
   public faMinusSquare = faMinusSquare;
 
-  constructor(private userService: UserServiceService) { }
+  constructor(private userService: UserServiceService) {}
 
   ngOnInit(): void {
     this.userService.productToBuyList.subscribe((res: Array<IProduct>) => {

@@ -13,13 +13,24 @@ export class UserServiceService {
   public logUser: IUser;
   public productToBuyList: BehaviorSubject<Array<IProduct>> = new BehaviorSubject([]);
 
-  constructor( private http: HttpClient, private router: Router, ) { }
+  constructor( private http: HttpClient, private router: Router, ) {
+    this.getItemLocalStorage('user');
+  }
+
+  getItemLocalStorage(key) {
+    const user = localStorage.getItem(key);
+    if (user) {
+      this.logUser = JSON.parse(user);
+    }
+  }
 
   loginUser(user: IUser): Observable<IUserServerModel> {
     return this.http.post(`${apiUrl}/login`, user).pipe(
       map((res: IUserServerModel) => {
         if (res.success) {
           this.logUser = res.user;
+          localStorage.setItem('user', JSON.stringify(this.logUser));
+          localStorage.setItem('userBasket', '');
         }
         return res;
       })
@@ -38,6 +49,7 @@ export class UserServiceService {
   }
 
   logOut() {
+    localStorage.clear();
     this.logUser = null;
     this.router.navigate(['']);
   }
@@ -46,6 +58,7 @@ export class UserServiceService {
     const currentList = this.productToBuyList.value;
     currentList.push(el);
     this.productToBuyList.next(currentList);
+    localStorage.setItem('userBasket', JSON.stringify(currentList));
   }
 
   deleteOneProduct(el: IProduct) {
@@ -53,17 +66,20 @@ export class UserServiceService {
     const index = currentList.indexOf(el);
     currentList.splice(index, 1);
     this.productToBuyList.next(currentList);
+    localStorage.setItem('userBasket', JSON.stringify(currentList));
   }
 
   addOneProduct(el: IProduct) {
     const currentList = this.productToBuyList.value;
     currentList.push(el);
     this.productToBuyList.next(currentList);
+    localStorage.setItem('userBasket', JSON.stringify(currentList));
   }
 
   deleteProduct(el: IProduct) {
     const currentList = this.productToBuyList.value;
     const newList = currentList.filter(element => element !== el);
     this.productToBuyList.next(newList);
+    localStorage.setItem('userBasket', JSON.stringify(currentList));
   }
 }

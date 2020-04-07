@@ -37,7 +37,7 @@ const appRoutes: Routes = [
     { path: 'categories/:name/create-product', component:  ProductFormComponent, data: {isAdmin: true} },
     { path: 'categories/:name/:id', component: ProductsComponent, data: {isAdmin: true} }
   ] },
-  { path: 'user', component: UserPageComponent, children: [
+  { path: 'user', component: UserPageComponent, canActivate: [UserGuard], children: [
     { path: 'categories', component: CategotiesComponent },
     { path: 'categories/:name', component: ProductsComponent },
     { path: 'categories/:name/:id', component: ProductsComponent },

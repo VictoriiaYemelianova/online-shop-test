@@ -9,6 +9,7 @@ import { UserServiceService } from 'src/app/service/user-service.service';
 export class UserGuard implements CanActivate {
 
   constructor( private userService: UserServiceService, private router: Router ) {}
+
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | boolean {
