@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     this.userService.loginUser(formValue)
       .subscribe((res: IUserServerModel) => {
         if (res.success) {
-          if (res.user.login === 'Admin') {
+          if (res.user.role === 'admin') {
             this.router.navigate(['admin/create-category']);
           } else {
             this.router.navigate(['user/categories']);

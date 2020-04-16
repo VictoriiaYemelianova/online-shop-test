@@ -5,9 +5,10 @@ export interface IUserServerModel {
 }
 
 export interface IUser {
+  _id?: string;
   login: string;
   pass: string;
-  _id?: string;
+  role?: string;
 }
 
 export interface IProductsServerModel {
