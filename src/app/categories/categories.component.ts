@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
 import { DataService } from '../service/data.service';
-import { ICategory, ICategoriesServerModel, IProductsServerModel } from '../data-interface';
+import { ICategory, IServerModel, IProductsServerModel } from '../data-interface';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -33,9 +33,9 @@ export class CategotiesComponent implements OnInit, OnDestroy {
   constructor(private router: ActivatedRoute, private categoriesService: DataService) { }
 
   ngOnInit(): void {
-    this.categoriesService.get('categories').subscribe((res: ICategoriesServerModel) => {
+    this.categoriesService.get('categories').subscribe((res: IServerModel) => {
       if (res.success) {
-        this.categoriesList = res.items;
+        this.categoriesList = res.items as ICategory[];
       }
 
       this.router.data
@@ -71,11 +71,11 @@ export class CategotiesComponent implements OnInit, OnDestroy {
   onUpdate() {
     const formValue = this.onUpdateForm.value;
     formValue._id = this.currentObj._id;
-    this.categoriesService.update(formValue, 'categories').subscribe((res: ICategoriesServerModel) => {
+    this.categoriesService.update(formValue, 'categories').subscribe((res: IServerModel) => {
       if (res.success) {
         const newCategoriesList: ICategory[] = this.categoriesList.map((el: ICategory) => {
-          if (el._id === res.item._id) {
-            el = res.item;
+          if (el._id === res.items[0]._id) {
+            el = res.items[0] as ICategory;
           }
           return el;
         });
@@ -98,7 +98,7 @@ export class CategotiesComponent implements OnInit, OnDestroy {
   }
 
   onDelete() {
-    this.categoriesService.delete(this.currentObj._id , 'categories').subscribe((res: ICategoriesServerModel) => {
+    this.categoriesService.delete(this.currentObj._id , 'categories').subscribe((res: IServerModel) => {
       if (res.success) {
         const newCategoriesList: ICategory[] = this.categoriesList.filter(el => el._id !== this.currentObj._id );
         this.deleteProducts();

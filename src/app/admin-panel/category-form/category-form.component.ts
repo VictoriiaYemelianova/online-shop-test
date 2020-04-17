@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CategoryService } from 'src/app/service/category.service';
 import { DataService } from 'src/app/service/data.service';
-import { ICategoriesServerModel } from 'src/app/data-interface';
+import { IServerModel } from 'src/app/data-interface';
 
 @Component({
   selector: 'app-category-form',
@@ -12,7 +13,7 @@ export class CategoryFormComponent implements OnInit {
   public categoryForm: FormGroup;
   public infoMessage: string;
 
-  constructor( private categoriesService: DataService ) { }
+  constructor( private categoriesService: DataService, private categoryService: CategoryService ) { }
 
   ngOnInit(): void {
     this.categoryForm = new FormGroup({
@@ -23,8 +24,9 @@ export class CategoryFormComponent implements OnInit {
 
   onSubmitNewCategpry() {
     const formValue = this.categoryForm.value;
-    this.categoriesService.create(formValue, 'categories')
-      .subscribe((res: ICategoriesServerModel) => {
+    formValue.name = formValue.name.toLowerCase();
+    this.categoryService.create(formValue)
+      .subscribe((res: IServerModel) => {
         if (res.success) {
           this.infoMessage = 'Created successfully!';
           this.categoryForm.reset();
