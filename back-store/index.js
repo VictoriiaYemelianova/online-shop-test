@@ -23,7 +23,12 @@ router.use(function (req, res, nex) {
 
   if (res.items) {
     result.success = true;
-    result.items.push(res.items);
+    if (Array.isArray(res.items)) {
+      result.items = res.items;
+    } else {
+      result.items.push(res.items);
+    }
+    
   } else {
     result.message = res.message;
   }

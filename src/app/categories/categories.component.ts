@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
 import { DataService } from '../service/data.service';
+import { CategoryService } from '../service/category.service';
 import { ICategory, IServerModel, IProductsServerModel } from '../data-interface';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -30,11 +31,12 @@ export class CategotiesComponent implements OnInit, OnDestroy {
   public faPencilAlt = faPencilAlt;
   public currentTemplate: TemplateRef<any>;
 
-  constructor(private router: ActivatedRoute, private categoriesService: DataService) { }
+  constructor(private router: ActivatedRoute, private categoriesService: DataService, private categoryService: CategoryService) { }
 
   ngOnInit(): void {
-    this.categoriesService.get('categories').subscribe((res: IServerModel) => {
+    this.categoryService.get().subscribe((res: IServerModel) => {
       if (res.success) {
+        console.log(res)
         this.categoriesList = res.items as ICategory[];
       }
 
@@ -70,18 +72,19 @@ export class CategotiesComponent implements OnInit, OnDestroy {
 
   onUpdate() {
     const formValue = this.onUpdateForm.value;
-    formValue._id = this.currentObj._id;
-    this.categoriesService.update(formValue, 'categories').subscribe((res: IServerModel) => {
+    formValue.name = formValue.name.toLocaleLowerCase();
+    formValue.id = this.currentObj.id;
+    this.categoryService.update(formValue).subscribe((res: IServerModel) => {
       if (res.success) {
         const newCategoriesList: ICategory[] = this.categoriesList.map((el: ICategory) => {
-          if (el._id === res.items[0]._id) {
+          // const firstEl = res.items[0] as ICategory;
+          if (el.id === (res.items[0] as ICategory).id ) {
             el = res.items[0] as ICategory;
           }
           return el;
         });
         this.categoriesList = newCategoriesList;
         this.infoMessage = 'Updated successfully!';
-        this.onUpdateForm.reset();
       } else {
         this.infoMessage = 'Error!';
       }
@@ -98,9 +101,9 @@ export class CategotiesComponent implements OnInit, OnDestroy {
   }
 
   onDelete() {
-    this.categoriesService.delete(this.currentObj._id , 'categories').subscribe((res: IServerModel) => {
+    this.categoriesService.delete(this.currentObj.id , 'categories').subscribe((res: IServerModel) => {
       if (res.success) {
-        const newCategoriesList: ICategory[] = this.categoriesList.filter(el => el._id !== this.currentObj._id );
+        const newCategoriesList: ICategory[] = this.categoriesList.filter(el => el.id !== this.currentObj.id );
         this.deleteProducts();
         this.categoriesList = newCategoriesList;
       }
@@ -119,5 +122,6 @@ export class CategotiesComponent implements OnInit, OnDestroy {
 
   closeModal() {
     this.IsModalShow = false;
+    this.infoMessage = '';
   }
 }

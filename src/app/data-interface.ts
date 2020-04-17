@@ -12,7 +12,7 @@ export interface IUser {
 }
 
 export interface ICategory {
-  _id?: string;
+  id?: string;
   name: string;
   imgUrl: string;
 }
