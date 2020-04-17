@@ -1,61 +1,52 @@
-var express         = require('express');
-var bodyParser = require('body-parser');
-var path            = require('path'); 
-var cors = require('cors');
-var app = express();
+const express         = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const app = express();
+const models = require('./models/index');
+
+const router = express.Router();
 
 app.use(cors());
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true }));
-const models = require('./models/index');
-// app.use(function(req, res, next) {
-//     res.setHeader('Access-Control-Allow-Origin', '*');
-//     res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  
-//     next();
-//   });
-
-// app.use(express.static(path.join(__dirname, 'public')));
+app.use('/', router);
 
 app.get('/api', function (req, res) {
   res.send('API is running');
 });
 
-app.post('/api/login', async (req, res, next) => {
+router.post('/api/login', async (req, res, next) => {
   try {
     const user = await models.User.findOne({
       where: {
         login: req.body.login,
         pass: req.body.pass
       }
-    })
-    res.send({
-      success: true, user: user
-    })
-  } catch (err) {
-    res.send({
-      success: false, 
-      message:"Неверное имя пользователя или пароль."
     });
+
+    if (!user) {
+      res.message = 'Неверное имя пользователя или пароль.';
+    } else {
+      res.items = user;
+    }
+
+    next();
+  } catch (err) {
+    res.message = err.message;
+    next();
   }
 });
 
-app.post('/api/register', async (req, res, next) => {
+router.post('/api/register', async (req, res, next) => {
   try {
     const user = await models.User.findOne({
       where: {
         login: req.body.login,
         pass: req.body.pass
       }
-    })
+    });
 
-    if (user) {
-      res.send({
-        success: false, 
-        message:"Пользователь с таким именем уже существует."
-      });
-    } else {
+    if (!user) {
       const currentData = {
         login: req.body.login,
         pass: req.body.pass,
@@ -65,15 +56,37 @@ app.post('/api/register', async (req, res, next) => {
       }
       
       const newUser = await models.User.create(currentData);
-      
-      res.send({
-        success: true,
-        user: newUser
-      })
+      res.items = newUser;
+    } else {
+      const message = 'Пользователь с таким именем уже существует.';
+      res.message = message;
     }
 
-  } catch (err) {}
-})
+    next();
+
+  } catch (err) {
+    const message = err.message;
+    res.message = message;
+    next;
+  }
+});
+
+router.use(function (req, res, nex) {
+  const result = {
+    success: false,
+    items: [],
+    message: ''
+  };
+
+  if (res.items) {
+    result.success = true;
+    result.items.push(res.items);
+  } else {
+    result.message = res.message;
+  }
+
+  res.send(result);
+});
 
 app.listen(3000, function(){
   console.log('Express server listening on port ' + 3000);

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IUser, IUserServerModel, IProduct } from '../data-interface';
+import { IUser, IServerModel, IProduct } from '../data-interface';
 import { HttpClient} from '@angular/common/http';
 import { apiUrl } from '../constants';
 import { map } from 'rxjs/operators';
@@ -24,11 +24,11 @@ export class UserServiceService {
     }
   }
 
-  loginUser(user: IUser): Observable<IUserServerModel> {
+  loginUser(user: IUser): Observable<IServerModel> {
     return this.http.post(`${apiUrl}/login`, user).pipe(
-      map((res: IUserServerModel) => {
+      map((res: IServerModel) => {
         if (res.success) {
-          this.logUser = res.user;
+          this.logUser = res.items[0] as IUser;
           localStorage.setItem('user', JSON.stringify(this.logUser));
           localStorage.setItem('userBasket', '');
         }
@@ -37,11 +37,11 @@ export class UserServiceService {
     );
   }
 
-  createUser(user: IUser): Observable<IUserServerModel> {
+  createUser(user: IUser): Observable<IServerModel> {
     return this.http.post(`${apiUrl}/register`, user).pipe(
-      map((res: IUserServerModel) => {
+      map((res: IServerModel) => {
         if (res.success) {
-          this.logUser = res.user;
+          this.logUser = res.items[0] as IUser;
         }
         return res;
       })

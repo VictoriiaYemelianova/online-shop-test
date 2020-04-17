@@ -1,7 +1,13 @@
+export interface IServerModel {
+  success: boolean;
+  items: Array<IUser | IProduct | ICategory>;
+  message: string;
+}
+
 export interface IUserServerModel {
   success: boolean;
-  user?: IUser;
-  message?: string;
+  items: IUser;
+  message: string;
 }
 
 export interface IUser {
@@ -18,13 +24,11 @@ export interface IProductsServerModel {
 }
 
 export interface IProduct {
+  _id?: string;
   name: string;
   imgUrl: string;
   price: number;
-  _entityType?: string;
-  _creationDate?: string;
-  _id?: string;
-  _updatedDate?: string;
+  idCategory: string;
 }
 
 export interface ICategoriesServerModel {
@@ -34,10 +38,7 @@ export interface ICategoriesServerModel {
 }
 
 export interface ICategory {
+  _id?: string;
   name: string;
   imgUrl: string;
-  _entityType?: string;
-  _creationDate?: string;
-  _id?: string;
-  _updatedDate?: string;
 }

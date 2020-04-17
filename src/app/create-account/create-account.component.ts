@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../service/user-service.service';
-import { IUser, IUserServerModel } from '../data-interface';
+import { IUser, IServerModel } from '../data-interface';
 import {Router} from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -29,7 +29,7 @@ export class CreateAccountComponent implements OnInit {
     const formValue = this.createForm.value;
     formValue.role = 'user';
     this.userService.createUser(formValue)
-      .subscribe((res: IUserServerModel) => {
+      .subscribe((res: IServerModel) => {
         if (res.success) {
           this.router.navigate(['user/categories']);
         } else {
