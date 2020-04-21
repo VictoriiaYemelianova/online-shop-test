@@ -5,7 +5,10 @@ module.exports = (sequelize, DataTypes) => {
     imgUrl: DataTypes.STRING
   }, {});
   Category.associate = function(models) {
-    // associations can be defined here
+    Category.hasMany(models.Product, {
+      foreignKey: 'idCategory',
+      constraints: false
+    })
   };
   return Category;
 };

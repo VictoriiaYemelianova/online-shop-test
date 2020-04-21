@@ -7,7 +7,10 @@ module.exports = (sequelize, DataTypes) => {
     idCategory: DataTypes.STRING
   }, {});
   Product.associate = function(models) {
-    // associations can be defined here
+    Product.belongsTo(models.Category, {
+      foreignKey: 'idCategory',
+      constraints: false
+    })
   };
   return Product;
 };

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
 import { DataService } from '../service/data.service';
-import { IProduct, IProductsServerModel } from '../data-interface';
+import { IProduct, IServerModel } from '../data-interface';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
@@ -8,6 +8,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { UserServiceService } from '../service/user-service.service';
+import { ProductService } from '../service/product.service';
 
 @Component({
   selector: 'app-products',
@@ -21,7 +22,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   private destroy: Subject<void> = new Subject<void>();
 
   public isAdmin = false;
-  public productName: string;
+  public categoryName: string;
   public productList: IProduct[];
   public updateForm: FormGroup;
   public infoMessage: string;
@@ -31,26 +32,28 @@ export class ProductsComponent implements OnInit, OnDestroy {
   public faPencilAlt = faPencilAlt;
   public currentTemplate: TemplateRef<any>;
 
-  constructor( private router: ActivatedRoute, private productService: DataService, private userService: UserServiceService ) { }
+  constructor(
+    private router: ActivatedRoute,
+    private productService: DataService,
+    private productS: ProductService,
+    private userService: UserServiceService
+  ) { }
 
   ngOnInit(): void {
     this.router.params
       .pipe(takeUntil(this.destroy))
-      .subscribe(res => this.productName = res.name);
+      .subscribe(res => {
+        this.categoryName = res.name;
 
-    this.productService.get(this.productName).subscribe((res: IProductsServerModel) => {
-      if (res.success) {
-        console.log(res.items);
-        this.productList = res.items;
-      }
-
-      this.router.data
-      .pipe(takeUntil(this.destroy))
-      .subscribe(data => {
-        if (data.isAdmin) {
-          this.isAdmin = true;
-        }
+        this.getProducts();
       });
+
+    this.router.data
+    .pipe(takeUntil(this.destroy))
+    .subscribe(data => {
+      if (data.isAdmin) {
+        this.isAdmin = true;
+      }
     });
 
     this.updateForm = new FormGroup({
@@ -65,6 +68,14 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.destroy.complete();
   }
 
+  getProducts() {
+    this.productS.get(this.categoryName).subscribe((res: IServerModel) => {
+      if (res.success) {
+        console.log(res.items);
+        this.productList = res.items as IProduct[];
+      }
+    });
+  }
   updateProduct(el: IProduct, event: Event) {
     event.preventDefault();
     event. stopPropagation();
@@ -78,12 +89,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   onUpdateForm() {
     const formValue = this.updateForm.value;
-    formValue._id = this.currentObj._id;
-    this.productService.update(formValue, this.productName).subscribe((res: IProductsServerModel) => {
+    formValue._id = this.currentObj.id;
+    this.productService.update(formValue, this.categoryName).subscribe((res: IServerModel) => {
       if (res.success) {
         const newProductList: IProduct[] = this.productList.map((el: IProduct) => {
-          if (el._id === res.item._id) {
-            el = res.item;
+          if (el.id === res.items[0].id) {
+            el = res.items[0] as IProduct;
           }
           return el;
         });
@@ -105,9 +116,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   onDelete() {
-    this.productService.delete(this.currentObj._id, this.productName).subscribe((res: IProductsServerModel) => {
+    this.productService.delete(this.currentObj.id, this.categoryName).subscribe((res: IServerModel) => {
       if (res.success) {
-        const newProductList: IProduct[] = this.productList.filter((el: IProduct) => el._id !== this.currentObj._id);
+        const newProductList: IProduct[] = this.productList.filter((el: IProduct) => el.id !== this.currentObj.id);
         this.productList = newProductList;
       }
     });

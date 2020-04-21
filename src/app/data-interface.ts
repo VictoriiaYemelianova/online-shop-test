@@ -5,7 +5,7 @@ export interface IServerModel {
 }
 
 export interface IUser {
-  _id?: string;
+  id?: string;
   login: string;
   pass: string;
   role?: string;
@@ -17,16 +17,10 @@ export interface ICategory {
   imgUrl: string;
 }
 
-export interface IProductsServerModel {
-  success: boolean;
-  items?: Array<IProduct>;
-  item?: IProduct;
-}
-
 export interface IProduct {
-  _id?: string;
+  id?: string;
   name: string;
   imgUrl: string;
   price: number;
-  idCategory: string;
+  idCategory?: string;
 }

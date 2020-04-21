@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CategoryService } from 'src/app/service/category.service';
-import { DataService } from 'src/app/service/data.service';
 import { IServerModel } from 'src/app/data-interface';
 
 @Component({
@@ -13,7 +12,7 @@ export class CategoryFormComponent implements OnInit {
   public categoryForm: FormGroup;
   public infoMessage: string;
 
-  constructor( private categoriesService: DataService, private categoryService: CategoryService ) { }
+  constructor( private categoryService: CategoryService ) { }
 
   ngOnInit(): void {
     this.categoryForm = new FormGroup({

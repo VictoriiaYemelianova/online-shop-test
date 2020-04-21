@@ -5,7 +5,7 @@
 
   <div class="products-content ">
     <div class="product-block" *ngFor="let product of productList">
-      <div [routerLink]="product._id" class="content">
+      <div [routerLink]="product.id" class="content">
         <div class="product-content">
           <div class="product-name">
             <span> {{ product.name }} </span>
@@ -42,7 +42,7 @@
 
 <ng-template #updateTemplate>
   <div class="form-content">
-    <h3>Update {{ productName }}</h3>
+    <h3>Update {{ categoryName }}</h3>
 
     <div class="message input-block">
       <span>{{ infoMessage }}</span>

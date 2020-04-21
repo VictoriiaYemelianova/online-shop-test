@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
 import { DataService } from '../service/data.service';
 import { CategoryService } from '../service/category.service';
-import { ICategory, IServerModel, IProductsServerModel } from '../data-interface';
+import { ICategory, IServerModel } from '../data-interface';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -36,7 +36,6 @@ export class CategotiesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.categoryService.get().subscribe((res: IServerModel) => {
       if (res.success) {
-        console.log(res)
         this.categoriesList = res.items as ICategory[];
       }
 
@@ -77,8 +76,7 @@ export class CategotiesComponent implements OnInit, OnDestroy {
     this.categoryService.update(formValue).subscribe((res: IServerModel) => {
       if (res.success) {
         const newCategoriesList: ICategory[] = this.categoriesList.map((el: ICategory) => {
-          // const firstEl = res.items[0] as ICategory;
-          if (el.id === (res.items[0] as ICategory).id ) {
+          if (el.id === res.items[0].id ) {
             el = res.items[0] as ICategory;
           }
           return el;
@@ -112,7 +110,7 @@ export class CategotiesComponent implements OnInit, OnDestroy {
 
   deleteProducts() {
     const currentProductName = this.currentObj.name.toLocaleLowerCase();
-    this.categoriesService.deleteAll(currentProductName).subscribe((response: IProductsServerModel) => {
+    this.categoriesService.deleteAll(currentProductName).subscribe((response: IServerModel) => {
       if (response.success) {
         console.log('succesfully');
       }

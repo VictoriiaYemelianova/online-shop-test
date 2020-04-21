@@ -3,7 +3,7 @@
     <a (click)="onCancel()">Back to product</a>
   </div>
   
-  <h3>Create new product {{ productName }}</h3>
+  <h3>Create new {{ categoryName }} product </h3>
 
   <form [formGroup]="productForm" (ngSubmit)="onSubmitNewProduct()" class="form-content">
     <div class="info-message">
