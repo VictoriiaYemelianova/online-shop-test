@@ -89,8 +89,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   onUpdateForm() {
     const formValue = this.updateForm.value;
-    formValue._id = this.currentObj.id;
-    this.productService.update(formValue, this.categoryName).subscribe((res: IServerModel) => {
+    formValue.id = this.currentObj.id;
+    this.productS.update(formValue).subscribe((res: IServerModel) => {
       if (res.success) {
         const newProductList: IProduct[] = this.productList.map((el: IProduct) => {
           if (el.id === res.items[0].id) {
@@ -100,7 +100,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
         });
         this.productList = newProductList;
         this.infoMessage = 'Updated successfully!';
-        this.updateForm.reset();
       } else {
         this.infoMessage = 'Error!';
       }

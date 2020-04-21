@@ -19,7 +19,7 @@ export class ProductService {
     return this.http.post(`${apiUrl}/${name}/create-product`, el);
   }
 
-  update() {}
-
-  delete() {}
+  update(el: IProduct) {
+    return this.http.put(`${apiUrl}/products/update`, el);
+  }
 }

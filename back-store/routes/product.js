@@ -32,13 +32,46 @@ module.exports = function(router) {
         price: req.body.price,
         idCategory: category.id,
         createdAt: new Date(),
-        updatedAt: new Date(),
+        updatedAt: new Date()
       };
 
       const newProduct = await models.Product.create(currentProduct);
       res.items = newProduct;
 
       next();
+    } catch(err) {
+      const message = err.message;
+      res.message = message;
+
+      next();
+    }
+  })
+
+  router.put('/api/products/update', async (req, res, next) => {
+    try {
+      const currentProduct = {
+        name: req.body.name,
+        imgUrl: req.body.imgUrl,
+        price: req.body.price,
+        updatedAt: new Date()
+      }
+
+      await models.Product.update(
+        currentProduct,
+        {
+          where: {
+            id: req.body.id
+          }
+        })
+
+        const updatedProduct = await models.Product.findOne({
+          where: {
+            id: req.body.id
+          }
+        });
+
+        res.items = updatedProduct;
+        next();
     } catch(err) {
       const message = err.message;
       res.message = message;

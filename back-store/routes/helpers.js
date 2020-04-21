@@ -1,6 +1,8 @@
+const models = require('../models/index');
+
 module.exports = {
   getCategory: async function(name) {
-    await models.Category.findOne({
+   return await models.Category.findOne({
       where: {
         name
       }
