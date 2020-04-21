@@ -80,4 +80,21 @@ module.exports = function(router) {
     }
   })
  
+  router.delete('/api/products/:id', async (req, res, next) => {
+    try {
+      const deleteProduct = await models.Product.destroy({
+        where: {
+          id: req.params.id
+        }
+      });
+
+      res.items = deleteProduct;
+      next();
+    } catch(err) {
+      const message = err.message;
+      res.message = message;
+
+      next();
+    }
+  })
 }

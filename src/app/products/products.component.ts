@@ -106,7 +106,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteCategory(el: IProduct, event: Event) {
+  deleteProduct(el: IProduct, event: Event) {
     event.preventDefault();
     event. stopPropagation();
     this.currentTemplate = this.deleteNotificationTemplate;
@@ -115,7 +115,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   onDelete() {
-    this.productService.delete(this.currentObj.id, this.categoryName).subscribe((res: IServerModel) => {
+    this.productS.delete(this.currentObj.id).subscribe((res: IServerModel) => {
       if (res.success) {
         const newProductList: IProduct[] = this.productList.filter((el: IProduct) => el.id !== this.currentObj.id);
         this.productList = newProductList;

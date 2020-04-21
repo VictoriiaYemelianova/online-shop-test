@@ -22,4 +22,8 @@ export class ProductService {
   update(el: IProduct) {
     return this.http.put(`${apiUrl}/products/update`, el);
   }
+
+  delete(id: string) {
+    return this.http.delete(`${apiUrl}/products/${id}`);
+  }
 }
