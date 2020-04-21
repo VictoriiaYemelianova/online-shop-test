@@ -76,4 +76,22 @@ module.exports = function (router) {
       next();
     }
   })
+
+  router.delete('/api/categories/:id', async (req, res, next) => {
+    try {
+      console.log(req.params.id)
+      const deletedCategory = await models.Category.destroy({
+        where: {
+          id: req.params.id
+        }
+      })
+      
+      res.items = deletedCategory;
+      next()
+    } catch(err) {
+      const message = err.message;
+      res.message = message;
+      next();
+    }
+  })
 }

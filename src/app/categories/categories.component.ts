@@ -97,11 +97,10 @@ export class CategotiesComponent implements OnInit, OnDestroy {
     this.currentTemplate = this.deleteNotificationTemplate;
     this.currentObj = obj;
     this.IsModalShow = true;
-    console.log(this.currentObj.name);
   }
 
   onDelete() {
-    this.categoriesService.delete(this.currentObj.id , 'categories').subscribe((res: IServerModel) => {
+    this.categoryService.delete(this.currentObj.id).subscribe((res: IServerModel) => {
       if (res.success) {
         const newCategoriesList: ICategory[] = this.categoriesList.filter(el => el.id !== this.currentObj.id );
         this.deleteProducts();
