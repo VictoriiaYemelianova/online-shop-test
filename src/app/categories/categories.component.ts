@@ -8,6 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { ProductService } from '../service/product.service';
 
 @Component({
   selector: 'app-categoties',
@@ -31,7 +32,12 @@ export class CategotiesComponent implements OnInit, OnDestroy {
   public faPencilAlt = faPencilAlt;
   public currentTemplate: TemplateRef<any>;
 
-  constructor(private router: ActivatedRoute, private categoriesService: DataService, private categoryService: CategoryService) { }
+  constructor(
+    private router: ActivatedRoute,
+    private categoriesService: DataService,
+    private categoryService: CategoryService,
+    private productService: ProductService
+  ) { }
 
   ngOnInit(): void {
     this.categoryService.get().subscribe((res: IServerModel) => {
@@ -98,21 +104,24 @@ export class CategotiesComponent implements OnInit, OnDestroy {
   }
 
   onDelete() {
-    this.categoryService.delete(this.currentObj.id).subscribe((res: IServerModel) => {
-      if (res.success) {
-        const newCategoriesList: ICategory[] = this.categoriesList.filter(el => el.id !== this.currentObj.id );
-        this.deleteProducts();
-        this.categoriesList = newCategoriesList;
-      }
-    });
+    this.deleteProducts();
     this.closeModal();
   }
 
   deleteProducts() {
     const currentProductName = this.currentObj.name.toLocaleLowerCase();
-    this.categoriesService.deleteAll(currentProductName).subscribe((response: IServerModel) => {
+    this.productService.deleteAllProducts(currentProductName).subscribe((response: IServerModel) => {
       if (response.success) {
-        console.log('succesfully');
+        this.categoryDelete();
+      }
+    });
+  }
+
+  categoryDelete() {
+    this.categoryService.delete(this.currentObj.id).subscribe((res: IServerModel) => {
+      if (res.success) {
+        const newCategoriesList: ICategory[] = this.categoriesList.filter(el => el.id !== this.currentObj.id );
+        this.categoriesList = newCategoriesList;
       }
     });
   }

@@ -97,4 +97,24 @@ module.exports = function(router) {
       next();
     }
   })
+
+  router.delete('/api/products/:name/delete', async (req, res, next) => {
+    try {
+      const category = await helpers.getCategory(req.params.name);
+
+      const deleteAllProduct = await models.Product.destroy({
+        where: {
+          idCategory: category.id
+        }
+      });
+
+      res.items = deleteAllProduct;
+      next();
+    } catch(err) {
+      const message = err.message;
+      res.message = message;
+
+      next();
+    }
+  })
 }

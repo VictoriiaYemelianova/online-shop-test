@@ -34,8 +34,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: ActivatedRoute,
-    private productService: DataService,
-    private productS: ProductService,
+    private productService: ProductService,
     private userService: UserServiceService
   ) { }
 
@@ -69,7 +68,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   getProducts() {
-    this.productS.get(this.categoryName).subscribe((res: IServerModel) => {
+    this.productService.get(this.categoryName).subscribe((res: IServerModel) => {
       if (res.success) {
         console.log(res.items);
         this.productList = res.items as IProduct[];
@@ -90,7 +89,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   onUpdateForm() {
     const formValue = this.updateForm.value;
     formValue.id = this.currentObj.id;
-    this.productS.update(formValue).subscribe((res: IServerModel) => {
+    this.productService.update(formValue).subscribe((res: IServerModel) => {
       if (res.success) {
         const newProductList: IProduct[] = this.productList.map((el: IProduct) => {
           if (el.id === res.items[0].id) {
@@ -115,7 +114,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   onDelete() {
-    this.productS.delete(this.currentObj.id).subscribe((res: IServerModel) => {
+    this.productService.delete(this.currentObj.id).subscribe((res: IServerModel) => {
       if (res.success) {
         const newProductList: IProduct[] = this.productList.filter((el: IProduct) => el.id !== this.currentObj.id);
         this.productList = newProductList;
