@@ -1,6 +1,6 @@
 const models = require('../models/index');
 
-module.exports = function (router) {
+module.exports = function(router) {
   router.get('/api/categories', async (req, res, next) => {
     try {
       const categories = await models.Category.findAll();

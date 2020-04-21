@@ -25,7 +25,6 @@ export class CreateAccountComponent implements OnInit {
   }
 
   onCreate() {
-    console.log('create')
     const formValue = this.createForm.value;
     formValue.role = 'user';
     this.userService.createUser(formValue)
