@@ -50,7 +50,6 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
   onSubmitNewProduct() {
     const formValue = this.productForm.value;
-    console.log(formValue);
     this.productService.create(formValue, this.categoryName)
       .subscribe((res: IServerModel) => {
         if (res.success) {

@@ -25,7 +25,7 @@ export class ShopBasketComponent implements OnInit {
   createProductList(arr: Array<IProduct>) {
     this.productList = [];
     arr.forEach((el: IProduct) => {
-      const index = this.productList.indexOf(el);
+      const index = this.productList.findIndex(item => item.id === el.id);
       let newEl;
       if (index !== -1) {
         this.productList[index].count += 1;
@@ -35,7 +35,6 @@ export class ShopBasketComponent implements OnInit {
         this.productList.push(newEl);
       }
     });
-
   }
 
   onMinus(product) {

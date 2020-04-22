@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 })
 export class UserServiceService {
   public logUser: IUser;
-  public productStorage: IProduct[];
   public productToBuyList: BehaviorSubject<Array<IProduct>> = new BehaviorSubject([]);
 
   constructor( private http: HttpClient, private router: Router, ) {
@@ -26,8 +25,8 @@ export class UserServiceService {
     }
 
     if (basket) {
-      this.productStorage = JSON.parse(basket);
-      this.productToBuyList.next(this.productStorage);
+      const productStorage = JSON.parse(basket);
+      this.productToBuyList.next(productStorage);
     }
   }
 
@@ -37,7 +36,7 @@ export class UserServiceService {
         if (res.success) {
           this.logUser = res.items[0] as IUser;
           localStorage.setItem('user', JSON.stringify(this.logUser));
-          localStorage.setItem('userBasket', JSON.stringify(this.productStorage));
+          localStorage.setItem('userBasket', '');
         }
         return res;
       })
@@ -87,6 +86,10 @@ export class UserServiceService {
     const currentList = this.productToBuyList.value;
     const newList = currentList.filter(element => element !== el);
     this.productToBuyList.next(newList);
-    localStorage.setItem('userBasket', JSON.stringify(currentList));
+    if (newList.length !== 0) {
+      localStorage.setItem('userBasket', JSON.stringify(currentList));
+    } else {
+      localStorage.setItem('userBasket', '');
+    }
   }
 }
