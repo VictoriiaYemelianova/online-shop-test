@@ -11,16 +11,23 @@ import { Router } from '@angular/router';
 })
 export class UserServiceService {
   public logUser: IUser;
+  public productStorage: IProduct[];
   public productToBuyList: BehaviorSubject<Array<IProduct>> = new BehaviorSubject([]);
 
   constructor( private http: HttpClient, private router: Router, ) {
-    this.getItemLocalStorage('user');
+    this.getItemLocalStorage('user', 'userBasket');
   }
 
-  getItemLocalStorage(key) {
-    const user = localStorage.getItem(key);
+  getItemLocalStorage(keyUser, keyBasket) {
+    const user = localStorage.getItem(keyUser);
+    const basket = localStorage.getItem(keyBasket);
     if (user) {
       this.logUser = JSON.parse(user);
+    }
+
+    if (basket) {
+      this.productStorage = JSON.parse(basket);
+      this.productToBuyList.next(this.productStorage);
     }
   }
 
@@ -30,7 +37,7 @@ export class UserServiceService {
         if (res.success) {
           this.logUser = res.items[0] as IUser;
           localStorage.setItem('user', JSON.stringify(this.logUser));
-          localStorage.setItem('userBasket', '');
+          localStorage.setItem('userBasket', JSON.stringify(this.productStorage));
         }
         return res;
       })
