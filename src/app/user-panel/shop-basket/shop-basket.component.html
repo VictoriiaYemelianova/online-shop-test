@@ -7,29 +7,33 @@
 
     <div *ngIf="productList.length">
       <div *ngFor="let product of productList" class="basket">
-          <div class="img-block">
-            <img [src]="product.imgUrl" alt="">
-          </div>
-  
-          <div class="info-block">
-            <div>Product name: {{product.name}}</div>
-            <div>Product price: {{product.price}}$</div>
-          </div>
+        <div class="img-block">
+          <img [src]="product.imgUrl" alt="">
+        </div>
 
-          <div class="count-block">
-            <div>
-              <fa-icon [icon]="faMinusSquare" class="faMinusSquare" (click)="onMinus(product)"></fa-icon>
-            </div>
-            <span>{{product.count}}</span>
-            <div>
-              <fa-icon [icon]="faPlusSquare" class="faPlusSquare" (click)="onPlus(product)"></fa-icon>
-            </div>
+        <div class="info-block">
+          <div>Product name: {{product.name}}</div>
+          <div>Product price: {{product.price}}$</div>
+        </div>
+
+        <div class="count-block">
+          <div>
+            <fa-icon [icon]="faMinusSquare" class="faMinusSquare" (click)="onMinus(product)"></fa-icon>
           </div>
-  
+          <span>{{product.count}}</span>
+          <div>
+            <fa-icon [icon]="faPlusSquare" class="faPlusSquare" (click)="onPlus(product)"></fa-icon>
+          </div>
+        </div>
+
         <div class="icon-block">
           <fa-icon class="trash-alt" [icon]="faTrashAlt" (click)="onDelete(product)"></fa-icon>
         </div>
       </div>
+    </div>
+
+    <div class="count-block">
+      <span>Amount: {{ countPrice }}$</span>
     </div>
   </div>
 </div>

@@ -13,6 +13,7 @@ export class ShopBasketComponent implements OnInit {
   public faTrashAlt = faTrashAlt;
   public faPlusSquare = faPlusSquare;
   public faMinusSquare = faMinusSquare;
+  public countPrice: number;
 
   constructor(private userService: UserServiceService) {}
 
@@ -24,7 +25,9 @@ export class ShopBasketComponent implements OnInit {
 
   createProductList(arr: Array<IProduct>) {
     this.productList = [];
+    this.countPrice = 0;
     arr.forEach((el: IProduct) => {
+      this.countAmount(el);
       const index = this.productList.findIndex(item => item.id === el.id);
       let newEl;
       if (index !== -1) {
@@ -35,6 +38,10 @@ export class ShopBasketComponent implements OnInit {
         this.productList.push(newEl);
       }
     });
+  }
+
+  countAmount(el) {
+    this.countPrice += el.price;
   }
 
   onMinus(product) {
