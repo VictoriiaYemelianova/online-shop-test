@@ -19,7 +19,6 @@ import { ProductsComponent } from './products/products.component';
 import { ShopBasketComponent } from './user-panel/shop-basket/shop-basket.component';
 
 import { UserServiceService } from './service/user-service.service';
-import { DataService } from './service/data.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { IsAdminGuard } from './Guard/is-admin/is-admin.guard';
@@ -71,7 +70,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FontAwesomeModule
   ],
-  providers: [UserServiceService, DataService, IsAdminGuard, UserGuard],
+  providers: [UserServiceService, IsAdminGuard, UserGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

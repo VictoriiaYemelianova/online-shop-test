@@ -5,7 +5,6 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Location } from '@angular/common';
 
-import { DataService } from 'src/app/service/data.service';
 import { ProductService } from 'src/app/service/product.service';
 import { IServerModel } from 'src/app/data-interface';
 

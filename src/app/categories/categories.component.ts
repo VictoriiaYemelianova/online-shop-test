@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
-import { DataService } from '../service/data.service';
 import { CategoryService } from '../service/category.service';
 import { ICategory, IServerModel } from '../data-interface';
 import { ActivatedRoute } from '@angular/router';
@@ -34,7 +33,6 @@ export class CategotiesComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: ActivatedRoute,
-    private categoriesService: DataService,
     private categoryService: CategoryService,
     private productService: ProductService
   ) { }
