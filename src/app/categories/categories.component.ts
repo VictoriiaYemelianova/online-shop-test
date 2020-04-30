@@ -8,6 +8,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { ProductService } from '../service/product.service';
+import { UserServiceService } from '../service/user-service.service';
 
 @Component({
   selector: 'app-categoties',
@@ -20,6 +21,7 @@ export class CategotiesComponent implements OnInit, OnDestroy {
 
 
   private destroy: Subject<void> = new Subject<void>();
+  private token: string;
 
   public categoriesList: ICategory[];
   public isAdmin = false;
@@ -80,7 +82,7 @@ export class CategotiesComponent implements OnInit, OnDestroy {
     this.categoryService.update(formValue).subscribe((res: IServerModel) => {
       if (res.success) {
         const newCategoriesList: ICategory[] = this.categoriesList.map((el: ICategory) => {
-          if (el.id === res.items[0].id ) {
+          if (el.id === (res.items[0] as ICategory).id ) {
             el = res.items[0] as ICategory;
           }
           return el;

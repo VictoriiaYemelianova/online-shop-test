@@ -93,5 +93,5 @@ module.exports = function(router) {
       res.message = message;
       next();
     }
-  })
+  });
 }

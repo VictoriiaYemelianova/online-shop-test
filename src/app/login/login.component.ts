@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../service/user-service.service';
-import { IUser, IServerModel } from '../data-interface';
+import { IUser, IServerModel, IUserToken } from '../data-interface';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     this.userService.loginUser(formValue)
       .subscribe((res: IServerModel) => {
         if (res.success) {
-          if ((res.items[0] as IUser).role === 'admin') {
+          if ((res.items[0] as IUserToken).user.role === 'admin') {
             this.router.navigate(['admin/create-category']);
           } else {
             this.router.navigate(['user/categories']);

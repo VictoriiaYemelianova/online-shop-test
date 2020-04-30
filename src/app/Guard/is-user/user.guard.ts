@@ -13,7 +13,7 @@ export class UserGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | boolean {
-    if (this.userService.logUser && this.userService.logUser.login !== 'Admin') {
+    if (this.userService.logUser && this.userService.logUser.user.login !== 'Admin') {
       return true;
     } else {
       this.router.navigate(['']);

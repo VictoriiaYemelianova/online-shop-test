@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { IUser, IServerModel, IProduct } from '../data-interface';
+import { IUser, IServerModel, IProduct, IUserToken } from '../data-interface';
 import { HttpClient} from '@angular/common/http';
-import { apiUrl } from '../constants';
+import { url } from '../constants';
 import { map } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class UserServiceService {
-  public logUser: IUser;
+  public logUser: IUserToken;
   public productToBuyList: BehaviorSubject<Array<IProduct>> = new BehaviorSubject([]);
 
   constructor( private http: HttpClient, private router: Router, ) {
@@ -31,10 +31,10 @@ export class UserServiceService {
   }
 
   loginUser(user: IUser): Observable<IServerModel> {
-    return this.http.post(`${apiUrl}/login`, user).pipe(
+    return this.http.post(`${url}/login`, user).pipe(
       map((res: IServerModel) => {
         if (res.success) {
-          this.logUser = res.items[0] as IUser;
+          this.logUser = res.items[0] as IUserToken;
           localStorage.setItem('user', JSON.stringify(this.logUser));
           localStorage.setItem('userBasket', '');
         }
@@ -44,10 +44,10 @@ export class UserServiceService {
   }
 
   createUser(user: IUser): Observable<IServerModel> {
-    return this.http.post(`${apiUrl}/register`, user).pipe(
+    return this.http.post(`${url}/register`, user).pipe(
       map((res: IServerModel) => {
         if (res.success) {
-          this.logUser = res.items[0] as IUser;
+          this.logUser = res.items[0] as IUserToken;
         }
         return res;
       })

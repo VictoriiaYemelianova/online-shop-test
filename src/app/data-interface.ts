@@ -1,7 +1,12 @@
 export interface IServerModel {
   success: boolean;
-  items: Array<IUser | IProduct | ICategory>;
+  items: Array<IProduct | ICategory | IUserToken>;
   message: string;
+}
+
+export interface IUserToken {
+  token: string;
+  user: IUser;
 }
 
 export interface IUser {

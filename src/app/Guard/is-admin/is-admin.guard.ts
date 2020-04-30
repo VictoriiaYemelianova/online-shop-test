@@ -12,7 +12,7 @@ export class IsAdminGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | boolean {
-    if (this.userService.logUser && this.userService.logUser.role === 'admin') {
+    if (this.userService.logUser && this.userService.logUser.user.role === 'admin') {
       return true;
     } else {
       this.router.navigate(['']);

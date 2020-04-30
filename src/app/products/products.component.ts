@@ -91,7 +91,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.productService.update(formValue).subscribe((res: IServerModel) => {
       if (res.success) {
         const newProductList: IProduct[] = this.productList.map((el: IProduct) => {
-          if (el.id === res.items[0].id) {
+          if (el.id === (res.items[0] as IProduct).id) {
             el = res.items[0] as IProduct;
           }
           return el;
