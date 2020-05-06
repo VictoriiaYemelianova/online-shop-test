@@ -29,19 +29,22 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'create-user', component: CreateAccountComponent },
   { path: '', redirectTo: '/enter-page', pathMatch: 'full' },
-  { path: 'admin', component: AdminPageComponent, canActivate: [IsAdminGuard], children: [
-    { path: 'create-category', component:  CategoryFormComponent, data: {isAdmin: true} },
-    { path: 'categories', component: CategotiesComponent, data: {isAdmin: true} },
-    { path: 'categories/:name', component: ProductsComponent, data: {isAdmin: true} },
-    { path: 'categories/:name/create-product', component:  ProductFormComponent, data: {isAdmin: true} },
-    { path: 'categories/:name/:id', component: ProductsComponent, data: {isAdmin: true} }
-  ] },
-  { path: 'user', component: UserPageComponent, canActivate: [UserGuard], children: [
-    { path: 'categories', component: CategotiesComponent },
-    { path: 'categories/:name', component: ProductsComponent },
-    { path: 'categories/:name/:id', component: ProductsComponent },
-    { path: 'basket', component: ShopBasketComponent }
-  ] }
+  { path: 'admin', loadChildren: () => import('./modules/admin.module').then(m => m.AdminModule),
+  canActivate: [IsAdminGuard] },
+  { path: 'user', loadChildren: () => import('./modules/user.module').then(m => m.UserModule) }
+  // { path: 'admin', component: AdminPageComponent, canActivate: [IsAdminGuard], children: [
+  //   { path: 'create-category', component:  CategoryFormComponent, data: {isAdmin: true} },
+  //   { path: 'categories', component: CategotiesComponent, data: {isAdmin: true} },
+  //   { path: 'categories/:name', component: ProductsComponent, data: {isAdmin: true} },
+  //   { path: 'categories/:name/create-product', component:  ProductFormComponent, data: {isAdmin: true} },
+  //   { path: 'categories/:name/:id', component: ProductsComponent, data: {isAdmin: true} }
+  // ] },
+  // { path: 'user', component: UserPageComponent, canActivate: [UserGuard], children: [
+  //   { path: 'categories', component: CategotiesComponent },
+  //   { path: 'categories/:name', component: ProductsComponent },
+  //   { path: 'categories/:name/:id', component: ProductsComponent },
+  //   { path: 'basket', component: ShopBasketComponent }
+  // ] }
 ];
 
 // canActivate: [UserGuard],
