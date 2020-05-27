@@ -1,5 +1,5 @@
 <div class="modal">
-  <div class="modal-content">
+  <div appClickOutside (appClickOutside)="onModalClose()" class="modal-content">
     <div class="button-close">
       <button class="close-modal" (click)="onModalClose()">&#x274C;</button>
     </div>

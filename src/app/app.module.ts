@@ -23,6 +23,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { IsAdminGuard } from './Guard/is-admin/is-admin.guard';
 import { UserGuard } from './Guard/is-user/user.guard';
+import { ClickOutsideDirective } from './click-outside.directive';
 
 const appRoutes: Routes = [
   { path: 'enter-page', component: FirstPageComponent },
@@ -62,7 +63,8 @@ const appRoutes: Routes = [
     UserPageComponent,
     ModalComponent,
     ProductsComponent,
-    ShopBasketComponent
+    ShopBasketComponent,
+    ClickOutsideDirective
   ],
   imports: [
     BrowserModule,
