@@ -11,13 +11,13 @@
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-content">
       <div class="form-group">
         <div class="input-block">
-          <label for="login">Email:</label>
-          <input type="text" id="login" formControlName="login">
+          <label for="email">Email:</label>
+          <input type="text" id="email" formControlName="email">
         </div>
 
-        <div *ngIf="loginForm.controls['login'].invalid && 
-          (loginForm.controls['login'].dirty || loginForm.controls['login'].touched)" class="error">
-          <span *ngIf="loginForm.controls['login'].errors.required">Login is required</span>
+        <div *ngIf="loginForm.controls['email'].invalid && 
+          (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)" class="error">
+          <span *ngIf="loginForm.controls['email'].errors.required">Login is required</span>
         </div>
       </div>
 
