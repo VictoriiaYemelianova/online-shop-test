@@ -11,7 +11,8 @@ export interface IUserToken {
 
 export interface IUser {
   id?: string;
-  login: string;
+  login?: string;
+  email?: string;
   pass: string;
   role?: string;
 }

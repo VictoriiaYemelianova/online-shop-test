@@ -8,7 +8,7 @@ module.exports = function(router) {
     try {
       const user = await models.User.findOne({
         where: {
-          login: req.body.login
+          email: req.body.email
         }
       });
 
@@ -17,7 +17,7 @@ module.exports = function(router) {
       } else {
         if (user.pass === req.body.pass) {
           let token = jwt.sign({
-            login: user.login,
+            email: user.email,
             role: user.role
           },
           config.secret,
@@ -46,13 +46,14 @@ module.exports = function(router) {
     try {
       const user = await models.User.findOne({
         where: {
-          login: req.body.login
+          email: req.body.email
         }
       });
   
       if (!user) {
         const currentData = {
           login: req.body.login,
+          email: req.body.email,
           pass: req.body.pass,
           role: req.body.role,
           createdAt: new Date(),
@@ -63,8 +64,8 @@ module.exports = function(router) {
 
         if (newUser) {
           let token = jwt.sign({
-            login: user.login,
-            role: user.role
+            email: newUser.email,
+            role: newUser.role
           },
           config.secret,
           { expiresIn: '24h' } // expires in 24 hours

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../service/user-service.service';
-import { IUser, IServerModel } from '../data-interface';
-import {Router} from '@angular/router';
+import { IServerModel } from '../data-interface';
+import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -19,6 +19,7 @@ export class CreateAccountComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm = new FormGroup({
+      email: new FormControl('', Validators.required),
       login: new FormControl('', Validators.required),
       pass: new FormControl('', Validators.required)
     });

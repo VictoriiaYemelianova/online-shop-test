@@ -11,6 +11,18 @@
     <form [formGroup]="createForm" (ngSubmit)="onCreate()" class="form-content">
       <div class="form-group">
         <div class="input-block">
+          <label for="email">Email</label>
+          <input type="text" id="email" formControlName="email">
+        </div>
+
+        <div *ngIf="createForm.controls['email'].invalid && 
+          (createForm.controls['email'].dirty || createForm.controls['email'].touched)" class="error">
+          <span *ngIf="createForm.controls['email'].errors.required">Email is required</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="input-block">
           <label for="login">Login</label>
           <input type="text" id="login" formControlName="login">
         </div>
