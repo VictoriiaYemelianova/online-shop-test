@@ -3,8 +3,8 @@ module.exports = (sequelize, DataTypes) => {
   const Product = sequelize.define('Product', {
     name: DataTypes.STRING,
     imgUrl: DataTypes.STRING,
-    price: DataTypes.NUMBER,
-    idCategory: DataTypes.STRING
+    price: DataTypes.INTEGER,
+    idCategory: DataTypes.INTEGER
   }, {});
   Product.associate = function(models) {
     Product.belongsTo(models.Category, {
