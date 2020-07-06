@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { UserServiceService } from 'src/app/service/user-service.service';
 import { IProduct } from 'src/app/data-interface';
 
@@ -15,7 +15,10 @@ export class UserPageComponent implements OnInit, OnDestroy {
   private destroy: Subject<void> = new Subject<void>();
 
   public isAdmin = false;
+
   public faShoppingBasket = faShoppingCart;
+  public logoutIcon = faSignOutAlt;
+
   public userProductSize: number;
 
   constructor( private router: ActivatedRoute, private userService: UserServiceService ) { }

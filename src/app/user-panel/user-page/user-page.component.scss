@@ -1,46 +1,55 @@
 .user-page {
-  max-width: 1000px;
-  margin: 0 auto;
-  background-color: #F8F8FF;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
 }
 
 .menu-content {
-  width: 1000px;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
   position: fixed;
   top: 0;
-  background-color: #F8F8FF;
+  background-color: #ffffff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.links-block {
+.left-menu,
+.right-menu {
+  display: flex;
 
-  .links {
+  .menu,
+  .icon {
+    height: 50px;
     display: flex;
-    justify-content: space-evenly;
-    padding-left: 0;
+    align-items: center;
+    justify-content: center;
+    color: #191970;
+    border: 1px solid transparent;
   }
 
-  .active-link {
-    color: red;
-  }
-
-  li {
-    list-style-type: none;
-    border-bottom: 1px solid transparent;
+  .menu:hover,
+  .icon:hover {
+    border-right: 1px solid #191970;
+    border-left: 1px solid #191970;
     cursor: pointer;
-
-    a {
-      text-decoration: none;
-      color: rgb(85, 26, 139);
-    }
-
-    a:hover {
-      color: red;
-    }
-  }
-
-  li:hover {
-    color: red;
-    border-bottom: 1px solid red;
   }
 }
+
+.left-menu {
+  flex: 1;
+
+  .menu {
+    width: 100px;
+  }
+}
+
+.right-menu {
+  width: 100px;
+
+  .icon {
+    width: 50px;
+  }
+}
+
