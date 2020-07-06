@@ -16,19 +16,19 @@ export class ProductService {
   }
 
   get(name: string) {
-    return this.http.get(`${apiUrl}/products/${name}`, {headers: {Authorization: 'Bearer ' + this.token}});
+    return this.http.get(`${apiUrl}/products/${name}`);
   }
 
   create(el: IProduct, name: string) {
-    return this.http.post(`${apiUrl}/${name}/create-product`, el, {headers: {Authorization: 'Bearer ' + this.token}});
+    return this.http.post(`${apiUrl}/${name}/create-product`, el);
   }
 
   update(el: IProduct) {
-    return this.http.put(`${apiUrl}/products/update`, el, {headers: {Authorization: 'Bearer ' + this.token}});
+    return this.http.put(`${apiUrl}/products/update`, el);
   }
 
   delete(id: string) {
-    return this.http.delete(`${apiUrl}/products/${id}`, {headers: {Authorization: 'Bearer ' + this.token}});
+    return this.http.delete(`${apiUrl}/products/${id}`);
   }
 
   deleteAllProducts(name: string) {

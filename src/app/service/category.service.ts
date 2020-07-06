@@ -17,18 +17,18 @@ export class CategoryService {
   }
 
   get(): Observable<any> {
-    return this.http.get(`${apiUrl}/categories`, {headers: {Authorization: 'Bearer ' + this.token}});
+    return this.http.get(`${apiUrl}/categories`);
   }
 
   create( el: ICategory ) {
-    return this.http.post(`${apiUrl}/categories/create`, el, {headers: {Authorization: 'Bearer ' + this.token}});
+    return this.http.post(`${apiUrl}/categories/create`, el);
   }
 
   update( el: ICategory ) {
-    return this.http.put(`${apiUrl}/categories/update`, el, {headers: {Authorization: 'Bearer ' + this.token}});
+    return this.http.put(`${apiUrl}/categories/update`, el);
   }
 
   delete(id: string) {
-    return this.http.delete(`${apiUrl}/categories/${id}`, {headers: {Authorization: 'Bearer ' + this.token}});
+    return this.http.delete(`${apiUrl}/categories/${id}`);
   }
 }
