@@ -27,13 +27,13 @@
     justify-content: center;
     color: #191970;
     border: 1px solid transparent;
+    cursor: pointer;
   }
 
   .menu:hover,
   .icon:hover {
     border-right: 1px solid #191970;
     border-left: 1px solid #191970;
-    cursor: pointer;
   }
 }
 
