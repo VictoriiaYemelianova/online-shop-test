@@ -13,7 +13,7 @@ module.exports = function(router) {
       });
 
       if (!user) {
-        res.message = 'Такого пользователя не существует.';
+        res.message = 'Гser does not exist!';
       } else {
         if (user.pass === req.body.pass) {
           let token = jwt.sign({
@@ -31,7 +31,7 @@ module.exports = function(router) {
 
           res.items = currentUser;
         } else {
-          res.message = 'Неверный пароль.'
+          res.message = 'Wrong password!'
         };
       };
   
@@ -79,7 +79,7 @@ module.exports = function(router) {
           res.items = currentUser;
         }
       } else {
-        const message = 'Пользователь с таким именем уже существует.';
+        const message = 'Error! User alrady exist!';
         res.message = message;
       }
   
