@@ -26,6 +26,7 @@ import { UserGuard } from './Guard/is-user/user.guard';
 import { ClickOutsideDirective } from './click-outside.directive';
 import { ParamInterceptor } from './param.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SubcategoryComponent } from './subcategory/subcategory.component';
 
 const appRoutes: Routes = [
   { path: 'enter-page', component: FirstPageComponent },
@@ -66,7 +67,8 @@ const appRoutes: Routes = [
     ModalComponent,
     ProductsComponent,
     ShopBasketComponent,
-    ClickOutsideDirective
+    ClickOutsideDirective,
+    SubcategoryComponent
   ],
   imports: [
     BrowserModule,
