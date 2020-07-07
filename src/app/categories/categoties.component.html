@@ -1,28 +1,25 @@
 <div class="categories-page">
   <div class="conteiner">
-    <div
-    class="category-block"
-    *ngFor="let category of categoriesList"
-    [routerLink]="category.name.toLowerCase()">
+    <div class="category-block" *ngFor="let category of categoriesList" [routerLink]="category.name.toLowerCase()">
 
-    <div class="img">
-      <img [src]="category.imgUrl" alt="">
-    </div>
+      <div class="img">
+        <img [src]="category.imgUrl" alt="">
+      </div>
 
-    <div class="category">
-      <div class="category-name"><span class="text-transfom">{{ category.name }}</span></div>
+      <div class="category">
+        <div class="category-name"><span class="text-transfom">{{ category.name }}</span></div>
 
-      <div class="icon-button" *ngIf="isAdmin">
-        <div class="icon icon-green" (click)="updateCategory(category, $event)">
-          <fa-icon [icon]="faPencilAlt"></fa-icon>
-        </div>
+        <div class="icon-button" *ngIf="isAdmin">
+          <div class="icon icon-green" (click)="updateCategory(category, $event)">
+            <fa-icon [icon]="faPencilAlt"></fa-icon>
+          </div>
 
-        <div class="icon icon-red" (click)="deleteCategory(category, $event)">
-          <fa-icon [icon]="faTrashAlt"></fa-icon>
+          <div class="icon icon-red" (click)="deleteCategory(category, $event)">
+            <fa-icon [icon]="faTrashAlt"></fa-icon>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   </div>
 </div>
 
@@ -46,7 +43,7 @@
       </div>
 
       <div class="button-block">
-        <button type="submit" [disabled]="!onUpdateForm.valid"  class="btn-green">update</button>
+        <button type="submit" [disabled]="!onUpdateForm.valid" class="btn-green">update</button>
         <button type="button" class="btn-red" (click)="closeModal()">cancel</button>
       </div>
     </form>
@@ -60,7 +57,7 @@
     </div>
 
     <div class="info-button">
-      <button (click)="onDelete()"  class="btn-green">delete</button>
+      <button (click)="onDelete()" class="btn-green">delete</button>
       <button (click)="closeModal()" class="btn-red">cancel</button>
     </div>
   </div>
