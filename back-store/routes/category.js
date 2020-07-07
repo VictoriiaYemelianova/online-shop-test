@@ -3,8 +3,13 @@ const models = require('../models/index');
 module.exports = function(router) {
   router.get('/api/categories', async (req, res, next) => {
     try {
-      const categories = await models.Category.findAll();
-      res.items = categories;
+      const categories = await models.Category.findAll({
+        include: {
+          model: models.Category
+        }
+      });
+
+      res.items = categories.filter(el => !el.subcategory);
 
       next();
     } catch (err) {
@@ -14,29 +19,23 @@ module.exports = function(router) {
       next();
     }
   });
-
+  
   router.post('/api/categories/create', async (req, res, next) => {
     try {
-      const category = await models.Category.findOne({
-        where: {
-          name: req.body.name
-        }
-      })
-
-      if (!category) {
-        const currentCategory = {
-          name: req.body.name,
-          imgUrl: req.body.imgUrl,
-          createdAt: new Date(),
-          updatedAt: new Date()
-        }
-
-        const newCategory = await models.Category.create(currentCategory);
-        res.items = newCategory;
-      } else {
-        const message = 'Категория с таким именем уже существует';
-        res.message = message;
+      const modelCategory = {
+        name: req.body.name,
+        imgUrl: req.body.imgUrl,
+        subcategory: null,
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
+
+      if (req.body.subcategory) {
+        modelCategory.subcategory = req.body.subcategory;
+      }
+
+      const newCategory = await models.Category.create(modelCategory);
+      res.items = newCategory;
 
       next();
     } catch (err) {
