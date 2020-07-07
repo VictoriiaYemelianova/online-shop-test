@@ -1,34 +1,34 @@
 <div class="categories-page">
-  <div *ngFor="let category of categoriesList" class="category-block">
-    <div [routerLink]="category.name.toLowerCase()" class="content">
-      <div class="category-content">
-        <div class="category-name">
-          <span class="upper-case"> {{ category.name }} </span>
-        </div>
-  
-        <div class="category-img">
-          <img [src]="category.imgUrl" alt="">
-        </div>
-      </div>
-  
-      <div *ngIf="isAdmin" class="button-content">
-        <button class="btn-trash" (click)="deleteCategory(category, $event)">
-          <fa-icon [icon]="faTrashAlt"></fa-icon>
-        </button>
+  <div class="conteiner">
+    <div
+    class="category-block"
+    *ngFor="let category of categoriesList"
+    [routerLink]="category.name.toLowerCase()">
 
-        <button class="btn-update" (click)="updateCategory(category, $event)">
-          <fa-icon [icon]="faPencilAlt"></fa-icon>
-        </button>
-      </div>
+    <div class="img">
+      <img [src]="category.imgUrl" alt="">
     </div>
 
-  </div>
+    <div class="category">
+      <div class="category-name"><span class="text-transfom">{{ category.name }}</span></div>
 
+      <div class="icon-button" *ngIf="isAdmin">
+        <div class="icon icon-green" (click)="updateCategory(category, $event)">
+          <fa-icon [icon]="faPencilAlt"></fa-icon>
+        </div>
+
+        <div class="icon icon-red" (click)="deleteCategory(category, $event)">
+          <fa-icon [icon]="faTrashAlt"></fa-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
 </div>
 
 <ng-template #updateTemplate>
   <div class="form-content">
-    <h3>Update {{ currentObj.name }}</h3>
+    <h3>Update <span class="text-transfom">{{ currentObj.name }}</span></h3>
 
     <div class="message input-block">
       <span>{{ infoMessage }}</span>
@@ -56,7 +56,7 @@
 <ng-template #deleteNotificationTemplate>
   <div class="delete-massage">
     <div class="info-message">
-      <span>Are you sure you want to remove {{ currentObj.name }}?</span>
+      <span>Are you sure you want to remove <span class="text-transfom">>{{ currentObj.name }}</span>?</span>
     </div>
 
     <div class="info-button">
