@@ -1,12 +1,12 @@
 <div class="admin-page">
   <div class="menu-content">
-    <nav class="links-block">
-      <ul class="links">
-        <li><a routerLink="create-category" routerLinkActive="active-link">Add new category</a></li> 
-        <li><a routerLink="categories" routerLinkActive="active-link">Categories</a></li>
-        <li><a (click)="onLogOut()">Log out</a></li>
-      </ul>
-    </nav>
+    <div class="left-menu">
+      <div class="link" routerLink="create-category" routerLinkActive="active-link">Add new category</div>
+      <div class="link">Add new subcategory</div>
+      <div class="link" routerLink="categories" routerLinkActive="active-link">Categories</div>
+    </div>
+
+    <div class="icon" (click)="onLogOut()"><fa-icon [icon]="logoutIcon"></fa-icon></div>
   </div>
 
   <router-outlet></router-outlet>
