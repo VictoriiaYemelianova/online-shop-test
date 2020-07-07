@@ -2,26 +2,43 @@ const models = require('../models/index');
 const helpers = require('./helpers');
 
 module.exports = function(router) {
-  router.get('/api/products/:name', async (req, res, next) => {
+  router.get('/api/parent-category-products/:id', async (req, res, next) => {
     try {
-      const category = await helpers.getCategory(req.params.name);
-  
       const products = await models.Product.findAll({
-        where: {
-          idCategory: category.id
+        include: {
+          model: models.Category,
+          where: {
+            subcategory: req.params.id
+          }
         }
-      })
+      });
   
       res.items = products;
-      console.log(category)
       next();
     } catch(err) {
       const message = err.message;
       res.message = message;
-
       next();
     }
   })
+
+  router.get('/api/subcategory-products/:id', async (req, res, next) => {
+    try {
+      const products = await models.Product.findAll({
+        where: {
+          idCategory: req.params.id
+        }
+      });
+  
+      res.items = products;
+      next();
+    } catch(err) {
+      const message = err.message;
+      res.message = message;
+      next();
+    }
+  })
+
   router.post('/api/:name/create-product',  async (req, res, next) => {
     try {
       const category = await helpers.getCategory(req.params.name);
