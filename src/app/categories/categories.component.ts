@@ -8,7 +8,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { ProductService } from '../service/product.service';
-import { UserServiceService } from '../service/user-service.service';
 
 @Component({
   selector: 'app-categoties',
@@ -23,15 +22,17 @@ export class CategotiesComponent implements OnInit, OnDestroy {
   private destroy: Subject<void> = new Subject<void>();
   private token: string;
 
-  public categoriesList: ICategory[];
+  public categoriesList: Array<ICategory>;
   public isAdmin = false;
   public IsModalShow = false;
   public onUpdateForm: FormGroup;
   public infoMessage: string;
   public currentObj: ICategory;
+
+  public currentTemplate: TemplateRef<any>;
+
   public faTrashAlt = faTrashAlt;
   public faPencilAlt = faPencilAlt;
-  public currentTemplate: TemplateRef<any>;
 
   constructor(
     private router: ActivatedRoute,
@@ -41,10 +42,6 @@ export class CategotiesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.categoryService.get().subscribe((res: IServerModel) => {
-      if (res.success) {
-        this.categoriesList = res.items as ICategory[];
-      }
-
       this.router.data
       .pipe(takeUntil(this.destroy))
       .subscribe(data => {
@@ -52,6 +49,10 @@ export class CategotiesComponent implements OnInit, OnDestroy {
           this.isAdmin = true;
         }
       });
+    });
+
+    this.categoryService.fullCategories.subscribe((res: Array<ICategory>) => {
+      this.categoriesList = res;
     });
 
     this.onUpdateForm = new FormGroup({

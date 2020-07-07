@@ -10,7 +10,7 @@ export interface IUserToken {
 }
 
 export interface IUser {
-  id?: string;
+  id?: number;
   login?: string;
   email?: string;
   pass: string;
@@ -18,9 +18,18 @@ export interface IUser {
 }
 
 export interface ICategory {
-  id?: string;
+  id?: number;
   name: string;
   imgUrl: string;
+  subcategory?: null;
+  Categories?: Array<ISubcategory>;
+}
+
+export interface ISubcategory {
+  id?: number;
+  name: string;
+  imgUrl: string;
+  subcategory?: number;
 }
 
 export interface IProduct {
