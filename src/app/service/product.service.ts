@@ -2,21 +2,44 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient} from '@angular/common/http';
 import { apiUrl } from '../constants';
-import { IProduct } from '../data-interface';
+import { IProduct, IServerModel } from '../data-interface';
 import { UserServiceService } from './user-service.service';
+import { map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
   private token: string;
+  public currentProducts: BehaviorSubject<Array<IProduct>> = new BehaviorSubject([]);
 
   constructor( private http: HttpClient, private userService: UserServiceService ) {
     this.token = this.userService.logUser.token;
   }
 
-  get(name: string) {
-    return this.http.get(`${apiUrl}/products/${name}`);
+  get(id: number) {
+    return this.http.get(`${apiUrl}/products/${id}`);
+  }
+
+  getFullProducts(id: number) {
+    return this.http.get(`${apiUrl}/parent-category-products/${id}`).pipe(
+      map((res: IServerModel) => {
+        if (res.success) {
+          this.currentProducts.next(res.items as IProduct[]);
+        }
+      })
+    );
+  }
+
+  getSubcategoryProducts(id: number) {
+    return this.http.get(`${apiUrl}/subcategory-products/${id}`).pipe(
+      map((res: IServerModel) => {
+        if (res.success) {
+          this.currentProducts.next(res.items as IProduct[]);
+        }
+      })
+    );
   }
 
   create(el: IProduct, name: string) {

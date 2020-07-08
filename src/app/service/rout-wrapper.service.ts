@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CategoryService } from './category.service';
-import { UserServiceService } from './user-service.service';
+import { ProductService } from './product.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,8 @@ export class RoutWrapperService {
 
   constructor(
     private router: Router,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private productService: ProductService
   ) {
     this.routUrl = this.router.url.split('/');
     this.routUrl.splice(0, 2);
@@ -19,17 +20,26 @@ export class RoutWrapperService {
     console.log(this.categoryService.fullCategories.value.length);
 
     if (this.routUrl.length === 2) {
-      if (!this.categoryService.fullCategories.value.length) {
-        this.categoryService.getCategories().subscribe();
-      }
-
-      this.categoryService.fullCategories.subscribe(res => {
-        const category = res.find((el) => el.name === this.routUrl[this.routUrl.length - 1]);
-        console.log(category);
-        this.categoryService.setCurrentCategory(category);
-      });
-
+      this.getAllProductsInCategory();
     }
+  }
+
+  getAllProductsInCategory() {
+    if (!this.categoryService.fullCategories.value.length) {
+      this.categoryService.getCategories().subscribe();
+    }
+
+    this.categoryService.fullCategories.subscribe(res => {
+      const category = res.find((el) => el.name === this.routUrl[this.routUrl.length - 1]);
+      console.log(category);
+      this.categoryService.setCurrentCategory(category);
+    });
+
+    this.categoryService.currentCategory.subscribe(resp => {
+      if (resp) {
+        this.productService.getFullProducts(resp.id).subscribe(r => console.log(r));
+      }
+    });
   }
 
 }

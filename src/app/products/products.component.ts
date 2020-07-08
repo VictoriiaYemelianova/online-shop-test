@@ -4,8 +4,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faPencilAlt, faShoppingCart, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { UserServiceService } from '../service/user-service.service';
 import { ProductService } from '../service/product.service';
 
@@ -20,16 +19,18 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   private destroy: Subject<void> = new Subject<void>();
 
+  public currentTemplate: TemplateRef<any>;
+  public IsModalShow = false;
   public isAdmin = false;
+  public infoMessage: string;
   public categoryName: string;
+  public currentObj: IProduct;
   public productList: IProduct[];
   public updateForm: FormGroup;
-  public infoMessage: string;
-  public IsModalShow = false;
-  public currentObj: IProduct;
   public faTrashAlt = faTrashAlt;
   public faPencilAlt = faPencilAlt;
-  public currentTemplate: TemplateRef<any>;
+  public faShoppingCart = faShoppingCart;
+  public faHeart = faHeart;
 
   constructor(
     private router: ActivatedRoute,
@@ -42,8 +43,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy))
       .subscribe(res => {
         this.categoryName = res.name;
-
-        this.getProducts();
       });
 
     this.router.data
@@ -51,6 +50,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
     .subscribe(data => {
       if (data.isAdmin) {
         this.isAdmin = true;
+      }
+    });
+
+    this.productService.currentProducts.subscribe((res: IProduct[]) => {
+      if (res) {
+        this.productList = res;
       }
     });
 
@@ -66,14 +71,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.destroy.complete();
   }
 
-  getProducts() {
-    this.productService.get(this.categoryName).subscribe((res: IServerModel) => {
-      if (res.success) {
-        console.log(res.items);
-        this.productList = res.items as IProduct[];
-      }
-    });
-  }
   updateProduct(el: IProduct, event: Event) {
     event.preventDefault();
     event. stopPropagation();
