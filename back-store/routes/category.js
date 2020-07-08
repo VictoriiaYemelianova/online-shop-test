@@ -10,12 +10,9 @@ module.exports = function(router) {
       });
 
       res.items = categories.filter(el => !el.subcategory);
-
       next();
     } catch (err) {
-      const message = err.message;
-      res.message = message;
-
+      res.message = err.message;
       next();
     }
   });
@@ -39,8 +36,7 @@ module.exports = function(router) {
 
       next();
     } catch (err) {
-      const message = err.message;
-      res.message = message;
+      res.message = err.message;
       next();
     }
   });
@@ -67,11 +63,9 @@ module.exports = function(router) {
       });
 
       res.items = updatedCategory;
-
       next();
     } catch(err) {
-      const message = err.message;
-      res.message = message;
+      res.message = err.message;
       next();
     }
   })
@@ -88,8 +82,7 @@ module.exports = function(router) {
       res.items = deletedCategory;
       next()
     } catch(err) {
-      const message = err.message;
-      res.message = message;
+      res.message = err.message;
       next();
     }
   });

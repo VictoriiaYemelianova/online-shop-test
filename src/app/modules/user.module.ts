@@ -7,7 +7,8 @@ import { ShopBasketComponent } from '../user-panel/shop-basket/shop-basket.compo
 const routes: Routes = [
   { path: '', component: UserPageComponent, children: [
     { path: 'categories', loadChildren: () => import('./categories.module').then(m => m.CategoriesModule) },
-    { path: 'categories/:name', loadChildren: () => import('./products.module').then(m => m.ProductsModule) },
+    { path: 'categories/:name',
+      loadChildren: () => import('./product-wrapper.module').then(m => m.ProductWrapperModule) },
     { path: 'basket', component: ShopBasketComponent }
   ] }
 ];

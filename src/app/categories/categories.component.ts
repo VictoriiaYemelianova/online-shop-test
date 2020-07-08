@@ -41,7 +41,7 @@ export class CategotiesComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.categoryService.get().subscribe((res: IServerModel) => {
+    this.categoryService.getCategories().subscribe((res: IServerModel) => {
       this.router.data
       .pipe(takeUntil(this.destroy))
       .subscribe(data => {

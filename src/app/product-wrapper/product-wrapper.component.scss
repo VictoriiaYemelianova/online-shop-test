@@ -1,0 +1,23 @@
+.content {
+  width: 100%;
+  background-color: rgb(234, 234, 235);
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.breadcrumbs {
+  height: 50px;
+  width: 100%;
+  background-color: red;
+}
+
+.subcategory,
+.products {
+  width: 1100px;
+}
+
+.subcategory {
+  margin-bottom: 50px;
+}

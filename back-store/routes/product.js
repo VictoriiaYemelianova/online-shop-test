@@ -4,7 +4,7 @@ const helpers = require('./helpers');
 module.exports = function(router) {
   router.get('/api/parent-category-products/:id', async (req, res, next) => {
     try {
-      const products = await models.Product.findAll({
+      const products = await models.Product.findAll({ //id category
         include: {
           model: models.Category,
           where: {
@@ -24,7 +24,7 @@ module.exports = function(router) {
 
   router.get('/api/subcategory-products/:id', async (req, res, next) => {
     try {
-      const products = await models.Product.findAll({
+      const products = await models.Product.findAll({ //id subcategory
         where: {
           idCategory: req.params.id
         }

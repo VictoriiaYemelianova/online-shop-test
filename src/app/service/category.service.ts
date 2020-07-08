@@ -13,12 +13,17 @@ import { map } from 'rxjs/operators';
 export class CategoryService {
   private token: string;
   public fullCategories: BehaviorSubject<Array<ICategory>> = new BehaviorSubject([]);
+  public currentCategory: BehaviorSubject<ICategory> = new BehaviorSubject(null);
 
   constructor( private http: HttpClient, private userService: UserServiceService ) {
     this.token = this.userService.logUser.token;
   }
 
-  get(): Observable<any> {
+  setCurrentCategory(category: ICategory) {
+    this.currentCategory.next(category);
+  }
+
+  getCategories(): Observable<any> {
     return this.http.get(`${apiUrl}/categories`).pipe(
       map((res: IServerModel) => {
         if (res.success) {
