@@ -17,6 +17,8 @@ export class CategoryService {
 
   constructor( private http: HttpClient, private userService: UserServiceService ) {
     this.token = this.userService.logUser.token;
+
+    this.getCategories().subscribe();
   }
 
   setCurrentCategory(category: ICategory | ISubcategory) {

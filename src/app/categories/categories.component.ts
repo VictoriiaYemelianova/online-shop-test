@@ -41,14 +41,12 @@ export class CategotiesComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.categoryService.getCategories().subscribe((res: IServerModel) => {
-      this.router.data
-      .pipe(takeUntil(this.destroy))
-      .subscribe(data => {
-        if (data.isAdmin) {
-          this.isAdmin = true;
-        }
-      });
+    this.router.data
+    .pipe(takeUntil(this.destroy))
+    .subscribe(data => {
+      if (data.isAdmin) {
+        this.isAdmin = true;
+      }
     });
 
     this.categoryService.fullCategories.subscribe((res: Array<ICategory>) => {
