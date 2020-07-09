@@ -66,6 +66,10 @@ export class CategotiesComponent implements OnInit, OnDestroy {
     this.destroy.complete();
   }
 
+  setSubcategory(subcategory) {
+    this.categoryService.setCurrentCategory(subcategory);
+  }
+
   updateCategory(obj: ICategory, event: Event) {
     event.preventDefault();
     event.stopPropagation();
