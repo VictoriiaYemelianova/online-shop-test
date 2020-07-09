@@ -1,5 +1,8 @@
 <div class="subcategory-content">
-  <div class="category-block" *ngFor="let subcategory of subcategories" [routerLink]="">
+  <div class="category-block"
+    *ngFor="let subcategory of subcategories"
+    [routerLink]="subcategory.name.toLowerCase()"
+    (click)="setSubcategory(subcategory)">
 
     <div class="img">
       <img [src]="subcategory.imgUrl" alt="">

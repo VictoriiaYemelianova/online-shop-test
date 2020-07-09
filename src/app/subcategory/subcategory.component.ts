@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { ISubcategory, ICategory } from '../data-interface';
+import { ISubcategory } from '../data-interface';
 import { ActivatedRoute } from '@angular/router';
 import { RoutWrapperService } from '../service/rout-wrapper.service';
 import { CategoryService } from '../service/category.service';
@@ -38,8 +38,7 @@ export class SubcategoryComponent implements OnInit {
     });
   }
 
-  ngOnChange(): void {
-
+  setSubcategory(subcategory) {
+    this.categoryService.setCurrentCategory(subcategory);
   }
-
 }
