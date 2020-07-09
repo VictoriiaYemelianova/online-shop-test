@@ -13,13 +13,13 @@ import { map } from 'rxjs/operators';
 export class CategoryService {
   private token: string;
   public fullCategories: BehaviorSubject<Array<ICategory>> = new BehaviorSubject([]);
-  public currentCategory: BehaviorSubject<ICategory> = new BehaviorSubject(null);
+  public currentCategory: BehaviorSubject<any> = new BehaviorSubject(null);
 
   constructor( private http: HttpClient, private userService: UserServiceService ) {
     this.token = this.userService.logUser.token;
   }
 
-  setCurrentCategory(category: ICategory) {
+  setCurrentCategory(category: ICategory | ISubcategory) {
     this.currentCategory.next(category);
   }
 

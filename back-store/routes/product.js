@@ -16,8 +16,7 @@ module.exports = function(router) {
       res.items = products;
       next();
     } catch(err) {
-      const message = err.message;
-      res.message = message;
+      res.message = err.message;
       next();
     }
   })
@@ -33,8 +32,7 @@ module.exports = function(router) {
       res.items = products;
       next();
     } catch(err) {
-      const message = err.message;
-      res.message = message;
+      res.message = err.message;;
       next();
     }
   })

@@ -9,6 +9,8 @@ const routes: Routes = [
     { path: 'categories', loadChildren: () => import('./categories.module').then(m => m.CategoriesModule) },
     { path: 'categories/:name',
       loadChildren: () => import('./product-wrapper.module').then(m => m.ProductWrapperModule) },
+    { path: 'categories/:name/:subname',
+      loadChildren: () => import('./product-wrapper.module').then(m => m.ProductWrapperModule) },
     { path: 'basket', component: ShopBasketComponent }
   ] }
 ];
