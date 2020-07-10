@@ -16,6 +16,7 @@ export class CategoryService {
   private subcategory: ISubcategory;
   public fullCategories: BehaviorSubject<Array<ICategory>> = new BehaviorSubject([]);
   public currentCategory: BehaviorSubject<any> = new BehaviorSubject(null);
+  public showSubcategoryComponent: BehaviorSubject<boolean> = new BehaviorSubject(null);
 
   constructor( private http: HttpClient, private userService: UserServiceService ) {
     this.token = this.userService.logUser.token;
@@ -49,8 +50,10 @@ export class CategoryService {
 
     let currentCategory;
     currentCategory = this.fullCategories.value.find(el => el.name === category);
+    this.showSubcategoryComponent.next(true);
 
     if (subcategory) {
+      this.showSubcategoryComponent.next(false);
       currentCategory = currentCategory.Categories.find(el => el.name === subcategory);
     }
 

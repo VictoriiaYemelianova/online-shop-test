@@ -9,7 +9,7 @@
       <span >{{ link.name }}</span>
     </div>
   </div>
-  <div class="subcategory">
+  <div class="subcategory" *ngIf="showSubcategory">
     <app-subcategory></app-subcategory>
   </div>
   <div class="products">

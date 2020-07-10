@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RoutWrapperService } from '../service/rout-wrapper.service';
 import { UserServiceService } from '../service/user-service.service';
+import { CategoryService } from '../service/category.service';
 
 @Component({
   selector: 'app-product-wrapper',
@@ -8,14 +9,17 @@ import { UserServiceService } from '../service/user-service.service';
   styleUrls: ['./product-wrapper.component.scss']
 })
 export class ProductWrapperComponent implements OnInit {
-  public breadCrumbs: Array<any>;
   private userRole: string;
+  public breadCrumbs: Array<any>;
+  public showSubcategory: boolean;
 
   constructor(
     private routWrapperService: RoutWrapperService,
-    private userServiceService: UserServiceService
+    private userServiceService: UserServiceService,
+    private categoryService: CategoryService
     ) {
       this.userRole = this.userServiceService.logUser.user.role;
+      this.showSubcategory = true;
     }
 
   ngOnInit(): void {
@@ -31,6 +35,11 @@ export class ProductWrapperComponent implements OnInit {
         });
       }
     });
-  }
 
+    this.categoryService.showSubcategoryComponent.subscribe(res => {
+      if (res !== null) {
+        this.showSubcategory = res;
+      }
+    });
+  }
 }
