@@ -20,8 +20,7 @@ import { ShopBasketComponent } from './user-panel/shop-basket/shop-basket.compon
 import { SubcategoryComponent } from './subcategory/subcategory.component';
 import { ProductWrapperComponent } from './product-wrapper/product-wrapper.component';
 
-import { ClickOutsideDirective } from './click-outside.directive';
-
+import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { UserServiceService } from './service/user-service.service';
 
 import { IsAdminGuard } from './Guard/is-admin/is-admin.guard';
