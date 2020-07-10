@@ -12,8 +12,7 @@ export class RoutWrapperService {
 
   constructor(
     private router: Router,
-    private categoryService: CategoryService,
-    private productService: ProductService
+    private categoryService: CategoryService
   ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {

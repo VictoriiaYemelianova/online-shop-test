@@ -6,7 +6,6 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { ICategory, IServerModel, ISubcategory } from '../data-interface';
 import { UserServiceService } from './user-service.service';
 import { map } from 'rxjs/operators';
-import { element } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
