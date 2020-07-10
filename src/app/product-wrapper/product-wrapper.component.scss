@@ -11,9 +11,56 @@
 .breadcrumbs {
   height: 50px;
   width: 100%;
-  background-color: red;
+  display: flex;
+  align-items: center;
+
+  .text-color {
+    color: rgba(68, 68, 68, 1);;
+  }
+
+  .text-color.active-link {
+    color: #000;
+    font-weight: bold;
+
+    span:hover {
+      border-bottom: none;
+    }
+  }
+
+  .breadcrumb-link {
+    width: 70px;
+    position: relative;
+    padding-left: 25px;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .breadcrumb-link:hover {
+    span {
+      border-bottom: 1px solid #000000;
+    }
+  }
+
+  .breadcrumb-link.text-color.active-link:hover {
+    cursor: text;
+    span {
+      border-bottom: none;
+    }
+  }
+
+  .breadcrumb-link+.breadcrumb-link::before {
+    content: "";
+    position: absolute;
+    transform: rotate(-70deg);
+    top: 8px;
+    left: 0;
+    width: 16px;
+    height: 1px;
+    background: #000;
+  }
 }
 
+.breadcrumbs,
 .subcategory,
 .products {
   width: 1100px;
