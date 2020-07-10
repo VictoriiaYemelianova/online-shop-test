@@ -27,7 +27,7 @@
       </div>
 
       <div class="for-directive margin"  *ngIf="!isAdmin">
-        <div class="icon icon-green ">
+        <div class="icon icon-green" (click)="onBasket(product, $event)">
           <fa-icon [icon]="faShoppingCart"></fa-icon>
         </div>
       </div>
