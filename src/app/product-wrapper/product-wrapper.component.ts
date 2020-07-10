@@ -9,8 +9,6 @@ export class ProductWrapperComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-    console.log('hi')
-  }
+  ngOnInit(): void {}
 
 }
