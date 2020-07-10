@@ -20,7 +20,8 @@ export class SubcategoryComponent implements OnInit {
 
   constructor(
     private router: ActivatedRoute,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private routWrapperService: RoutWrapperService,
   ) { }
 
   ngOnInit(): void {
