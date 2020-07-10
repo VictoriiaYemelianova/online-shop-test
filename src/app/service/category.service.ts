@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ɵSWITCH_COMPILE_INJECTABLE__POST_R3__ } from '@angular/core';
 
 import { HttpClient} from '@angular/common/http';
 import { apiUrl } from '../constants';
@@ -6,12 +6,15 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { ICategory, IServerModel, ISubcategory } from '../data-interface';
 import { UserServiceService } from './user-service.service';
 import { map } from 'rxjs/operators';
+import { element } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
   private token: string;
+  private category: ICategory;
+  private subcategory: ISubcategory;
   public fullCategories: BehaviorSubject<Array<ICategory>> = new BehaviorSubject([]);
   public currentCategory: BehaviorSubject<any> = new BehaviorSubject(null);
 
@@ -30,9 +33,29 @@ export class CategoryService {
       map((res: IServerModel) => {
         if (res.success) {
           this.fullCategories.next(res.items as Array<ICategory>);
+          if (this.category) {
+            this.checkRebootPage(this.category, this.subcategory);
+          }
         }
       })
     );
+  }
+
+  checkRebootPage(category, subcategory) {
+    if (!this.fullCategories.value.length) {
+      this.category = category;
+      this.subcategory = subcategory;
+      return;
+    }
+
+    let currentCategory;
+    currentCategory = this.fullCategories.value.find(el => el.name === category);
+
+    if (subcategory) {
+      currentCategory = currentCategory.Categories.find(el => el.name === subcategory);
+    }
+
+    this.currentCategory.next(currentCategory);
   }
 
   create( el: ICategory | ISubcategory ) {
