@@ -19,7 +19,6 @@ export class SubcategoryComponent implements OnInit {
   public faPencilAlt = faPencilAlt;
 
   constructor(
-    private routWrapperService: RoutWrapperService,
     private router: ActivatedRoute,
     private categoryService: CategoryService
   ) { }
