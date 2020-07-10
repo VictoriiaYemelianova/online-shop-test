@@ -1,31 +1,33 @@
 <div class="products-page">
   <div class="products-content">
     <div class="product-block" *ngFor="let product of productList; index as i">
-      <div class="for-directive">
-        <fa-icon [icon]="faHeart"></fa-icon>
+      <div class="for-directive margin">
+        <div class="icon icon-red ">
+          <fa-icon [icon]="faHeart"></fa-icon>
+        </div>
       </div>
 
-      <div class="product-img">
+      <div class="product-img margin">
         <img [src]="product.imgUrl" alt="">
       </div>
 
-      <div class="description-product">
+      <div class="description-product margin">
         <div class="text-transfom text"> {{ product.name }} </div>
         <div class="text-transfom text">Price: {{ product.price }}$ </div>
       </div>
 
-      <div class="btn-content" *ngIf="isAdmin">
+      <div class="btn-content margin" *ngIf="isAdmin">
         <div class="icon icon-green">
           <fa-icon [icon]="faPencilAlt"></fa-icon>
         </div>
 
-        <div class="icon icon-red">
+        <div class="icon icon-red margin">
           <fa-icon [icon]="faTrashAlt"></fa-icon>
         </div>
       </div>
 
-      <div class="btn-content" *ngIf="!isAdmin">
-        <div class="icon icon-green">
+      <div class="for-directive margin"  *ngIf="!isAdmin">
+        <div class="icon icon-green ">
           <fa-icon [icon]="faShoppingCart"></fa-icon>
         </div>
       </div>
