@@ -1,10 +1,8 @@
 <div class="products-page">
   <div class="products-content">
     <div class="product-block" *ngFor="let product of productList; index as i">
-      <div class="for-directive margin">
-        <div class="icon icon-red ">
-          <fa-icon [icon]="faHeart"></fa-icon>
-        </div>
+      <div class="data-info margin">
+        <div class="day-ago text-transfom"> <span>added</span>: {{ product.createdAt | daysAgo }} </div>
       </div>
 
       <div class="product-img margin">
@@ -26,9 +24,13 @@
         </div>
       </div>
 
-      <div class="for-directive margin"  *ngIf="!isAdmin">
+      <div class="btn-content margin"  *ngIf="!isAdmin">
         <div class="icon icon-green" (click)="onBasket(product, $event)">
           <fa-icon [icon]="faShoppingCart"></fa-icon>
+        </div>
+
+        <div class="icon icon-red ">
+          <fa-icon [icon]="faHeart"></fa-icon>
         </div>
       </div>
     </div>
