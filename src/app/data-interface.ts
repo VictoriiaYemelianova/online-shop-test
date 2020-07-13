@@ -1,6 +1,6 @@
 export interface IServerModel {
   success: boolean;
-  items: Array<IProduct | ICategory | IUserToken>;
+  items: Array<IProduct | ICategory | IUserToken | ISubcategory>;
   message: string;
 }
 

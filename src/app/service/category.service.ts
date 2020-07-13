@@ -61,7 +61,20 @@ export class CategoryService {
   }
 
   create( el: ICategory | ISubcategory ) {
-    return this.http.post(`${apiUrl}/categories/create`, el);
+    return this.http.post(`${apiUrl}/categories/create`, el).pipe(
+      map((res: IServerModel) => {
+        if (res.success) {
+          const currentFullCatefories = this.fullCategories.value;
+          currentFullCatefories.forEach((el: ICategory) => {
+            if (el.id === (res.items[0] as ISubcategory).subcategory) {
+              el.Categories.push(res.items[0] as ISubcategory);
+            }
+          });
+        }
+
+        return res;
+      })
+    );
   }
 
   update( el: ICategory | ISubcategory ) {

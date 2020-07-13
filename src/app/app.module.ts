@@ -28,6 +28,7 @@ import { UserGuard } from './Guard/is-user/user.guard';
 import { ParamInterceptor } from './param.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DaysAgoPipe } from './pipes/days-ago.pipe';
+import { SubcategoryFormComponent } from './admin-panel/subcategory-form/subcategory-form.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { DaysAgoPipe } from './pipes/days-ago.pipe';
     ClickOutsideDirective,
     SubcategoryComponent,
     ProductWrapperComponent,
-    DaysAgoPipe
+    DaysAgoPipe,
+    SubcategoryFormComponent
   ],
   imports: [
     BrowserModule,

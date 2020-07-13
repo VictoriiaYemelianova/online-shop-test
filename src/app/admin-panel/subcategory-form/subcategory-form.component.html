@@ -1,0 +1,53 @@
+<div class="category-form-block">
+  <h3>Create new subcategory</h3>
+
+  <div class="info-message">
+    {{infoMessage}}
+  </div>
+
+  <form [formGroup]="subCategoryForm" (ngSubmit)="onSubmit()" class="form-content">
+    <div class="form-group">
+      <div class="input-block">
+        <div class="left-column">Choose category:</div>
+        <select class="right-column select" formControlName="subcategory">
+          <option *ngFor="let category of categories" >
+            {{ category.name }}
+          </option>
+        </select>
+      </div>
+
+      <div *ngIf="subCategoryForm.controls['name'].invalid && 
+        (subCategoryForm.controls['name'].dirty || subCategoryForm.controls['name'].touched)" class="error">
+        <span *ngIf="subCategoryForm.controls['name'].errors.required" class="error-message">Name is required</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-block">
+        <label class="left-column" for="name">Name subcategory:</label>
+        <input class="right-column" type="text" id="name" formControlName="name">
+      </div>
+
+      <div *ngIf="subCategoryForm.controls['name'].invalid && 
+        (subCategoryForm.controls['name'].dirty || subCategoryForm.controls['name'].touched)" class="error">
+        <span *ngIf="subCategoryForm.controls['name'].errors.required" class="error-message">Name is required</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-block">
+        <label class="left-column" for="imgUrl">Img Url:</label>
+        <input class="right-column" type="text" id="imgUrl" formControlName="imgUrl">
+      </div>
+
+      <div *ngIf="subCategoryForm.controls['imgUrl'].invalid && 
+        (subCategoryForm.controls['imgUrl'].dirty || subCategoryForm.controls['imgUrl'].touched)" class="error">
+        <span *ngIf="subCategoryForm.controls['imgUrl'].errors.required" class="error-message">Img Url is required</span>
+      </div>
+    </div>
+
+    <div class="button-block">
+      <button type="submit" class="btn-green" [disabled]="!subCategoryForm.valid">Create</button>
+    </div>
+  </form>
+</div>
