@@ -27,6 +27,7 @@ import { IsAdminGuard } from './Guard/is-admin/is-admin.guard';
 import { UserGuard } from './Guard/is-user/user.guard';
 import { ParamInterceptor } from './param.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { DaysAgoPipe } from './pipes/days-ago.pipe';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     ShopBasketComponent,
     ClickOutsideDirective,
     SubcategoryComponent,
-    ProductWrapperComponent
+    ProductWrapperComponent,
+    ShowItemsDirective,
+    DaysAgoPipe
   ],
   imports: [
     BrowserModule,
