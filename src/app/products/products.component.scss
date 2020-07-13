@@ -36,22 +36,25 @@
   }
 }
 
-.btn-content {
+.btn-block {
   height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 
-  .icon {
-    width: 30px;
-    height: 30px;
+  .btn-content {
     display: flex;
     align-items: center;
-    justify-content: center;
-  }
-
-  .icon:hover {
-    box-shadow: 2px 0px 5px rgba(68, 68, 68, 1);;
+    justify-content: space-between;
+  
+    .icon {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    .icon:hover {
+      box-shadow: 2px 0px 5px rgba(68, 68, 68, 1);;
+    }
   }
 }
 

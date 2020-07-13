@@ -14,23 +14,25 @@
         <div class="text-transfom text">Price: {{ product.price }}$ </div>
       </div>
 
-      <div class="btn-content margin" *ngIf="isAdmin">
-        <div class="icon icon-green">
-          <fa-icon [icon]="faPencilAlt"></fa-icon>
+      <div class="btn-block margin">
+        <div class="btn-content" *ngIf="isAdmin">
+          <div class="icon icon-green">
+            <fa-icon [icon]="faPencilAlt"></fa-icon>
+          </div>
+  
+          <div class="icon icon-red margin">
+            <fa-icon [icon]="faTrashAlt"></fa-icon>
+          </div>
         </div>
 
-        <div class="icon icon-red margin">
-          <fa-icon [icon]="faTrashAlt"></fa-icon>
-        </div>
-      </div>
-
-      <div class="btn-content margin"  *ngIf="!isAdmin">
-        <div class="icon icon-green" (click)="onBasket(product, $event)">
-          <fa-icon [icon]="faShoppingCart"></fa-icon>
-        </div>
-
-        <div class="icon icon-red ">
-          <fa-icon [icon]="faHeart"></fa-icon>
+        <div class="btn-content" *ngIf="!isAdmin">
+          <div class="icon icon-green" (click)="onBasket(product, $event)">
+            <fa-icon [icon]="faShoppingCart"></fa-icon>
+          </div>
+  
+          <div class="icon icon-red ">
+            <fa-icon [icon]="faHeart"></fa-icon>
+          </div>
         </div>
       </div>
     </div>
