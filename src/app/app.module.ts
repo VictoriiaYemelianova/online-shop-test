@@ -46,7 +46,6 @@ import { DaysAgoPipe } from './pipes/days-ago.pipe';
     ClickOutsideDirective,
     SubcategoryComponent,
     ProductWrapperComponent,
-    ShowItemsDirective,
     DaysAgoPipe
   ],
   imports: [
