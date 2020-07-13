@@ -38,4 +38,5 @@ export interface IProduct {
   imgUrl: string;
   price: number;
   idCategory?: string;
+  createdAt: string;
 }
