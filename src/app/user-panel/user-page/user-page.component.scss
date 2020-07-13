@@ -12,7 +12,8 @@
   position: fixed;
   top: 0;
   background-color: #ffffff;
-  box-shadow: 0 0 10px rgba(68, 68, 68, 1);;
+  box-shadow: 0 0 10px rgba(68, 68, 68, 1);
+  z-index: 2;
 }
 
 .left-menu,
