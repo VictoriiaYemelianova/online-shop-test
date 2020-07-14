@@ -1,0 +1,70 @@
+.select {
+  height: 100%;
+  width: 100%;
+  text-transform: none;
+  position: relative;
+}
+
+.show-value {
+  height: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .selected-value,
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .selected-value {
+    flex: 1;
+  }
+
+  .icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+}
+
+.drop-down-select {
+  width: calc(100% - 40px);
+  position: absolute;
+  top: inherit;
+  padding: 10px 20px;
+  background-color: #ffffff;
+
+  .option {
+    height: 25px;
+
+      label {
+        height: inherit;
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        .checkbox {
+          width: 20px;
+          height: 20px;
+          margin-right: 10px;
+        }
+
+        input {
+          appearance: none;
+          outline: none;
+        }
+
+        .faCheck {
+          position: absolute;
+          top: 5px;
+          left: 2px;
+        }
+      }
+
+      .option-name {
+        flex: 1;
+      }
+  }
+}

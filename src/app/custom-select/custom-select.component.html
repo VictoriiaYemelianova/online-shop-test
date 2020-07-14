@@ -1,0 +1,24 @@
+<div class="select">
+  <div class="show-value" (click)="showHideDropDown()">
+    <div class="selected-value">{{selectedNameElement}}</div>
+    <div class="icon">
+      <fa-icon [icon]="faChevronDown" *ngIf="!showDropDown"></fa-icon>
+      <fa-icon [icon]="faChevronUp" *ngIf="showDropDown"></fa-icon>
+    </div>
+  </div>
+
+  <div class="drop-down-select" *ngIf="showDropDown">
+    <div class="option" *ngFor="let option of options, let i = index" (click)="onSelect($event, option, i)">
+      <label>
+        <div class="checkbox">
+          <input type="radio">
+          <fa-icon class="faCheck" *ngIf="selectedIndexElement[i]" [icon]="faCheck"></fa-icon>
+        </div>
+  
+        <div class="option-name">
+          {{option}}
+        </div>
+      </label>
+    </div>
+  </div>
+</div>
