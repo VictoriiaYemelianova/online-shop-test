@@ -1,13 +1,34 @@
 <div class="filter-content">
   <div class="filter">
-    <span>Filter by:</span>
+    <div class="text">Filter by:</div>
+
+    <div class="filter-price">
+      <div class="filter-text">Price:</div>
+
+      <div class="filter-price-content">
+        <div class="price-filter-input">
+          <span>$</span>
+          <input id="from-inp" type="text" placeholder="5" [(ngModel)]="priceFrom">
+        </div>
+
+        <span>to</span>
+
+        <div class="price-filter-input">
+          <span>$</span>
+          <input id="to-inp" type="text" placeholder="350" [(ngModel)]="priceTo">
+        </div>
+
+        <div class="btn text" (click)="addPriceFilter()">go</div>
+      </div>
+    </div>
+
   </div>
 
   <div class="sort">
     <div class="text">SORT BY:</div>
 
     <div class="value-sort">
-      <app-custom-select [options]="optionList" (selectedOption)="getSelectedSortByValue($event)"></app-custom-select>
+      <app-custom-select [options]="optionList" (selectedOption)="getSelectedFilter($event)"></app-custom-select>
     </div>
   </div>
 </div>

@@ -14,6 +14,7 @@ import { CategoryService } from './category.service';
 export class ProductService {
   private token: string;
   public currentProducts: BehaviorSubject<Array<IProduct>> = new BehaviorSubject([]);
+  public currentSortedProductsList: BehaviorSubject<Array<IProduct>> = new BehaviorSubject([]);
 
   constructor(
     private http: HttpClient,
@@ -51,6 +52,10 @@ export class ProductService {
         }
       })
     );
+  }
+
+  setSortedProducts(prosucts: IProduct[]) {
+    this.currentSortedProductsList.next(prosucts);
   }
 
   create(el: IProduct, name: string) {

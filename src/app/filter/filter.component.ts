@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FilterService } from '../service/filter.service';
-import { RoutWrapperService } from '../service/rout-wrapper.service';
+import { IFilter } from '../data-interface';
 
 @Component({
   selector: 'app-filter',
@@ -9,17 +9,32 @@ import { RoutWrapperService } from '../service/rout-wrapper.service';
 })
 export class FilterComponent implements OnInit {
   public optionList: Array<string>;
+  public newPriceObj: IFilter = {};
+  public priceFrom: string;
+  public priceTo: string;
 
   constructor(
-    private filterService: FilterService,
-    private routWrapperService: RoutWrapperService
+    private filterService: FilterService
   ) { }
 
   ngOnInit(): void {
+    this.filterService.addFilter(null);
     this.optionList = this.filterService.sortBy;
   }
 
-  getSelectedSortByValue(event) {
-    this.routWrapperService.addQueryParams(event);
+  getSelectedFilter(event) {
+    const obj = {
+      sortby: event
+    };
+    this.filterService.addFilter(obj);
+  }
+
+  addPriceFilter() {
+    this.newPriceObj = {
+      pricefrome: parseInt(this.priceFrom, 10),
+      priceto: parseInt(this.priceTo, 10)
+    };
+
+    this.filterService.addFilter(this.newPriceObj);
   }
 }

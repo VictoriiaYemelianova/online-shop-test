@@ -3,6 +3,15 @@
   width: 1100px;
   display: flex;
   align-items: center;
+
+  .text {
+    text-transform: uppercase;
+  }
+
+  .filter-text {
+    width: 70px;
+    text-align: center;
+  }
 }
 
 .filter,
@@ -10,19 +19,61 @@
   height: inherit;
   display: flex;
   align-items: center;
-  text-transform: uppercase;
 }
 
 .filter {
   flex: 1;
 }
 
+.filter-price {
+  width: 320px;
+  display: flex;
+  align-items: center;
+
+  .filter-price-content {
+    width: 240px;
+    display: flex;
+    align-items: center;
+
+    .price-filter-input {
+      width: 60px;
+      display: flex;
+      align-items: center;
+      margin: 0 10px;
+
+      input {
+        width: 40px;
+        height: 30px;
+        padding: 5px;
+        margin-left: 5px;
+        border: 1px solid rgba(68, 68, 68, .5);
+        border-radius: 3px;
+        outline: none;
+      }
+    }
+
+    .btn {
+      width: 40px;
+      height: 30px;
+      padding: 5px;
+      margin-left: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgb(245, 245, 245);
+      border: 1px solid rgb(223, 223, 223);
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      box-shadow: 0 0 5px rgb(180, 180, 180);
+    }
+  }
+}
+
 .sort {
   width: 250px;
-
-  .text {
-    width: 70px;
-  }
 
   .value-sort {
    width: 180px;

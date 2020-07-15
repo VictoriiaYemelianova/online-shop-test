@@ -7,6 +7,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { faTrashAlt, faPencilAlt, faShoppingCart, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { UserServiceService } from '../service/user-service.service';
 import { ProductService } from '../service/product.service';
+import { FilterService } from '../service/filter.service';
 
 @Component({
   selector: 'app-products',
@@ -46,14 +47,14 @@ export class ProductsComponent implements OnInit, OnDestroy {
       });
 
     this.router.data
-    .pipe(takeUntil(this.destroy))
-    .subscribe(data => {
-      if (data.isAdmin) {
-        this.isAdmin = true;
-      }
-    });
+      .pipe(takeUntil(this.destroy))
+      .subscribe(data => {
+        if (data.isAdmin) {
+          this.isAdmin = true;
+        }
+      });
 
-    this.productService.currentProducts.subscribe((res: IProduct[]) => {
+    this.productService.currentSortedProductsList.subscribe((res: IProduct[]) => {
       if (res) {
         this.productList = res;
       }
@@ -73,7 +74,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   updateProduct(el: IProduct, event: Event) {
     event.preventDefault();
-    event. stopPropagation();
+    event.stopPropagation();
     this.currentTemplate = this.updateTemplate;
     this.IsModalShow = true;
     this.currentObj = el;
@@ -103,7 +104,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   deleteProduct(el: IProduct, event: Event) {
     event.preventDefault();
-    event. stopPropagation();
+    event.stopPropagation();
     this.currentTemplate = this.deleteNotificationTemplate;
     this.currentObj = el;
     this.IsModalShow = true;
@@ -125,7 +126,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   onBasket(product: IProduct, event) {
     event.preventDefault();
-    event. stopPropagation();
+    event.stopPropagation();
     this.userService.addElToBuyList(product);
   }
 }
