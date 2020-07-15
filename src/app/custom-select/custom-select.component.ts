@@ -14,7 +14,7 @@ export class CustomSelectComponent implements OnInit {
   public faCheck = faCheck;
   public faChevronDown = faChevronDown;
   public faChevronUp = faChevronUp;
-  public selectedIndexElement = {};
+  public selectedElement;
   public selectedNameElement: string;
   public showDropDown = false;
 
@@ -24,16 +24,14 @@ export class CustomSelectComponent implements OnInit {
     if (this.selectedValue) {
       const index = this.options.indexOf(this.selectedValue);
       this.selectedNameElement = this.selectedValue;
-      this.selectedIndexElement[`${index}`] = true;
+      this.selectedElement = index;
     }
   }
 
-  onSelect(event, option: string, index: number) {
-    this.selectedIndexElement = {};
-    this.selectedIndexElement[`${index}`] = event.target.checked;
+  onSelect(option: string, index: number) {
+    this.selectedElement = index;
     this.selectedNameElement = option;
     this.selectedOption.emit(option);
-    this.showHideDropDown();
   }
 
   showHideDropDown() {
