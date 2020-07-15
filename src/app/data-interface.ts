@@ -43,6 +43,6 @@ export interface IProduct {
 
 export interface IFilter {
   sortby?: string;
-  pricefrome?: string;
-  priceto?: string;
+  pricefrome?: number;
+  priceto?: number;
 }
