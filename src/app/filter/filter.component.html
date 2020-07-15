@@ -1,0 +1,13 @@
+<div class="filter-content">
+  <div class="filter">
+    <span>Filter by:</span>
+  </div>
+
+  <div class="sort">
+    <div class="text">SORT BY:</div>
+
+    <div class="value-sort">
+      <app-custom-select [options]="optionList" (selectedOption)="getSelectedSortByValue($event)"></app-custom-select>
+    </div>
+  </div>
+</div>

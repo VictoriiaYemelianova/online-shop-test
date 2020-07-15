@@ -29,6 +29,7 @@ import { ParamInterceptor } from './param.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DaysAgoPipe } from './pipes/days-ago.pipe';
 import { SubcategoryFormComponent } from './admin-panel/subcategory-form/subcategory-form.component';
+import { FilterComponent } from './filter/filter.component';
 import { CustomSelectComponent } from './custom-select/custom-select.component';
 
 @NgModule({
@@ -50,6 +51,7 @@ import { CustomSelectComponent } from './custom-select/custom-select.component';
     ProductWrapperComponent,
     DaysAgoPipe,
     SubcategoryFormComponent,
+    FilterComponent,
     CustomSelectComponent
   ],
   imports: [

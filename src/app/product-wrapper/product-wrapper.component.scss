@@ -8,8 +8,16 @@
   align-items: center;
 }
 
-.breadcrumbs {
+.filter  {
   height: 50px;
+  width: 100%;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+}
+
+.breadcrumbs {
+  min-height: 50px;
   width: 100%;
   display: flex;
   align-items: center;
