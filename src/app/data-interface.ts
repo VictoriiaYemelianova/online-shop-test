@@ -40,3 +40,9 @@ export interface IProduct {
   idCategory?: string;
   createdAt: string;
 }
+
+export interface IFilter {
+  sortby?: string;
+  pricefrome?: string;
+  priceto?: string;
+}
