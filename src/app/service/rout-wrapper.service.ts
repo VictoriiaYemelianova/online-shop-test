@@ -9,7 +9,7 @@ import { IFilter } from '../data-interface';
 })
 export class RoutWrapperService {
   private routUrl: Array<string>;
-  public currentQueryParams: IFilter;
+  public currentQueryParams: IFilter = {};
   public breadcrumbs: BehaviorSubject<Array<string>> = new BehaviorSubject(null);
 
   constructor(
