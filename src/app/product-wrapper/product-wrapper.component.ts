@@ -42,4 +42,8 @@ export class ProductWrapperComponent implements OnInit {
       }
     });
   }
+
+  checkUrlIsActive(url: string) {
+    return this.routWrapperService.checkUrl(url);
+  }
 }

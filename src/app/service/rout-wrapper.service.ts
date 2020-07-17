@@ -45,9 +45,15 @@ export class RoutWrapperService {
 
   addQueryParams(params: IFilter) {
     this.router.navigate([],
-    {
-      relativeTo: this.activatedRoute,
-      queryParams: params
-    });
+      {
+        relativeTo: this.activatedRoute,
+        queryParams: params
+      });
+  }
+
+  checkUrl(url): boolean {
+    const charPos = this.router.url.indexOf('?');
+    const cleanUrl = charPos !== -1 ? this.router.url.slice(0, charPos) : this.router.url;
+    return (cleanUrl === url);
   }
 }

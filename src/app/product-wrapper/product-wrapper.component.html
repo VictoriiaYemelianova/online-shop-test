@@ -6,8 +6,8 @@
     <div class="text-color"> Move to: </div>
     <div
       *ngFor="let link of breadCrumbs" class="breadcrumb-link text-color"
-      [routerLink]="link.link" routerLinkActive="active-link"
-      [routerLinkActiveOptions]="{exact:true}"
+      [routerLink]="link.link" 
+      [class.active-link]="checkUrlIsActive(link.link)"
       >
       <span >{{ link.name }}</span>
     </div>
