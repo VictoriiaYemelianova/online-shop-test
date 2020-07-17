@@ -65,11 +65,16 @@ export class CategoryService {
       map((res: IServerModel) => {
         if (res.success) {
           const currentFullCatefories = this.fullCategories.value;
-          currentFullCatefories.forEach((el: ICategory) => {
-            if (el.id === (res.items[0] as ISubcategory).subcategory) {
-              el.Categories.push(res.items[0] as ISubcategory);
-            }
-          });
+          if ((res.items[0] as ISubcategory).subcategory === null) {
+            currentFullCatefories.push(res.items[0] as ICategory);
+          } else {
+            currentFullCatefories.forEach((element: ICategory) => {
+              if (element.id === (res.items[0] as ISubcategory).subcategory) {
+                element.Categories.push(res.items[0] as ISubcategory);
+              }
+            });
+          }
+          this.fullCategories.next(currentFullCatefories);
         }
 
         return res;
