@@ -13,7 +13,7 @@ import { CategoryService } from './category.service';
 })
 export class ProductService {
   private token: string;
-  public currentProducts: BehaviorSubject<Array<IProduct>> = new BehaviorSubject([]);
+  public fullProducts: BehaviorSubject<Array<IProduct>> = new BehaviorSubject([]);
   public currentSortedProductsList: BehaviorSubject<Array<IProduct>> = new BehaviorSubject([]);
 
   constructor(
@@ -38,7 +38,7 @@ export class ProductService {
     return this.http.get(`${apiUrl}/parent-category-products/${id}`).pipe(
       map((res: IServerModel) => {
         if (res.success) {
-          this.currentProducts.next(res.items as IProduct[]);
+          this.fullProducts.next(res.items as IProduct[]);
         }
       })
     );
@@ -48,7 +48,7 @@ export class ProductService {
     return this.http.get(`${apiUrl}/subcategory-products/${id}`).pipe(
       map((res: IServerModel) => {
         if (res.success) {
-          this.currentProducts.next(res.items as IProduct[]);
+          this.fullProducts.next(res.items as IProduct[]);
         }
       })
     );

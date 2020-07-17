@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FilterService } from '../service/filter.service';
-import { IFilter } from '../data-interface';
 
 @Component({
   selector: 'app-filter',
@@ -9,32 +8,23 @@ import { IFilter } from '../data-interface';
 })
 export class FilterComponent implements OnInit {
   public optionList: Array<string>;
-  public newPriceObj: IFilter = {};
-  public priceFrom: string;
-  public priceTo: string;
+  public priceFrom = '';
+  public priceTo = '';
+  public sortBy = 'newest';
 
   constructor(
     private filterService: FilterService
   ) { }
 
   ngOnInit(): void {
-    this.filterService.addFilter(null);
     this.optionList = this.filterService.sortBy;
   }
 
-  getSelectedFilter(event) {
-    const obj = {
-      sortby: event
-    };
-    this.filterService.addFilter(obj);
+  getSelectedSortBy(event) {
+    this.filterService.addSorting(event);
   }
 
   addPriceFilter() {
-    this.newPriceObj = {
-      pricefrome: parseInt(this.priceFrom, 10),
-      priceto: parseInt(this.priceTo, 10)
-    };
-
-    this.filterService.addFilter(this.newPriceObj);
+    this.filterService.addPriceFilter(parseInt(this.priceFrom, 10), parseInt(this.priceTo, 10));
   }
 }
