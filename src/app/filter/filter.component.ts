@@ -10,7 +10,7 @@ export class FilterComponent implements OnInit {
   public optionList: Array<string>;
   public priceFrom = '';
   public priceTo = '';
-  public sortBy = 'newest';
+  public sortBy = '';
 
   constructor(
     private filterService: FilterService
@@ -18,6 +18,7 @@ export class FilterComponent implements OnInit {
 
   ngOnInit(): void {
     this.optionList = this.filterService.sortBy;
+    this.sortBy = this.filterService.setFilters.sortby;
   }
 
   getSelectedSortBy(event) {

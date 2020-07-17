@@ -28,7 +28,7 @@
     <div class="text">SORT BY:</div>
 
     <div class="value-sort">
-      <app-custom-select [options]="optionList" (selectedOption)="getSelectedSortBy($event)"></app-custom-select>
+      <app-custom-select [options]="optionList" [selectedValue]='sortBy' (selectedOption)="getSelectedSortBy($event)"></app-custom-select>
     </div>
   </div>
 </div>
