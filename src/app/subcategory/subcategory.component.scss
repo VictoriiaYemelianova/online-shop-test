@@ -28,10 +28,13 @@
 }
 
 .img {
-  height: 190px;
+  height: 140px;
+  position: relative;
+  overflow: hidden;
   
   img {
     width: 230px;
+    position: absolute;
   }
 }
 

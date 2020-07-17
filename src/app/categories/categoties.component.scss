@@ -31,9 +31,16 @@
 .img {
   display: flex;
   justify-content: center;
+}
+
+.img {
+  height: 140px;
+  position: relative;
+  overflow: hidden;
 
   img {
     width: 230px;
+    position: absolute;
   }
 }
 
