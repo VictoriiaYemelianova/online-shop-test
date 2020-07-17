@@ -31,7 +31,7 @@ export class CustomSelectComponent implements OnInit {
   onSelect(option: string, index: number) {
     this.selectedElement = index;
     this.selectedNameElement = option;
-    this.selectedOption.emit(option);
+    this.selectedOption.emit(option.replace( /\s/g, ''));
   }
 
   showHideDropDown() {
