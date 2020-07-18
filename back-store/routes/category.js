@@ -43,24 +43,29 @@ module.exports = function(router) {
 
   router.put('/api/categories/update', async (req, res, next) => {
     try {
-      const { name, imgUrl, id } = req.body;
-
-      await models.Category.update({
-        name: name,
-        imgUrl: imgUrl,
+      const modelCategory = {
+        id: req.body.id,
+        name: req.body.name,
+        imgUrl: req.body.imgUrl,
+        subcategory: null,
         updatedAt: new Date()
-      },
-      {
+      }
+
+      if (req.body.subcategory) {
+        modelCategory.subcategory = req.body.subcategory;
+      }
+
+      const updatedCategory = await models.Category.update(modelCategory, {
         where: {
-          id
+          id: req.body.id
         }
       });
 
-      const updatedCategory = await models.Category.findOne({
-        where: {
-          id
-        }
-      });
+      // const updatedCategory = await models.Category.findOne({
+      //   where: {
+      //     id: req.body.id
+      //   }
+      // });
 
       res.items = updatedCategory;
       next();
@@ -72,7 +77,6 @@ module.exports = function(router) {
 
   router.delete('/api/categories/:id', async (req, res, next) => {
     try {
-      console.log(req.params.id)
       const deletedCategory = await models.Category.destroy({
         where: {
           id: req.params.id
