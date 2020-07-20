@@ -61,11 +61,7 @@ module.exports = function(router) {
         }
       });
 
-      // const updatedCategory = await models.Category.findOne({
-      //   where: {
-      //     id: req.body.id
-      //   }
-      // });
+      // const updatedCategory = await models.Category.findAll();
 
       res.items = updatedCategory;
       next();
