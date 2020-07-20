@@ -80,6 +80,10 @@ module.exports = function(router) {
       const deletedCategory = await models.Category.destroy({
         where: {
           id: req.params.id
+        },
+        include: {
+          model: models.Category,
+          model: models.Product
         }
       })
       
