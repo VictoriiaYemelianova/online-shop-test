@@ -21,7 +21,7 @@ export interface ICategory {
   id?: number;
   name: string;
   imgUrl: string;
-  subcategory?: null;
+  subcategoryId?: null;
   Categories?: Array<ISubcategory>;
 }
 
