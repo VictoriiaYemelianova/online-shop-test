@@ -37,15 +37,13 @@ module.exports = function(router) {
     }
   })
 
-  router.post('/api/:name/create-product',  async (req, res, next) => {
+  router.post('/api/create-product',  async (req, res, next) => {
     try {
-      const category = await helpers.getCategory(req.params.name);
-
       const currentProduct = {
         name: req.body.name,
         imgUrl: req.body.imgUrl,
         price: req.body.price,
-        idCategory: category.id,
+        idCategory: req.body.idCategory,
         createdAt: new Date(),
         updatedAt: new Date()
       };
@@ -71,19 +69,19 @@ module.exports = function(router) {
         updatedAt: new Date()
       }
 
-      await models.Product.update(
+      await models.Product.update( //возвращает количество измененных элементов 
         currentProduct,
         {
           where: {
             id: req.body.id
           }
-        })
-
-        const updatedProduct = await models.Product.findOne({
-          where: {
-            id: req.body.id
-          }
         });
+
+        // const updatedProduct = await models.Product.findOne({
+        //   where: {
+        //     id: req.body.id
+        //   }
+        // });
 
         res.items = updatedProduct;
         next();
@@ -97,7 +95,7 @@ module.exports = function(router) {
  
   router.delete('/api/products/:id', async (req, res, next) => {
     try {
-      const deleteProduct = await models.Product.destroy({
+      const deleteProduct = await models.Product.destroy({  //возвращает количество удаленных элементов 
         where: {
           id: req.params.id
         }
@@ -113,13 +111,11 @@ module.exports = function(router) {
     }
   })
 
-  router.delete('/api/products/:name/delete', async (req, res, next) => {
+  router.delete('/api/products/delete-all/:id', async (req, res, next) => { //id подкатегории, в которой удаляются все продукты
     try {
-      const category = await helpers.getCategory(req.params.name);
-
-      const deleteAllProduct = await models.Product.destroy({
+       const deleteAllProduct = await models.Product.destroy({ //возвращает количество удаленных элементов 
         where: {
-          idCategory: category.id
+          idCategory: req.params.id
         }
       });
 
