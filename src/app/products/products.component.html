@@ -1,5 +1,8 @@
 <div class="products-page">
   <div class="products-content">
+    <div class="empty-product-list" *ngIf="!productList">
+      <span>no products in {{categoryName}} category </span>
+    </div>
     <div class="product-block" *ngFor="let product of productList; index as i">
       <div class="data-info margin">
         <div class="day-ago text-transfom"> <span>added</span>: {{ product.createdAt | daysAgo }} </div>

@@ -17,6 +17,15 @@
   justify-content: flex-start;
 }
 
+.empty-product-list {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-transform: uppercase;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
 .data-info {
   height: 30px;
   display: flex;
