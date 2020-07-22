@@ -1,6 +1,6 @@
 <div class="products-page">
   <div class="products-content">
-    <div class="empty-product-list" *ngIf="!productList">
+    <div class="empty-product-list" *ngIf="!productList.length">
       <span>no products in {{categoryName}} category </span>
     </div>
     <div class="product-block" *ngFor="let product of productList; index as i">

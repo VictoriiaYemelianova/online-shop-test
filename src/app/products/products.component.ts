@@ -55,7 +55,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
       });
 
     this.productService.currentSortedProductsList.subscribe((res: IProduct[]) => {
-      if (res.length) {
+      if (res) {
         this.productList = res;
       }
     });

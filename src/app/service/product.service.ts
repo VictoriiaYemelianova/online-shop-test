@@ -54,8 +54,8 @@ export class ProductService {
     );
   }
 
-  setSortedProducts(prosucts: IProduct[]) {
-    this.currentSortedProductsList.next(prosucts);
+  setSortedProducts(products: IProduct[]) {
+    this.currentSortedProductsList.next(products);
   }
 
   create(el: IProduct, name: string) {

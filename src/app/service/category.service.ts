@@ -33,7 +33,6 @@ export class CategoryService {
       map((res: IServerModel) => {
         if (res.success) {
           this.fullCategories.next(res.items as Array<ICategory>);
-          console.log(this.fullCategories.value);
           if (this.category) {
             this.checkRebootPage(this.category, this.subcategory);
           }

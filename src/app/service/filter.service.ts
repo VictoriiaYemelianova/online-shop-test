@@ -23,9 +23,9 @@ export class FilterService {
     }
 
     this.productService.fullProducts.subscribe((res: IProduct[]) => {
-      if (res.length) {
+      if (res) {
         this.currentProducts = res;
-        this.addFilter();
+        this.addFilter()
       }
     });
   }
