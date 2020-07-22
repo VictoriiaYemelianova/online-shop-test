@@ -68,6 +68,10 @@ export class CategotiesComponent implements OnInit, OnDestroy {
     this.categoryService.setCurrentCategory(subcategory);
   }
 
+  replaceSpacesRout(routName) {
+    return routName.replace( /\s/g, '');
+  }
+
   onUpdateCategory(obj: ICategory, event: Event) {
     event.preventDefault();
     event.stopPropagation();

@@ -2,7 +2,7 @@
   <div class="conteiner">
     <div class="category-block"
       *ngFor="let category of categoriesList"
-      [routerLink]="category.name.toLowerCase()"
+      [routerLink]="replaceSpacesRout(category.name).toLowerCase()"
       (click)="setSubcategory(category)"
       >
 
