@@ -8,7 +8,7 @@ module.exports = function(router) {
         include: {
           model: models.Category,
           where: {
-            subcategory: req.params.id
+            subcategoryId: req.params.id
           }
         }
       });
