@@ -9,7 +9,7 @@ module.exports = function(router) {
         }
       });
 
-      res.items = categories.filter(el => !el.subcategory);
+      res.items = categories.filter(el => !el.subcategoryId);
       next();
     } catch (err) {
       res.message = err.message;
@@ -22,13 +22,13 @@ module.exports = function(router) {
       const modelCategory = {
         name: req.body.name,
         imgUrl: req.body.imgUrl,
-        subcategory: null,
+        subcategoryId: null,
         createdAt: new Date(),
         updatedAt: new Date()
       }
 
-      if (req.body.subcategory) {
-        modelCategory.subcategory = req.body.subcategory;
+      if (req.body.subcategoryId) {
+        modelCategory.subcategoryId = req.body.subcategoryId;
       }
 
       const newCategory = await models.Category.create(modelCategory);
@@ -47,12 +47,12 @@ module.exports = function(router) {
         id: req.body.id,
         name: req.body.name,
         imgUrl: req.body.imgUrl,
-        subcategory: null,
+        subcategoryId: null,
         updatedAt: new Date()
       }
 
-      if (req.body.subcategory) {
-        modelCategory.subcategory = req.body.subcategory;
+      if (req.body.subcategoryId) {
+        modelCategory.subcategoryId = req.body.subcategoryId;
       }
 
       const updatedCategory = await models.Category.update(modelCategory, {

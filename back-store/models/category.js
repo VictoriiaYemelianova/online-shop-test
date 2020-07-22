@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const Category = sequelize.define('Category', {
     name: DataTypes.STRING,
     imgUrl: DataTypes.STRING,
-    subcategory: DataTypes.INTEGER
+    subcategoryId: DataTypes.INTEGER
   }, {});
   Category.associate = function(models) {
     Category.hasMany(models.Product, {
@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     })
 
     Category.hasMany(models.Category, {
-      foreignKey: 'subcategory',
+      foreignKey: 'subcategoryId',
       constraints: false
     })
   };

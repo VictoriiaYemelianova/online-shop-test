@@ -19,7 +19,7 @@ export class SubcategoryFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.categoryService.fullCategories.subscribe(res => {
-      this.categories = res.filter(el => !el.subcategory);
+      this.categories = res.filter(el => !el.subcategoryId);
     });
 
     this.subCategoryForm = new FormGroup({
