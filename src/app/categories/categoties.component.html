@@ -14,7 +14,7 @@
         <div class="category-name"><span class="text-transfom">{{ category.name }}</span></div>
 
         <div class="icon-button" *ngIf="isAdmin">
-          <div class="icon icon-green" (click)="updateCategory(category, $event)">
+          <div class="icon icon-green" (click)="onUpdateCategory(category, $event)">
             <fa-icon [icon]="faPencilAlt"></fa-icon>
           </div>
 
@@ -29,13 +29,13 @@
 
 <ng-template #updateTemplate>
   <div class="form-content">
-    <h3>Update <span class="text-transfom">{{ currentObj.name }}</span></h3>
+    <h3>update: <span class="upper-case">{{ currentObj.name }}</span> </h3>
 
     <div class="message input-block">
       <span>{{ infoMessage }}</span>
     </div>
 
-    <form [formGroup]="onUpdateForm" (ngSubmit)="onUpdate()">
+    <form [formGroup]="onUpdateForm" (ngSubmit)="sendUpdatedCategory()">
       <div class="input-block">
         <label for="name">Category name:</label>
         <input type="text" id="name" formControlName="name">

@@ -12,7 +12,7 @@
       <div class="category-name"><span class="text-transfom">{{ subcategory.name }}</span></div>
 
       <div class="icon-button" *ngIf="isAdmin">
-        <div class="icon icon-green">
+        <div class="icon icon-green" (click)="onUpdateCategory(subcategory, $event)">
           <fa-icon [icon]="faPencilAlt"></fa-icon>
         </div>
 
@@ -23,3 +23,29 @@
     </div>
   </div>
 </div>
+
+<ng-template #updateTemplate>
+  <div class="form-content">
+    <h3>update: <span class="upper-case">{{ currentObj.name }}</span> </h3>
+
+    <form [formGroup]="onUpdateForm" (ngSubmit)="sendUpdatedSubategory()">
+      <div class="input-block">
+        <label for="name">Subcategory name:</label>
+        <input type="text" id="name" formControlName="name">
+      </div>
+
+      <div class="input-block">
+        <label for="img-url">Img-url:</label>
+        <input type="text" id="img-url" formControlName="imgUrl">
+      </div>
+
+      <div class="button-block">
+        <button type="submit" [disabled]="!onUpdateForm.valid" class="btn-green">update</button>
+        <button type="button" class="btn-red" (click)="closeModal()">cancel</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<app-modal *ngIf="IsModalShow" [template]="currentTemplate" (closeModal)="closeModal()">
+</app-modal>

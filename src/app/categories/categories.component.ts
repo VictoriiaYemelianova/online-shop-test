@@ -68,7 +68,7 @@ export class CategotiesComponent implements OnInit, OnDestroy {
     this.categoryService.setCurrentCategory(subcategory);
   }
 
-  updateCategory(obj: ICategory, event: Event) {
+  onUpdateCategory(obj: ICategory, event: Event) {
     event.preventDefault();
     event.stopPropagation();
     this.currentTemplate = this.updateTemplate;
@@ -78,19 +78,12 @@ export class CategotiesComponent implements OnInit, OnDestroy {
     this.onUpdateForm.controls.imgUrl.setValue(obj.imgUrl);
   }
 
-  onUpdate() {
+  sendUpdatedCategory() {
     const formValue = this.onUpdateForm.value;
     formValue.name = formValue.name.toLocaleLowerCase();
     formValue.id = this.currentObj.id;
     this.categoryService.update(formValue).subscribe((res: IServerModel) => {
       if (res.success) {
-        const newCategoriesList: ICategory[] = this.categoriesList.map((el: ICategory) => {
-          if (el.id === (res.items[0] as ICategory).id ) {
-            el = res.items[0] as ICategory;
-          }
-          return el;
-        });
-        this.categoriesList = newCategoriesList;
         this.infoMessage = 'Updated successfully!';
       } else {
         this.infoMessage = 'Error!';
