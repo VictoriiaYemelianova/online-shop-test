@@ -31,6 +31,7 @@ import { DaysAgoPipe } from './pipes/days-ago.pipe';
 import { SubcategoryFormComponent } from './admin-panel/subcategory-form/subcategory-form.component';
 import { FilterComponent } from './filter/filter.component';
 import { CustomSelectComponent } from './custom-select/custom-select.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { CustomSelectComponent } from './custom-select/custom-select.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    BrowserAnimationsModule
   ],
   providers: [
     UserServiceService,
