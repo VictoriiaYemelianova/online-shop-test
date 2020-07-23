@@ -1,18 +1,36 @@
 <div class="admin-page">
   <div class="menu-content">
-    <div class="left-menu">
-      <div class="link" routerLink="create-category" routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{exact:true}">Add new category</div>
-      <div class="link" routerLink="create-subcategory" routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{exact:true}">Add new subcategory</div>
-      <div class="link" routerLink="categories" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">
-        Categories</div>
-    </div>
-
-    <div class="icon" (click)="onLogOut()">
-      <fa-icon [icon]="logoutIcon"></fa-icon>
+    <div class="menu">
+      <div class="left-menu">
+        <div class="link" routerLink="create-category" routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{exact:true}">Add new category</div>
+        <div class="link" routerLink="create-subcategory" routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{exact:true}">Add new subcategory</div>
+        <div class="link" routerLink="categories" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">
+          Categories</div>
+      </div>
+  
+      <div class="left-menu-mobile">
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item routerLink="create-category" routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{exact:true}">Add new category</button>
+          <button mat-menu-item routerLink="create-subcategory" routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{exact:true}">Add new subcategor</button>
+          <button mat-menu-item routerLink="categories" routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{exact:true}">Categories</button>
+        </mat-menu>
+      </div>
+  
+      <div class="icon" (click)="onLogOut()">
+        <fa-icon [icon]="logoutIcon"></fa-icon>
+      </div>
     </div>
   </div>
 
-  <router-outlet></router-outlet>
+  <div class="content-page">
+    <router-outlet></router-outlet>
+  </div>
 </div>

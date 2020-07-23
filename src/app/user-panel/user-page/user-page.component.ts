@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { faShoppingCart, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { UserServiceService } from 'src/app/service/user-service.service';
 import { IProduct } from 'src/app/data-interface';
+import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'app-user-page',
@@ -12,6 +13,8 @@ import { IProduct } from 'src/app/data-interface';
   styleUrls: ['./user-page.component.scss']
 })
 export class UserPageComponent implements OnInit, OnDestroy {
+  @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
+
   private destroy: Subject<void> = new Subject<void>();
 
   public isAdmin = false;
