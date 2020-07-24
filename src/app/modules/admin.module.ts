@@ -10,12 +10,12 @@ const routes: Routes = [
   { path: '', component: AdminPageComponent, children: [
     { path: 'create-category', component:  CategoryFormComponent, data: {isAdmin: true} },
     { path: 'create-subcategory', component:  SubcategoryFormComponent, data: {isAdmin: true} },
+    { path: 'create-product', component:  ProductFormComponent, data: {isAdmin: true} },
     { path: 'categories', loadChildren: () => import('./categories.module').then(m => m.CategoriesModule), data: {isAdmin: true} },
     { path: 'categories/:category',
       loadChildren: () => import('./product-wrapper.module').then(m => m.ProductWrapperModule), data: {isAdmin: true} },
     { path: 'categories/:name/:subname',
-      loadChildren: () => import('./product-wrapper.module').then(m => m.ProductWrapperModule) },
-    { path: 'categories/:name/create-product', component:  ProductFormComponent, data: {isAdmin: true} },
+      loadChildren: () => import('./product-wrapper.module').then(m => m.ProductWrapperModule) }
   ] }
 ];
 
