@@ -54,15 +54,15 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
   onSubmitNewProduct() {
     const formValue = this.productForm.value;
-    // this.productService.create(formValue, this.categoryName)
-    //   .subscribe((res: IServerModel) => {
-    //     if (res.success) {
-    //       this.infoMessage = 'Created successfully!';
-    //       this.productForm.reset();
-    //     } else {
-    //       this.infoMessage = 'Error!';
-    //     }
-    //   });
+    this.productService.create(formValue)
+      .subscribe((res: IServerModel) => {
+        if (res.success) {
+          this.infoMessage = 'Created successfully!';
+          this.productForm.reset();
+        } else {
+          this.infoMessage = 'Error!';
+        }
+      });
   }
 
   onChooseCategory(category: ICategory) {

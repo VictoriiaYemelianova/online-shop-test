@@ -58,7 +58,7 @@ export class ProductService {
     this.currentSortedProductsList.next(products);
   }
 
-  create(el: IProduct, name: string) {
+  create(el) {
     return this.http.post(`${apiUrl}/${name}/create-product`, el);
   }
 
