@@ -31,7 +31,9 @@ import { DaysAgoPipe } from './pipes/days-ago.pipe';
 import { SubcategoryFormComponent } from './admin-panel/subcategory-form/subcategory-form.component';
 import { FilterComponent } from './filter/filter.component';
 import { CustomSelectComponent } from './custom-select/custom-select.component';
+import { MatMenuModule } from '@angular/material/menu';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     HttpClientModule,
     FontAwesomeModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatMenuModule,
+    MatIconModule
   ],
   providers: [
     UserServiceService,
