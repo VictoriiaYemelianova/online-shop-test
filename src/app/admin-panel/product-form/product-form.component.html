@@ -1,9 +1,9 @@
 <div class="product-form-block">
-  <div class="back">
+  <!-- <div class="back">
     <a (click)="onCancel()">Back to product</a>
-  </div>
+  </div> -->
   
-  <h3>Create new {{ categoryName }} product </h3>
+  <h3>Create new product </h3>
 
   <form [formGroup]="productForm" (ngSubmit)="onSubmitNewProduct()" class="form-content">
     <div class="info-message">
@@ -12,8 +12,12 @@
 
     <div class="form-group">
       <div class="input-block">
-        <label for="name">Product name:</label>
-        <input type="text" id="name" formControlName="name">
+        <div class="left-column">Choose category:</div>
+        <select class="right-column select" formControlName="category">
+          <option *ngFor="let category of categories" (click)="onChooseCategory(category)">
+            {{ category.name }}
+          </option>
+        </select>
       </div>
 
       <div *ngIf="productForm.controls['name'].invalid && 
@@ -24,8 +28,36 @@
 
     <div class="form-group">
       <div class="input-block">
-        <label for="img-url">Product img url</label>
-        <input type="text" id="img-url" formControlName="imgUrl">
+        <div class="left-column">Choose subcategory:</div>
+        <select class="right-column select" formControlName="subcategory">
+          <option *ngFor="let subcategory of subcategories" >
+            {{ subcategory.name }}
+          </option>
+        </select>
+      </div>
+
+      <div *ngIf="productForm.controls['name'].invalid && 
+        (productForm.controls['name'].dirty || productForm.controls['name'].touched)" class="error">
+        <span *ngIf="productForm.controls['name'].errors.required" class="error-message">Name is required</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-block">
+        <label class="left-column" for="name">Product name:</label>
+        <input type="text" class="right-column" id="name" formControlName="name">
+      </div>
+
+      <div *ngIf="productForm.controls['name'].invalid && 
+        (productForm.controls['name'].dirty || productForm.controls['name'].touched)" class="error">
+        <span *ngIf="productForm.controls['name'].errors.required" class="error-message">Name is required</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-block">
+        <label class="left-column" for="img-url">Product img url</label>
+        <input type="text" class="right-column" id="img-url" formControlName="imgUrl">
       </div>
 
       <div *ngIf="productForm.controls['imgUrl'].invalid && 
@@ -36,8 +68,8 @@
 
     <div class="form-group">
       <div class="input-block">
-        <label for="price">Product price</label>
-        <input type="text" id="price" formControlName="price">
+        <label class="left-column" for="price">Product price</label>
+        <input type="text" class="right-column" id="price" formControlName="price">
       </div>
 
       <div *ngIf="productForm.controls['price'].invalid && 
@@ -48,7 +80,6 @@
 
     <div class="button-block">
       <button type="submit" class="btn-green" [disabled]="!productForm.valid">Create</button>
-      <button type="button" class="btn-red" (click)="onCancel()">Cancel</button>
     </div>
   </form>
 </div>
