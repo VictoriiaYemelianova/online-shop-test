@@ -1,17 +1,15 @@
 .category-form-block {
-  min-width: 1000px;
-  height: 820px;
-  padding: 5% 0;
+  width: 500px;
+  min-width: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 auto;
-  background-color: #F8F8FF;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(68, 68, 68, 1);
 }
 
 .form-content {
-  width: 50%;
-  min-height: 200px;
+  margin-bottom: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,7 +33,7 @@
   align-items: center;
 
   label {
-    width: 120px;
+    width: 160px;
   }
 
   input {
