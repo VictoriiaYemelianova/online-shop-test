@@ -22,7 +22,7 @@
           <div class="icon icon-green">
             <fa-icon [icon]="faPencilAlt"></fa-icon>
           </div>
-  
+
           <div class="icon icon-red margin">
             <fa-icon [icon]="faTrashAlt"></fa-icon>
           </div>
@@ -32,7 +32,7 @@
           <div class="icon icon-green" (click)="onBasket(product, $event)">
             <fa-icon [icon]="faShoppingCart"></fa-icon>
           </div>
-  
+
           <div class="icon icon-red ">
             <fa-icon [icon]="faHeart"></fa-icon>
           </div>
@@ -40,51 +40,52 @@
       </div>
     </div>
   </div>
+</div>
 
-  <ng-template #updateTemplate>
-    <div class="form-content">
-      <h3>Update {{ categoryName }}</h3>
+<ng-template #updateTemplate>
+  <div class="form-content">
+    <h3>Update {{ categoryName }}</h3>
 
-      <div class="message input-block">
-        <span>{{ infoMessage }}</span>
-      </div>
-
-      <form [formGroup]="updateForm" (ngSubmit)="onUpdateForm()">
-        <div class="input-block">
-          <label for="name">Category name:</label>
-          <input type="text" id="name" formControlName="name">
-        </div>
-
-        <div class="input-block">
-          <label for="img-url">Img-url:</label>
-          <input type="text" id="img-url" formControlName="imgUrl">
-        </div>
-
-        <div class="input-block">
-          <label for="price">Price:</label>
-          <input type="text" id="price" formControlName="price">
-        </div>
-
-        <div class="button-block">
-          <button type="submit" class="btn-green">update</button>
-          <button type="button" class="btn-red" (click)="closeModal()">cancel</button>
-        </div>
-      </form>
+    <div class="message input-block">
+      <span>{{ infoMessage }}</span>
     </div>
-  </ng-template>
 
-  <ng-template #deleteNotificationTemplate>
-    <div class="delete-massage">
-      <div class="info-message">
-        <span>Are you sure you want to remove {{ currentObj.name }}?</span>
+    <form [formGroup]="updateForm" (ngSubmit)="onUpdateForm()">
+      <div class="input-block">
+        <label for="name">Category name:</label>
+        <input type="text" id="name" formControlName="name">
       </div>
 
-      <div class="info-button">
-        <button (click)="onDelete()" class="btn-green">delete</button>
-        <button (click)="closeModal()" class="btn-red">cancel</button>
+      <div class="input-block">
+        <label for="img-url">Img-url:</label>
+        <input type="text" id="img-url" formControlName="imgUrl">
       </div>
+
+      <div class="input-block">
+        <label for="price">Price:</label>
+        <input type="text" id="price" formControlName="price">
+      </div>
+
+      <div class="button-block">
+        <button type="submit" class="btn-green">update</button>
+        <button type="button" class="btn-red" (click)="closeModal()">cancel</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #deleteNotificationTemplate>
+  <div class="delete-massage">
+    <div class="info-message">
+      <span>Are you sure you want to remove {{ currentObj.name }}?</span>
     </div>
-  </ng-template>
 
-  <app-modal *ngIf="IsModalShow" [template]="currentTemplate" (closeModal)="closeModal()">
-  </app-modal>
+    <div class="info-button">
+      <button (click)="onDelete()" class="btn-green">delete</button>
+      <button (click)="closeModal()" class="btn-red">cancel</button>
+    </div>
+  </div>
+</ng-template>
+
+<app-modal *ngIf="IsModalShow" [template]="currentTemplate" (closeModal)="closeModal()">
+</app-modal>
