@@ -68,7 +68,15 @@
 }
 
 .content-page {
-  padding-top: 100px;
+  padding-top: 50px;
+}
+
+@media (max-width: 767px) {
+  .menu {
+    .left-menu {
+      font-size: 14px;
+    }
+  }
 }
 
 @media (max-width: 599px) {
@@ -79,7 +87,6 @@
   
     .left-menu-mobile {
       display: flex;
-      padding-left: 10px;
       flex: 1;
   
       [mat-icon-button] {
