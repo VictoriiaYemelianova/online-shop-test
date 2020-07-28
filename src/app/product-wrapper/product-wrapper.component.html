@@ -3,13 +3,15 @@
     <app-filter></app-filter>
   </div>
   <div class="breadcrumbs">
-    <div class="text-color"> Move to: </div>
-    <div
-      *ngFor="let link of breadCrumbs" class="breadcrumb-link text-color"
-      [routerLink]="link.link" 
-      [class.active-link]="checkUrlIsActive(link.link)"
-      >
-      <span >{{ link.name }}</span>
+    <div class="conteiner">
+      <div class="text-color"> Move to: </div>
+      <div
+        *ngFor="let link of breadCrumbs" class="breadcrumb-link text-color"
+        [routerLink]="link.link" 
+        [class.active-link]="checkUrlIsActive(link.link)"
+        >
+        <span >{{ link.name }}</span>
+      </div>
     </div>
   </div>
   <div class="subcategory" *ngIf="showSubcategory">
