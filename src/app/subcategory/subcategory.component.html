@@ -1,23 +1,23 @@
-<div class="subcategory-content">
-  <div class="category-block"
-    *ngFor="let subcategory of subcategories"
-    [routerLink]="subcategory.name.toLowerCase()"
-    (click)="setSubcategory(subcategory)">
+<div class="subcategory-page">
+  <div class="conteiner">
+    <div class="category-block" *ngFor="let subcategory of subcategories" [routerLink]="subcategory.name.toLowerCase()"
+      (click)="setSubcategory(subcategory)">
 
-    <div class="img">
-      <img [src]="subcategory.imgUrl" alt="">
-    </div>
+      <div class="img">
+        <img [src]="subcategory.imgUrl" alt="">
+      </div>
 
-    <div class="subcategory">
-      <div class="category-name"><span class="text-transfom">{{ subcategory.name }}</span></div>
+      <div class="subcategory">
+        <div class="category-name"><span class="text-transfom">{{ subcategory.name }}</span></div>
 
-      <div class="icon-button" *ngIf="isAdmin">
-        <div class="icon icon-green" (click)="onUpdateCategory(subcategory, $event)">
-          <fa-icon [icon]="faPencilAlt"></fa-icon>
-        </div>
+        <div class="icon-button" *ngIf="isAdmin">
+          <div class="icon icon-green" (click)="onUpdateCategory(subcategory, $event)">
+            <fa-icon [icon]="faPencilAlt"></fa-icon>
+          </div>
 
-        <div class="icon icon-red">
-          <fa-icon [icon]="faTrashAlt"></fa-icon>
+          <div class="icon icon-red">
+            <fa-icon [icon]="faTrashAlt"></fa-icon>
+          </div>
         </div>
       </div>
     </div>
