@@ -1,5 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { faCheck, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { ICategory, ISelectList } from '../data-interface';
+
+interface IList<T> {
+  name: string;
+  value: T;
+}
+
+const categoryList: IList<ICategory>[] = [];
 
 @Component({
   selector: 'app-custom-select',
@@ -7,31 +15,27 @@ import { faCheck, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg
   styleUrls: ['./custom-select.component.scss']
 })
 export class CustomSelectComponent implements OnInit {
-  @Input() options: Array<string>;
-  @Input() selectedValue: string;
-  @Output() selectedOption: EventEmitter<string> = new EventEmitter();
+  @Input() options: Array<ISelectList<any>>;
+  @Input() defaultEl: ISelectList<any>;
+  @Output() selectedOption: EventEmitter<ISelectList<any>> = new EventEmitter();
 
   public faCheck = faCheck;
   public faChevronDown = faChevronDown;
   public faChevronUp = faChevronUp;
-  public selectedElement;
   public selectedNameElement: string;
   public showDropDown = false;
 
   constructor() { }
 
   ngOnInit(): void {
-    if (this.selectedValue) {
-      const index = this.options.indexOf(this.selectedValue);
-      this.selectedNameElement = this.selectedValue;
-      this.selectedElement = index;
+    if (this.defaultEl) {
+      this.selectedNameElement = this.defaultEl.name;
     }
   }
 
-  onSelect(option: string, index: number) {
-    this.selectedElement = index;
-    this.selectedNameElement = option;
-    this.selectedOption.emit(option.replace( /\s/g, ''));
+  onSelect(option) {
+    this.selectedNameElement = option.name;
+    this.selectedOption.emit(option.value);
   }
 
   showHideDropDown() {

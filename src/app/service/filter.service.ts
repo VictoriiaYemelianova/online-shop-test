@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ProductService } from './product.service';
 import { RoutWrapperService } from './rout-wrapper.service';
-import { IProduct, IFilter } from '../data-interface';
+import { IProduct, IFilter, ISelectList } from '../data-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,16 @@ import { IProduct, IFilter } from '../data-interface';
 export class FilterService {
   public currentProducts: Array<IProduct> = [];
   public setFilters: IFilter = {};
-  public sortBy = ['newest', 'lowest price', 'highest price'];
+  public sortBy: Array<ISelectList<string>> = [{
+    name: 'newest',
+    value: 'newest'
+  }, {
+    name: 'lowest price',
+    value: 'lowestprice'
+  }, {
+    name: 'highest price',
+    value: 'highestprice'
+  }];
   public defaultValueSortBy = 'newest';
 
   constructor(
@@ -25,7 +34,7 @@ export class FilterService {
     this.productService.fullProducts.subscribe((res: IProduct[]) => {
       if (res) {
         this.currentProducts = res;
-        this.addFilter()
+        this.addFilter();
       }
     });
   }

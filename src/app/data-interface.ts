@@ -46,3 +46,8 @@ export interface IFilter {
   pricefrom?: number;
   priceto?: number;
 }
+
+export interface ISelectList<T> {
+  name: string;
+  value: T;
+}

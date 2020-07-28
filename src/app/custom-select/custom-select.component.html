@@ -8,17 +8,10 @@
   </div>
 
   <div class="drop-down-select" *ngIf="showDropDown">
-    <div class="option" *ngFor="let option of options, let i = index" (click)="onSelect(option, i)">
-      <label>
-        <div class="checkbox">
-          <input type="radio">
-          <fa-icon class="faCheck" *ngIf="selectedElement === i" [icon]="faCheck"></fa-icon>
-        </div>
-  
-        <div class="option-name">
-          {{option}}
-        </div>
-      </label>
+    <div class="option" *ngFor="let option of options" (click)="onSelect(option)">
+      <div class="option-name">
+        {{option.name}}
+      </div>
     </div>
   </div>
 </div>

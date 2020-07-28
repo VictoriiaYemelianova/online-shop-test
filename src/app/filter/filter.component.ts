@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FilterService } from '../service/filter.service';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { ISelectList } from '../data-interface';
 
 @Component({
   selector: 'app-filter',
@@ -8,10 +9,10 @@ import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent implements OnInit {
-  public optionList: Array<string>;
+  public optionList: Array<ISelectList<string>>;
   public priceFrom = '';
   public priceTo = '';
-  public sortBy = '';
+  public sortBy: ISelectList<string>;
   public faChevronDown = faChevronDown;
   public faChevronUp = faChevronUp;
   public showDropDown = false;
@@ -22,10 +23,13 @@ export class FilterComponent implements OnInit {
 
   ngOnInit(): void {
     this.optionList = this.filterService.sortBy;
-    this.sortBy = this.filterService.setFilters.sortby;
+    if (this.filterService.setFilters.sortby) {
+      this.sortBy = this.optionList.find(el => el.value === this.filterService.setFilters.sortby);
+    }
   }
 
   getSelectedSortBy(event) {
+    console.log(event);
     this.filterService.addSorting(event);
   }
 
