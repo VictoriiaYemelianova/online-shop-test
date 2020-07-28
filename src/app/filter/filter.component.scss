@@ -104,10 +104,17 @@
 }
 
 .sort {
-  width: 250px;
+  max-width: 220px;
+  width: 100%;
 
   .value-sort {
    width: 180px;
    height: inherit;
+  }
+}
+
+@media (max-width: 767px) {
+  .filter-content .conteiner .text {
+    display: none;
   }
 }
