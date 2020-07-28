@@ -1,16 +1,25 @@
 .filter-content {
-  height: 50px;
-  width: 1100px;
+  height: 60px;
+  width: 100%;
   display: flex;
   align-items: center;
+  background-color: #ffffff;
+  border: 1px solid #ebebeb;
 
-  .text {
-    text-transform: uppercase;
+  .conteiner {
+    width: 100%;
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    padding-left: 10px;
+    display: flex;
   }
 
-  .filter-text {
-    width: 70px;
-    text-align: center;
+  .text {
+    width: 90px;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
   }
 }
 
@@ -18,7 +27,6 @@
 .sort {
   height: inherit;
   display: flex;
-  align-items: center;
 }
 
 .filter {
@@ -26,14 +34,37 @@
 }
 
 .filter-price {
-  width: 320px;
-  display: flex;
-  align-items: center;
+  width: 115px;
+  position: relative;
+  cursor: pointer;
+
+  .filter-name {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .icon {
+      display: flex;
+      align-items: center;
+      width: 20px;
+      height: 20px;
+      margin-left: 10px;
+      text-align: center;
+    }
+  }
 
   .filter-price-content {
     width: 240px;
     display: flex;
     align-items: center;
+    position: absolute;
+    top: 60px;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    border-radius: 3px;
+    box-shadow: 0 0 5px rgba(68, 68, 68, 1);
+    z-index: 2;
 
     .price-filter-input {
       width: 60px;

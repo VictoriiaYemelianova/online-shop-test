@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FilterService } from '../service/filter.service';
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-filter',
@@ -11,6 +12,9 @@ export class FilterComponent implements OnInit {
   public priceFrom = '';
   public priceTo = '';
   public sortBy = '';
+  public faChevronDown = faChevronDown;
+  public faChevronUp = faChevronUp;
+  public showDropDown = false;
 
   constructor(
     private filterService: FilterService
@@ -27,5 +31,9 @@ export class FilterComponent implements OnInit {
 
   addPriceFilter() {
     this.filterService.addPriceFilter(parseInt(this.priceFrom, 10), parseInt(this.priceTo, 10));
+  }
+
+  showHidePrice() {
+    this.showDropDown = !this.showDropDown;
   }
 }
