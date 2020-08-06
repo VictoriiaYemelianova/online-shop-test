@@ -19,4 +19,22 @@ module.exports = function(router) {
       next();
     }
   });
+
+  router.post('/api/addselecteditem', async (req, res, next) => {
+    try {
+      const modelSelectedList = {
+        userId: req.body.userId,
+        productId: req.body.productId,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }
+
+      const selectedList = await models.Selectedlist.create(modelSelectedList);
+      res.items = selectedList;
+      next();
+    } catch(err) {
+      res.message = err.message;
+      next();
+    }
+  });
 }
