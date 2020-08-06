@@ -10,6 +10,11 @@ module.exports = (sequelize, DataTypes) => {
     Product.belongsTo(models.Category, {
       foreignKey: 'idCategory',
       constraints: false
+    }),
+
+    Product.hasMany(models.Selectedlist, {
+      foreignKey: 'productId',
+      allowNull: false
     })
   };
   return Product;
