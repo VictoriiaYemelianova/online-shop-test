@@ -13,7 +13,9 @@ export class UserServiceService {
   public logUser: IUserToken;
   public productToBuyList: BehaviorSubject<Array<IProduct>> = new BehaviorSubject([]);
 
-  constructor( private http: HttpClient, private router: Router, ) {
+  constructor(
+    private http: HttpClient,
+    private router: Router) {
     this.getItemLocalStorage('user', 'userBasket');
   }
 
