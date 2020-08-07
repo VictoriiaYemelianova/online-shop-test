@@ -1,20 +1,21 @@
 const models = require('../models/index');
 
-module.exports = function(router) {
+module.exports = function (router) {
   router.get('/api/selectedlist/:userId', async (req, res, next) => {
     try {
       const list = await models.Product.findAll({
-        include : {
+        include: {
           model: models.Selectedlist,
           where: {
             userId: req.params.userId
-          }
+          },
+          attributes: []
         }
       });
 
       res.items = list;
       next();
-    } catch(err) {
+    } catch (err) {
       res.message = err.message;
       next();
     }
@@ -30,9 +31,9 @@ module.exports = function(router) {
       }
 
       const selectedList = await models.Selectedlist.create(modelSelectedList);
-      res.items = selectedList;
+      res.items = selectedlist;
       next();
-    } catch(err) {
+    } catch (err) {
       res.message = err.message;
       next();
     }
