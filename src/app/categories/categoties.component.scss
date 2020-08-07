@@ -142,17 +142,13 @@
   }
 }
 
-@media (min-width: 768px) and (max-width: 979px) {
+@media (max-width: 979px) {
   .conteiner {
     width: calc(280px * 2);
   }
-
-  .category-block {
-    width: 280px;
-  }
 }
 
-@media (min-width: 481px) and (max-width: 767px) {
+@media (max-width: 767px) {
   .conteiner {
     width: calc(240px * 2);
   }
