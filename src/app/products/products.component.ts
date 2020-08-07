@@ -7,7 +7,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { faTrashAlt, faPencilAlt, faShoppingCart, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { UserServiceService } from '../service/user-service.service';
 import { ProductService } from '../service/product.service';
-import { FilterService } from '../service/filter.service';
 
 @Component({
   selector: 'app-products',
