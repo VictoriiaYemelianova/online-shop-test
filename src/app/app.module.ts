@@ -34,6 +34,7 @@ import { CustomSelectComponent } from './custom-select/custom-select.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
+import { SelectedListComponent } from './user-panel/selected-list/selected-list.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { MatIconModule } from '@angular/material/icon';
     DaysAgoPipe,
     SubcategoryFormComponent,
     FilterComponent,
-    CustomSelectComponent
+    CustomSelectComponent,
+    SelectedListComponent
   ],
   imports: [
     BrowserModule,

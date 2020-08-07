@@ -2,10 +2,11 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { faShoppingCart, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faSignOutAlt, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { UserServiceService } from 'src/app/service/user-service.service';
 import { IProduct } from 'src/app/data-interface';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { SelectedlistService } from 'src/app/service/selectedlist.service';
 
 @Component({
   selector: 'app-user-page',
@@ -21,10 +22,15 @@ export class UserPageComponent implements OnInit, OnDestroy {
 
   public faShoppingBasket = faShoppingCart;
   public logoutIcon = faSignOutAlt;
+  public faHeart = faHeart;
 
   public userProductSize: number;
+  public userSelectedProductSize: number;
 
-  constructor( private router: ActivatedRoute, private userService: UserServiceService ) { }
+  constructor(
+    private router: ActivatedRoute,
+    private userService: UserServiceService,
+    private selectedlistService: SelectedlistService) { }
 
   ngOnInit(): void {
     this.router.data
@@ -37,6 +43,11 @@ export class UserPageComponent implements OnInit, OnDestroy {
 
     this.userService.productToBuyList.subscribe((res: Array<IProduct>) => {
       this.userProductSize = res.length;
+    });
+
+    this.selectedlistService.getSelectedProducts(this.userService.logUser.user.id).subscribe();
+    this.selectedlistService.selectedProduct.subscribe((res: Array<IProduct>) => {
+      this.userSelectedProductSize = res.length;
     });
   }
 
