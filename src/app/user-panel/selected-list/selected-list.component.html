@@ -1,1 +1,12 @@
-<p>selected-list works!</p>
+<div class="content">
+  <div class="info-content">
+    <div class="info-content__conteiner">
+      <h1>My saved items</h1>
+      <div class="list-number">{{selectedproductsNumber}} saved products</div>
+    </div>
+  </div>
+
+  <div class="product-content" *ngIf="selectedProducts.length">
+    <app-products [selectedProductsList]="selectedProducts"></app-products>
+  </div>
+</div>

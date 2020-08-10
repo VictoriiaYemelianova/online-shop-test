@@ -3,6 +3,7 @@ import { Routes, RouterModule} from '@angular/router';
 
 import { UserPageComponent } from '../user-panel/user-page/user-page.component';
 import { ShopBasketComponent } from '../user-panel/shop-basket/shop-basket.component';
+import { SelectedListComponent } from '../user-panel/selected-list/selected-list.component';
 
 const routes: Routes = [
   { path: '', component: UserPageComponent, children: [
@@ -11,7 +12,8 @@ const routes: Routes = [
       loadChildren: () => import('./product-wrapper.module').then(m => m.ProductWrapperModule) },
     { path: 'categories/:name/:subname',
       loadChildren: () => import('./product-wrapper.module').then(m => m.ProductWrapperModule) },
-    { path: 'basket', component: ShopBasketComponent }
+    { path: 'basket', component: ShopBasketComponent },
+    { path: 'selected-products', component: SelectedListComponent }
   ] }
 ];
 
