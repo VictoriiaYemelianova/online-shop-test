@@ -33,7 +33,7 @@
             <fa-icon [icon]="faShoppingCart"></fa-icon>
           </div>
 
-          <div class="icon icon-red ">
+          <div class="icon icon-red" [className]="checkSelectedEl(product) ? 'icon-red' : 'icon-black'">
             <fa-icon [icon]="faHeart"></fa-icon>
           </div>
         </div>

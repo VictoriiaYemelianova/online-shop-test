@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, TemplateRef, Input } from '@angular/core';
 import { IProduct, IServerModel } from '../data-interface';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -7,6 +7,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { faTrashAlt, faPencilAlt, faShoppingCart, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { UserServiceService } from '../service/user-service.service';
 import { ProductService } from '../service/product.service';
+import { SelectedlistService } from '../service/selectedlist.service';
 
 @Component({
   selector: 'app-products',
@@ -16,6 +17,7 @@ import { ProductService } from '../service/product.service';
 export class ProductsComponent implements OnInit, OnDestroy {
   @ViewChild('updateTemplate') updateTemplate: TemplateRef<any>;
   @ViewChild('deleteNotificationTemplate') deleteNotificationTemplate: TemplateRef<any>;
+  @Input() isSelected = false;
 
   private destroy: Subject<void> = new Subject<void>();
 
@@ -26,6 +28,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   public categoryName: string;
   public currentObj: IProduct;
   public productList: IProduct[];
+  public selectedProductsList: Array<IProduct>;
   public updateForm: FormGroup;
   public faTrashAlt = faTrashAlt;
   public faPencilAlt = faPencilAlt;
@@ -35,7 +38,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
   constructor(
     private router: ActivatedRoute,
     private productService: ProductService,
-    private userService: UserServiceService
+    private userService: UserServiceService,
+    private selectedlistService: SelectedlistService
   ) { }
 
   ngOnInit(): void {
@@ -56,6 +60,16 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.productService.currentSortedProductsList.subscribe((res: IProduct[]) => {
       if (res) {
         this.productList = res;
+      }
+    });
+
+    this.selectedlistService.selectedProduct.subscribe((res: Array<IProduct>) => {
+      if (res) {
+        this.selectedProductsList = res;
+
+        if (this.isSelected) {
+          this.productList = this.selectedProductsList;
+        }
       }
     });
 
@@ -80,6 +94,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.updateForm.controls.name.setValue(el.name);
     this.updateForm.controls.imgUrl.setValue(el.imgUrl);
     this.updateForm.controls.price.setValue(el.price);
+  }
+
+  checkSelectedEl(arr) {
+    return this.selectedProductsList.some(el => el.id === arr.id);
   }
 
   onUpdateForm() {
