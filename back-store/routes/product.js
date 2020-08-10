@@ -2,6 +2,17 @@ const models = require('../models/index');
 const helpers = require('./helpers');
 
 module.exports = function(router) {
+  router.get('/api/all-products', async (req, res, next) => {
+    try {
+      const products = await models.Product.findAll();
+      res.items = products;
+      next();
+    } catch(err) {
+      res.message = err.message;
+      next();
+    }
+  })
+
   router.get('/api/parent-category-products/:id', async (req, res, next) => {
     try {
       const products = await models.Product.findAll({ //id category
